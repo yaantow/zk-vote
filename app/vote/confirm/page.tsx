@@ -18,6 +18,7 @@ import { useElectionStore } from "@/lib/store/election-store";
 import { useProofStore } from "@/lib/store/proof-store";
 import { nidToField, computeNullifier } from "@/lib/utils/hash";
 import { queueVote } from "@/lib/utils/offline-queue";
+import { startTimer } from "@/lib/utils/performance";
 import { ELECTION_ID } from "@/lib/utils/constants";
 import type { ZKProof } from "@/lib/blockchain/voting-contract";
 import { CheckCircle2, BarChart3, Info } from "lucide-react";
@@ -55,8 +56,10 @@ export default function ConfirmPage() {
     try {
       // Step 1: Initialize ZoKrates
       proof.setStatus("initializing");
+      const zkInitTimer = startTimer("zkp-init", "ZoKrates WASM initialization");
       const { getZoKratesProvider } = await import("@/lib/zk/zokrates");
       await getZoKratesProvider();
+      zkInitTimer.stop();
 
       // Step 2: Compute witness inputs
       proof.setStatus("computing");
@@ -70,6 +73,7 @@ export default function ConfirmPage() {
       proof.setStatus("proving");
 
       // Dynamic import to avoid SSR issues with WASM
+      const proofTimer = startTimer("zkp-proof", "Groth16 proof generation");
       const { generateProof } = await import("@/lib/zk/prover");
       let generatedProof;
       try {
@@ -100,13 +104,16 @@ export default function ConfirmPage() {
       }
 
       proof.setProof(generatedProof);
+      proofTimer.stop();
 
       // Step 4: Submit to blockchain
       proof.setStatus("submitting");
+      const txTimer = startTimer("tx-submit", "On-chain vote submission");
 
       if (!navigator.onLine) {
         // Queue for later submission
         await queueVote(generatedProof.proof, generatedProof.inputs);
+        txTimer.stop();
         proof.setStatus("done");
         proof.setTxHash("queued-offline");
         return;
@@ -126,6 +133,8 @@ export default function ConfirmPage() {
         // If contract isn't deployed yet, simulate success for UI demo
         proof.setTxHash("0x" + "0".repeat(64) + " (demo — contract not deployed)");
       }
+
+      txTimer.stop();
 
       proof.setStatus("done");
     } catch (err) {

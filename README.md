@@ -81,11 +81,14 @@
 | Styling         | Tailwind CSS             | 4.x       | Utility-first CSS (CSS-first config) |
 | UI Components   | shadcn/ui                | latest    | Accessible, composable components    |
 | ZKP             | zokrates-js              | 1.1.9     | Client-side zk-SNARK proof gen (WASM)|
+| Hash            | circomlibjs              | 0.1.7     | Real Poseidon hash (matches circuit) |
 | Blockchain      | ethers.js                | 6.x       | Wallet connection, contract calls    |
 | Wallet          | MetaMask                 | Extension | Key management, transaction signing  |
 | Smart Contracts | Solidity                 | 0.8.24    | On-chain verifier + voting logic     |
 | SC Framework    | Hardhat                  | 2.28.6    | Compile, test, deploy contracts      |
 | SC Libraries    | OpenZeppelin             | 5.x       | Contract utilities                   |
+| Testing         | Jest + ts-jest           | 30.x      | Frontend unit testing (38 tests)     |
+| Audit           | Python + web3.py         | 3.x / 6.x| Independent on-chain audit script    |
 | Network         | Polygon Amoy Testnet     | Chain ID 80002 | Fast blocks, free test tokens   |
 | State Mgmt      | Zustand                  | 5.x       | Lightweight client state             |
 | PWA             | @serwist/next            | 9.x       | Service worker, offline support      |
@@ -106,23 +109,24 @@ zk-vote/
 │   ├── auth/page.tsx                    # Voter authentication
 │   ├── vote/
 │   │   ├── page.tsx                     # Ballot — candidate selection
-│   │   └── confirm/page.tsx             # ZKP generation + submission
+│   │   └── confirm/page.tsx             # ZKP generation + submission (perf-instrumented)
 │   ├── results/page.tsx                 # Live results from blockchain
 │   ├── audit/page.tsx                   # Public audit & tally verification
 │   ├── admin/page.tsx                   # Election admin panel
+│   ├── survey/page.tsx                  # SUS usability survey (10-item, scoring, CSV)
 │   └── api/
 │       ├── register/route.ts            # POST — voter registration
 │       ├── election/route.ts            # GET — election metadata
 │       └── audit/route.ts              # GET — audit events & tallies
 │
 ├── components/                          # React components
-│   ├── header.tsx                       # Navigation header
-│   ├── network-status.tsx               # Online/offline indicator
-│   ├── wallet-connect.tsx               # MetaMask connection button
-│   ├── voting-card.tsx                  # Candidate voting card
-│   ├── proof-status.tsx                 # ZKP generation progress
-│   ├── results-chart.tsx                # Bar chart for results
-│   ├── audit-log.tsx                    # Event log table
+│   ├── Header.tsx                       # Navigation header (incl. Survey link)
+│   ├── NetworkStatus.tsx                # Online/offline indicator
+│   ├── WalletConnect.tsx                # MetaMask connection button
+│   ├── VotingCard.tsx                   # Candidate voting card
+│   ├── ProofStatus.tsx                  # ZKP generation progress
+│   ├── ResultsChart.tsx                 # Bar chart for results
+│   ├── AuditLog.tsx                     # Event log table
 │   └── ui/                             # shadcn/ui primitives
 │       ├── button.tsx, card.tsx, input.tsx, label.tsx
 │       ├── badge.tsx, progress.tsx, table.tsx, separator.tsx
@@ -130,8 +134,10 @@ zk-vote/
 ├── lib/                                 # Shared utilities & integrations
 │   ├── utils/
 │   │   ├── constants.ts                 # Candidates, chain config, contract addr
-│   │   ├── hash.ts                      # Poseidon hash (keccak256 placeholder)
+│   │   ├── hash.ts                      # Poseidon hash (async circomlibjs + sync keccak256 fallback)
 │   │   ├── merkle.ts                    # Binary Merkle tree (DEPTH=6, 64 leaves)
+│   │   ├── poseidon-merkle.ts           # Async Merkle tree using real Poseidon
+│   │   ├── performance.ts              # Perf timing, metrics, statistics, CSV export
 │   │   └── offline-queue.ts            # IndexedDB queue for offline votes
 │   ├── stores/
 │   │   ├── voter-store.ts               # Voter auth state (persisted)
@@ -150,7 +156,8 @@ zk-vote/
 ├── contracts/                           # Hardhat project (smart contracts)
 │   ├── contracts/
 │   │   ├── Verifier.sol                 # Groth16 pairing library + verifier
-│   │   └── ZKVoting.sol                 # Main voting contract
+│   │   ├── ZKVoting.sol                 # Main voting contract
+│   │   └── MockVerifier.sol             # Always-true verifier for E2E testing
 │   ├── circuits/
 │   │   └── circuit.zok                  # ZoKrates circuit source
 │   ├── test/
@@ -158,10 +165,23 @@ zk-vote/
 │   ├── scripts/
 │   │   ├── deploy.ts                    # Deployment script
 │   │   ├── setup-election.ts            # Demo election setup
-│   │   └── sync-artifacts.sh           # Artifact sync to frontend
+│   │   ├── sync-artifacts.sh           # Artifact sync to frontend
+│   │   ├── e2e-test.ts                  # Full E2E integration test (10 checks)
+│   │   └── mock-election.ts            # N=50 mock election simulator
 │   ├── hardhat.config.ts                # Hardhat configuration
 │   ├── package.json                     # Contract dependencies
 │   └── .env                             # Deployer key template
+│
+├── audit/                               # Independent Python audit
+│   ├── audit.py                         # On-chain tally verification script
+│   └── requirements.txt                # web3.py, python-dotenv, rich
+│
+├── __tests__/                           # Frontend unit tests (Jest)
+│   ├── merkle.test.ts                   # Merkle tree + hash tests (31 tests)
+│   └── offline-queue.test.ts           # Offline queue tests (7 tests)
+│
+├── types/
+│   └── circomlibjs.d.ts                # TypeScript declarations for circomlibjs
 │
 ├── public/
 │   ├── offline.html                     # Offline fallback page
@@ -171,6 +191,7 @@ zk-vote/
 │   └── REQUIREMENTS.md                  # Full project specification
 │
 ├── package.json                         # Root dependencies
+├── jest.config.ts                       # Jest configuration (ESM + ts-jest)
 ├── next.config.ts                       # Next.js + Serwist + WASM config
 ├── tsconfig.json                        # TypeScript config
 ├── postcss.config.mjs                   # PostCSS (Tailwind)
@@ -248,6 +269,8 @@ npm run setup
 | `npm run build`  | Production build                               |
 | `npm run start`  | Start production server                        |
 | `npm run lint`   | Run ESLint                                     |
+| `npm test`       | Run Jest unit tests (38 tests)                 |
+| `npm run test:watch` | Run tests in watch mode                    |
 
 ### Contracts (`cd contracts`)
 
@@ -258,6 +281,8 @@ npm run setup
 | `npm run deploy:local` | Deploy to local Hardhat node              |
 | `npm run deploy:amoy`  | Deploy to Polygon Amoy testnet            |
 | `npm run setup`      | Set up demo election on local node           |
+| `npx hardhat run scripts/e2e-test.ts`  | Run full E2E integration test  |
+| `npx hardhat run scripts/mock-election.ts` | Run N=50 mock election   |
 
 ---
 
@@ -408,6 +433,7 @@ npm run deploy:amoy  # or deploy:local
 | `/results`       | Live Results           | Bar chart of candidate tallies, auto-refreshes every 15s   |
 | `/audit`         | Public Audit           | Event log table, tally comparison (recomputed vs on-chain), CSV export  |
 | `/admin`         | Election Admin         | Setup election (title, candidates), start/end election     |
+| `/survey`        | SUS Survey             | 10-question System Usability Scale, auto-scoring, CSV export |
 
 ---
 
@@ -432,7 +458,101 @@ The audit system provides transparent, independent verification of election resu
 2. **Independent recomputation:** The `/audit` page fetches all `VoteCast` events and recomputes tallies from scratch
 3. **Tally comparison:** Recomputed tallies are compared against on-chain contract state — any mismatch is flagged
 4. **CSV export:** All audit data can be exported as CSV for external analysis
-5. **Python audit script:** (Phase 3) An independent Python script will read events directly from the blockchain RPC for cross-platform verification
+5. **Python audit script:** An independent Python script (`audit/audit.py`) reads events directly from the blockchain RPC for cross-platform verification — completely independent of the frontend
+
+### Python Audit Script
+
+```bash
+# Setup
+cd audit
+python3 -m venv venv
+source venv/bin/activate
+pip install -r requirements.txt
+
+# Run audit
+python audit.py --contract 0x<address>
+python audit.py --contract 0x<address> --rpc https://custom-rpc.example.com
+python audit.py --contract 0x<address> --csv audit_report.csv
+
+# Or use environment variables
+export CONTRACT_ADDRESS=0x<address>
+export RPC_URL=https://rpc-amoy.polygon.technology
+python audit.py
+```
+
+The script produces a rich console report with color-coded results and optionally exports a CSV with complete event logs and tally comparisons. Returns exit code 0 for pass, 1 for fail.
+
+---
+
+## Testing
+
+### Overview
+
+| Suite | Tests | Framework | Command |
+|-------|-------|-----------|---------|
+| Merkle Tree + Hash Utils | 31 | Jest / ts-jest | `npm test` (root) |
+| Offline Queue | 7 | Jest / ts-jest | `npm test` (root) |
+| Smart Contracts | 32 | Hardhat / Chai | `cd contracts && npm test` |
+| E2E Integration | 10 checks | Hardhat script | `cd contracts && npx hardhat run scripts/e2e-test.ts` |
+| Mock Election (N=50) | Full sim | Hardhat script | `cd contracts && npx hardhat run scripts/mock-election.ts` |
+| **Total** | **70 + E2E** | | |
+
+### Frontend Tests (Jest)
+
+```bash
+# Run all 38 tests
+npm test
+
+# Watch mode
+npm run test:watch
+```
+
+Tests cover:
+- **Merkle tree** — build, pad, deterministic root, proof generation/verification, tampered proof rejection
+- **Hash utilities** — sync keccak256 (`poseidonHash`, `computeCommitment`, `nidToField`) and async Poseidon (`poseidonHashAsync`, `computeCommitmentAsync`, `computeNullifierAsync`)
+- **Offline queue** — data structure creation, unique IDs, filtering, JSON serialization, constants
+
+### Smart Contract Tests (Hardhat)
+
+```bash
+cd contracts && npm test
+```
+
+32 tests across 6 categories: Deployment, Election Setup, Election Lifecycle, Vote Casting Guards, View Functions, and Verifier.
+
+### E2E Integration Test
+
+```bash
+cd contracts && npx hardhat run scripts/e2e-test.ts
+```
+
+10-check full lifecycle: deploy MockVerifier + ZKVoting → setup election → start → cast 10 votes → verify tallies → reject double vote → reject invalid candidate → end election → reject late vote → audit from events.
+
+### Mock Election (N=50)
+
+```bash
+cd contracts && npx hardhat run scripts/mock-election.ts
+```
+
+Simulates a realistic election: 50 voters, 4 candidates, weighted random voting, 5 double-vote attempts (all rejected), gas metrics collection, full audit tally comparison.
+
+### SUS Survey
+
+The `/survey` page implements the standard 10-item System Usability Scale with automatic scoring (0–100), letter grades (A+ to F), localStorage persistence, and CSV export for research data collection.
+
+---
+
+## Performance Metrics
+
+The vote confirmation page (`/vote/confirm`) is instrumented with performance timers:
+
+| Timer | Category | What it measures |
+|-------|----------|-----------------|
+| ZoKrates Init | `zkp-init` | WASM provider initialization |
+| Proof Generation | `zkp-proof` | Groth16 proof computation |
+| TX Submission | `tx-submit` | On-chain transaction submission |
+
+Metrics are stored in localStorage and can be exported via `exportMetricsCSV()` or analyzed with `calculateStats()` (min, max, mean, median, P95, std dev).
 
 ---
 
@@ -454,10 +574,11 @@ The audit system provides transparent, independent verification of election resu
 | **Webpack over Turbopack** | Next.js 16 defaults to Turbopack, but WASM async loading (`zokrates-js`) and Serwist service workers require Webpack's `asyncWebAssembly` experiment. |
 | **Polygon Amoy testnet** | Fast block times (~2s), free test tokens, EVM-compatible. Suitable for research prototype without mainnet gas costs. |
 | **Groth16 proving system** | Constant-size proofs (~200 bytes), fast on-chain verification (~200K gas). Requires trusted setup but acceptable for a research prototype. |
-| **Poseidon hash placeholder** | The frontend uses `keccak256` as a Poseidon placeholder. The real Poseidon hash is used in the ZoKrates circuit. After trusted setup, both layers will use matching Poseidon. |
+| **Poseidon hash placeholder** | The async Poseidon functions via `circomlibjs` now match the ZoKrates circuit exactly. A sync keccak256 fallback is retained for the prototype `/api/register` route. |
 | **In-memory Merkle tree** | The `/api/register` route stores commitments in server memory. Acceptable for prototype — production would use a persistent store. |
 | **Zustand over Redux** | Minimal boilerplate, excellent TypeScript support, built-in persist middleware for localStorage. |
 | **shadcn/ui** | Not a dependency — components are copied into the project. Full control, accessible by default, consistent with Tailwind. |
+| **MockVerifier for testing** | Extends the real Verifier with `verifyTx` overridden to always return `true`. Enables full E2E testing of voting logic without the ZoKrates trusted setup. |
 
 ---
 
@@ -465,7 +586,7 @@ The audit system provides transparent, independent verification of election resu
 
 - [x] **Phase 1 — Layer 1 (Client PWA):** All pages, components, stores, utilities, API routes, and PWA configuration complete. Production build passes.
 - [x] **Phase 2 — Layer 2 (Smart Contracts):** Hardhat project, Verifier.sol, ZKVoting.sol, circuit, deploy scripts, 32/32 tests passing. Frontend API routes wired to contract.
-- [ ] **Phase 3 — Layer 3 (Audit & Testing):** Python audit script, Poseidon hash alignment, end-to-end integration testing, mock election with N=50 participants, SUS survey.
+- [x] **Phase 3 — Layer 3 (Audit & Testing):** Python audit script, real Poseidon hash (circomlibjs), E2E integration test, mock election (N=50, 100% double-vote rejection), SUS survey page, performance metrics instrumentation. 70 tests total (38 Jest + 32 Hardhat).
 - [ ] **ZoKrates Trusted Setup:** Circuit written, awaiting CLI compilation + setup.
 - [ ] **Testnet Deployment:** Awaiting trusted setup + funded wallet.
 

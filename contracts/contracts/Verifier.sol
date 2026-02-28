@@ -251,7 +251,7 @@ contract Verifier {
     function verifyTx(
         Proof memory proof,
         uint256[4] memory input
-    ) public view returns (bool r) {
+    ) public view virtual returns (bool r) {
         VerifyingKey memory vk = verifyingKey();
         require(input.length + 1 == vk.IC.length, "verifier-bad-input");
 

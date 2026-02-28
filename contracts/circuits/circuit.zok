@@ -1,0 +1,45 @@
+// ZK-Vote Maldives — Voter Eligibility Circuit
+//
+// Proves: "I am a registered voter, and I voted for a valid candidate"
+// without revealing the voter's identity or their vote choice.
+//
+// Compile with: zokrates compile -i circuit.zok
+// Setup with:   zokrates setup
+// Export with:  zokrates export-verifier
+
+import "hashes/poseidon/poseidon" as poseidon;
+
+const u32 DEPTH = 6; // supports 2^6 = 64 voters
+
+def main(
+    private field voterSecret,
+    private field voterNid,
+    private field[DEPTH] merklePath,
+    private field[DEPTH] merklePathIndices,
+    field merkleRoot,
+    field nullifierHash,
+    field candidateIndex,
+    field maxCandidates
+) -> bool {
+
+    // 1. Compute voter commitment = Poseidon(nid, secret)
+    field commitment = poseidon([voterNid, voterSecret]);
+
+    // 2. Verify Merkle proof: commitment exists in tree with given root
+    field mut currentHash = commitment;
+    for u32 i in 0..DEPTH {
+        field left = if merklePathIndices[i] == 0 { currentHash } else { merklePath[i] };
+        field right = if merklePathIndices[i] == 0 { merklePath[i] } else { currentHash };
+        currentHash = poseidon([left, right]);
+    }
+    assert(currentHash == merkleRoot);
+
+    // 3. Verify nullifier = Poseidon(secret, electionId=1)
+    field computedNullifier = poseidon([voterSecret, 1]);
+    assert(computedNullifier == nullifierHash);
+
+    // 4. Validate candidate index is in range
+    assert(candidateIndex < maxCandidates);
+
+    return true;
+}

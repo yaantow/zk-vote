@@ -31,7 +31,7 @@ export default function ConfirmPage() {
   const candidates =
     election.candidates.length > 0
       ? election.candidates
-      : ["Library", "Lab", "Gym", "Cafeteria"];
+      : ["Ibrahim Mohamed Solih", "Mohamed Muizzu", "Ilyas Labeeb", "Qasim Ibrahim"];
 
   const candidateName =
     proof.selectedCandidate !== null

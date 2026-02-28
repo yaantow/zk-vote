@@ -19,8 +19,8 @@ async function main() {
   const zkVoting = ZKVoting.attach(zkVotingAddress);
 
   // Setup election
-  const title = "Best Campus Facility";
-  const candidates = ["Library", "Lab", "Gym", "Cafeteria"];
+  const title = "Presidential Election 2026";
+  const candidates = ["Ibrahim Mohamed Solih", "Mohamed Muizzu", "Ilyas Labeeb", "Qasim Ibrahim"];
 
   // Placeholder Merkle root — replace with actual root from voter registration
   const merkleRoot = BigInt(

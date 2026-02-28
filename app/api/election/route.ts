@@ -48,7 +48,7 @@ export async function GET() {
 
     // Prototype defaults
     const data = {
-      title: "Best Campus Facility",
+      title: "Presidential Election 2026",
       candidates: DEFAULT_CANDIDATES,
       merkleRoot: "0x0",
       isActive: true,

@@ -42,7 +42,7 @@ async function main() {
 
   const N = 50;
   const DOUBLE_VOTE_ATTEMPTS = 5;
-  const candidates = ["Library", "Lab", "Gym", "Cafeteria"];
+  const candidates = ["Ibrahim Mohamed Solih", "Mohamed Muizzu", "Ilyas Labeeb", "Qasim Ibrahim"];
 
   console.log(`  Admin: ${admin.address}`);
   console.log(`  Signers available: ${signers.length}`);

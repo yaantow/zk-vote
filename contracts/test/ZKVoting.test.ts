@@ -33,7 +33,7 @@ describe("ZKVoting", function () {
     const zkVoting = await ZKVoting.deploy(await verifier.getAddress());
     await zkVoting.waitForDeployment();
 
-    const candidates = ["Library", "Lab", "Gym", "Cafeteria"];
+    const candidates = ["Ibrahim Mohamed Solih", "Mohamed Muizzu", "Ilyas Labeeb", "Qasim Ibrahim"];
     const merkleRoot = BigInt(
       "0x1234567890abcdef1234567890abcdef1234567890abcdef1234567890abcdef"
     );

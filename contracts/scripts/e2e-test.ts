@@ -70,11 +70,11 @@ async function main() {
   // ═══════════════════════════════════════════════════════════════
   console.log("━━━ Step 2: Setup election ━━━");
 
-  const candidates = ["Library", "Lab", "Gym", "Cafeteria"];
+  const candidates = ["Ibrahim Mohamed Solih", "Mohamed Muizzu", "Ilyas Labeeb", "Qasim Ibrahim"];
   const merkleRoot = 12345678n; // Placeholder root for testing
 
   await voting.setupElection(
-    "Best Campus Facility — E2E Test",
+    "Presidential Election 2026 — E2E Test",
     candidates,
     merkleRoot
   );

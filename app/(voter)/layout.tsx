@@ -1,9 +1,11 @@
 "use client";
 
 import Link from "next/link";
-import { usePathname } from "next/navigation";
-import { Vote } from "lucide-react";
+import { usePathname, useRouter } from "next/navigation";
+import { Vote, LogOut } from "lucide-react";
 import { NetworkStatus } from "@/components/NetworkStatus";
+import { useVoterStore } from "@/lib/store/voter-store";
+import { useProofStore } from "@/lib/store/proof-store";
 import { cn } from "@/lib/utils";
 
 const STEPS = [
@@ -66,6 +68,32 @@ function VoterStepper() {
   );
 }
 
+function LogoutButton() {
+  const router = useRouter();
+  const voterReset = useVoterStore((s) => s.reset);
+  const proofReset = useProofStore((s) => s.reset);
+  const isAuthenticated = useVoterStore((s) => s.isAuthenticated);
+
+  if (!isAuthenticated) return null;
+
+  const handleLogout = () => {
+    voterReset();
+    proofReset();
+    router.push("/");
+  };
+
+  return (
+    <button
+      onClick={handleLogout}
+      className="flex items-center gap-1.5 rounded-lg px-2.5 py-1.5 text-xs text-muted-foreground transition-colors hover:bg-destructive/10 hover:text-destructive"
+      title="Log out"
+    >
+      <LogOut className="h-3.5 w-3.5" />
+      <span className="hidden sm:inline">Log out</span>
+    </button>
+  );
+}
+
 export default function VoterLayout({
   children,
 }: {
@@ -85,7 +113,10 @@ export default function VoterLayout({
             </div>
             <span className="text-sm">Maldives eVote</span>
           </Link>
-          <NetworkStatus />
+          <div className="flex items-center gap-2">
+            <LogoutButton />
+            <NetworkStatus />
+          </div>
         </div>
       </header>
 

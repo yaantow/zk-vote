@@ -9,7 +9,7 @@ import { useElectionStore } from "@/lib/store/election-store";
 import { useProofStore } from "@/lib/store/proof-store";
 import { AlertTriangle, ArrowRight, Loader2 } from "lucide-react";
 
-const CANDIDATE_ICONS = ["🏫", "📚", "🏋️", "🍽️", "🎓", "🏥"];
+const CANDIDATE_ICONS = ["�️", "🌟", "⚖️", "🤝", "🎓", "🏥"];
 
 export default function VotePage() {
   const router = useRouter();
@@ -55,7 +55,7 @@ export default function VotePage() {
   const candidates =
     election.candidates.length > 0
       ? election.candidates
-      : ["Library", "Lab", "Gym", "Cafeteria"];
+      : ["Ibrahim Mohamed Solih", "Mohamed Muizzu", "Ilyas Labeeb", "Qasim Ibrahim"];
 
   const handleConfirm = () => {
     if (selected === null) return;

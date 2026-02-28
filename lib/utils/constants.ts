@@ -25,10 +25,10 @@ export const ARTIFACTS_FILE = `${PROOF_ARTIFACTS_PATH}/artifacts.json`;
 
 // Election defaults (used before contract is deployed)
 export const DEFAULT_CANDIDATES = [
-  "Library",
-  "Lab",
-  "Gym",
-  "Cafeteria",
+  "Ibrahim Mohamed Solih",
+  "Mohamed Muizzu",
+  "Ilyas Labeeb",
+  "Qasim Ibrahim",
 ];
 
 // Auto-refresh interval for results page (ms)

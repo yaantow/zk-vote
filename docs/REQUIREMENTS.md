@@ -1277,19 +1277,167 @@ export default config;
 
 ## Quick Start Checklist
 
-- [ ] Run `npx create-next-app@latest` with App Router + TypeScript + Tailwind
-- [ ] Install deps: `ethers`, `zustand`, `zokrates-js`, `@serwist/next`, `shadcn/ui`
-- [ ] Create folder structure as specified in Section 3
-- [ ] Build the landing page (`/`) first — static, no deps
-- [ ] Build auth page (`/auth`) — wallet connection + simulated NID
-- [ ] Build ballot page (`/vote`) — candidate selection UI
+- [x] Run `npx create-next-app@latest` with App Router + TypeScript + Tailwind
+- [x] Install deps: `ethers`, `zustand`, `zokrates-js`, `@serwist/next`, `shadcn/ui`
+- [x] Create folder structure as specified in Section 3
+- [x] Build the landing page (`/`) first — static, no deps
+- [x] Build auth page (`/auth`) — wallet connection + simulated NID
+- [x] Build ballot page (`/vote`) — candidate selection UI
 - [ ] Write the ZoKrates circuit (`circuit.zok`) and compile
 - [ ] Run trusted setup → get proving key + verification key + Verifier.sol
 - [ ] Write `ZKVoting.sol` contract referencing `Verifier.sol`
 - [ ] Deploy contracts to Polygon Amoy testnet
-- [ ] Build proof generation page (`/vote/confirm`) — integrate zokrates-js
-- [ ] Build results page (`/results`) — read tally from contract
-- [ ] Build audit page (`/audit`) — read events, recompute tally
-- [ ] Configure PWA (manifest, service worker, offline caching)
+- [x] Build proof generation page (`/vote/confirm`) — integrate zokrates-js
+- [x] Build results page (`/results`) — read tally from contract
+- [x] Build audit page (`/audit`) — read events, recompute tally
+- [x] Configure PWA (manifest, service worker, offline caching)
 - [ ] Test full flow end-to-end
 - [ ] Prepare for mock election with 50 participants
+
+---
+
+## 15. Development Progress Log
+
+### Phase 1: Layer 1 — Client PWA (COMPLETED — 28 Feb 2026)
+
+Layer 1 (Client PWA) has been fully implemented. All frontend pages, components,
+state management, blockchain integration wrappers, ZKP client-side logic, API
+routes, and PWA configuration are in place. The project builds successfully with
+webpack and the dev server runs at `http://localhost:3000`.
+
+#### 15.1 Dependencies Installed
+
+| Package | Version | Purpose |
+|---------|---------|---------|
+| ethers | 6.x | Wallet connection, contract interaction via MetaMask |
+| zustand | 5.x | Lightweight client state management (voter, election, proof stores) |
+| zokrates-js | 1.1.9 | Client-side WASM ZKP proof generation |
+| @serwist/next | latest | Service worker generation, offline caching |
+| @serwist/precaching | latest | Precache support for Serwist |
+| serwist | latest | Runtime caching strategies (CacheFirst, NetworkFirst) |
+| class-variance-authority | latest | shadcn/ui dependency |
+| clsx | latest | shadcn/ui dependency |
+| tailwind-merge | latest | shadcn/ui dependency |
+| lucide-react | latest | Icon library for UI |
+
+shadcn/ui was initialized with defaults (new-york style, neutral base, CSS variables).
+
+#### 15.2 Configuration Changes
+
+- **`package.json`** — Dev/build scripts changed to `next dev --webpack` / `next build --webpack` because Next.js 16 defaults to Turbopack, but zokrates-js (WASM) and @serwist/next both require Webpack.
+- **`next.config.ts`** — Added Serwist wrapper (`withSerwist`) and Webpack config for `asyncWebAssembly` experiment + `.wasm` module rules.
+- **`app/globals.css`** — Extended with ZK-Vote custom theme tokens (`--color-success`, `--color-warning`, `--color-info`, `--color-online`, `--color-offline`) on top of shadcn defaults. Tailwind v4 CSS-first `@theme inline` block used throughout.
+- **`app/layout.tsx`** — Updated metadata (title template, description, manifest, Apple web app config), viewport settings, dark mode default (`<html class="dark">`), and added global `<Header />` component.
+- **`.env.local`** — Template created with `NEXT_PUBLIC_POLYGON_AMOY_RPC`, `NEXT_PUBLIC_CHAIN_ID`, `NEXT_PUBLIC_CONTRACT_ADDRESS`, `NEXT_PUBLIC_ELECTION_ID`, `NEXT_PUBLIC_MERKLE_DEPTH`.
+
+#### 15.3 Pages Implemented
+
+| Route | File | Status | Notes |
+|-------|------|--------|-------|
+| `/` | `app/page.tsx` | ✅ Done | Static server component. Hero section, 3 CTAs (Start Voting, View Results, Audit Election), "How It Works" 4-step cards. |
+| `/auth` | `app/auth/page.tsx` | ✅ Done | Client component. NID + secret pin inputs, computes commitment via `computeCommitment()`, calls `POST /api/register` to get Merkle proof, stores to Zustand, MetaMask connect via `<WalletConnect />`, redirects to `/vote` on success. Guards against re-auth. |
+| `/vote` | `app/vote/page.tsx` | ✅ Done | Client component. Fetches election metadata from `/api/election`, renders candidate cards via `<VotingCard />`, radio-style selection. Guards: redirects to `/auth` if not authenticated. Stores selected candidate index in proof store. |
+| `/vote/confirm` | `app/vote/confirm/page.tsx` | ✅ Done | Client component. 4-step proof flow: (1) init ZoKrates WASM, (2) compute witness, (3) generate Groth16 proof, (4) submit on-chain via `castVote()`. Graceful fallback: if ZKP artifacts unavailable (pre-trusted-setup), creates mock proof for UI demo. If offline, queues proof via `offline-queue.ts`. Shows tx hash on success. |
+| `/results` | `app/results/page.tsx` | ✅ Done | Client component. Fetches tallies from `/api/election`, renders bar chart via `<ResultsChart />`, auto-refreshes every 15s, shows election status badge, link to PolygonScan contract + audit page. |
+| `/audit` | `app/audit/page.tsx` | ✅ Done | Client component. Fetches from `/api/audit`, side-by-side on-chain vs recomputed tally cards, match/mismatch status banner, `<AuditLog />` table with CSV export. |
+| `/admin` | `app/admin/page.tsx` | ✅ Done | Client component. Wallet connect, election title/candidates configuration, voter NID textarea for registration, Start/End election buttons. Currently prototype-mode (UI-only actions); will wire to contract calls after Layer 2 deployment. |
+
+#### 15.4 Components Implemented
+
+| Component | File | Description |
+|-----------|------|-------------|
+| Header | `components/Header.tsx` | Sticky top nav with route links (Home, Vote, Results, Audit, Admin), active route highlight, responsive icon-only on mobile, `<NetworkStatus />` badge. |
+| NetworkStatus | `components/NetworkStatus.tsx` | Online/offline badge using `navigator.onLine` + event listeners. Green "Online" / red "Offline" with Wifi/WifiOff icons. |
+| WalletConnect | `components/WalletConnect.tsx` | MetaMask connection button. Calls `connectWallet()` from provider, stores address in voter store. Shows truncated address when connected. Error display. |
+| VotingCard | `components/VotingCard.tsx` | Candidate selection card with emoji icon, name, radio indicator. Keyboard accessible (Enter/Space). Blue ring highlight when selected. |
+| ProofStatus | `components/ProofStatus.tsx` | 4-step progress display (Loading ZoKrates → Computing witness → Generating proof → Submitting to blockchain). Uses check/spinner/circle/alert icons per step state. |
+| ResultsChart | `components/ResultsChart.tsx` | Horizontal bar chart. Shows candidate name, vote count, percentage. Bar width proportional to max tally. CSS-based (no chart library). |
+| AuditLog | `components/AuditLog.tsx` | Event log table (index, truncated nullifier hash, block number, timestamp). CSV export button generates blob download. |
+
+**shadcn/ui components (8):** Button, Card, Input, Label, Badge, Progress, Table, Separator.
+
+#### 15.5 State Management (Zustand Stores)
+
+| Store | File | Persisted | Fields |
+|-------|------|-----------|--------|
+| Voter | `lib/store/voter-store.ts` | ✅ localStorage | `isAuthenticated`, `nid`, `secret`, `commitment`, `merkleProof`, `merklePathIndices`, `walletAddress` |
+| Election | `lib/store/election-store.ts` | ❌ | `title`, `candidates`, `merkleRoot`, `isActive`, `contractAddress`, `totalVotes`, `tallies` |
+| Proof | `lib/store/proof-store.ts` | ❌ | `selectedCandidate`, `proofStatus` (idle/initializing/computing/proving/submitting/done/error), `proof`, `txHash`, `error` |
+
+#### 15.6 Utility Libraries
+
+| File | Purpose |
+|------|---------|
+| `lib/utils/constants.ts` | App-wide constants: chain config, Merkle depth (6), proof artifact paths, default candidates, refresh intervals, IndexedDB names. |
+| `lib/utils/hash.ts` | Poseidon placeholder using ethers.js `keccak256`. Functions: `poseidonHash()`, `computeCommitment(nid, secret)`, `computeNullifier(secret, electionId)`, `nidToField()`, `hashToBigInt()`. **Note:** Will need to replace with real Poseidon hash matching the ZoKrates circuit when artifacts are generated. |
+| `lib/utils/merkle.ts` | Binary Merkle tree: `buildMerkleTree()` (pads to 2^depth), `getMerkleRoot()`, `generateMerkleProof()` (returns path + indices), `verifyMerkleProof()`. Uses `poseidonHash()` from hash.ts. |
+| `lib/utils/offline-queue.ts` | IndexedDB-backed queue: `queueVote()`, `getPendingVotes()`, `markSubmitted()`, `clearSubmitted()`. Stores proof + public inputs with UUID and timestamp. |
+
+#### 15.7 ZoKrates Integration
+
+| File | Status | Notes |
+|------|--------|-------|
+| `lib/zk/zokrates.ts` | ✅ Done | Lazy singleton provider via `getZoKratesProvider()`. Wraps `zokrates-js` `initialize()`. |
+| `lib/zk/prover.ts` | ✅ Done | `loadArtifacts()` fetches from `/public/zk/`. `generateProof(input)` computes witness + Groth16 proof. Uses proper `CompilationArtifacts` type from zokrates-js. |
+| `lib/zk/circuit.zok` | ✅ Reference | ZoKrates source code in comments (DEPTH=6, Poseidon-based). Needs CLI compilation to produce artifacts. |
+| `public/zk/` | ⬜ Empty | Placeholder directory. Will contain `artifacts.json` and `proving-key.bin` after trusted setup (Layer 2 prerequisite). |
+
+#### 15.8 Blockchain Integration
+
+| File | Status | Notes |
+|------|--------|-------|
+| `lib/blockchain/config.ts` | ✅ Done | Chain config (Polygon Amoy 80002), contract address from env. |
+| `lib/blockchain/provider.ts` | ✅ Done | Read-only `JsonRpcProvider`, `connectWallet()` with network switching, `getConnectedAddress()`. Handles chain-not-added (4902) error. |
+| `lib/blockchain/voting-contract.ts` | ✅ Done | Full typed wrappers: `getReadContract()`, `getWriteContract()`, `castVote()`, `setupElection()`, `startElection()`, `endElection()`, `getAllCandidates()`, `getVoteCastEvents()`. |
+| `lib/blockchain/abi/ZKVoting.json` | ✅ Done | Complete ABI matching the `ZKVoting.sol` spec (Section 8). Includes Groth16 proof struct types. |
+
+#### 15.9 API Routes
+
+| Route | Method | File | Notes |
+|-------|--------|------|-------|
+| `/api/register` | POST | `app/api/register/route.ts` | In-memory voter registry. Adds commitment, builds Merkle tree, returns proof + indices + root. Prototype-mode (resets on server restart). |
+| `/api/election` | GET | `app/api/election/route.ts` | Returns default election metadata (title, 4 candidates, tallies). Will read from contract after deployment. |
+| `/api/audit` | GET | `app/api/audit/route.ts` | Returns empty events + zero tallies. Will read VoteCast events from contract after deployment. |
+
+#### 15.10 PWA Configuration
+
+| File | Status | Notes |
+|------|--------|-------|
+| `app/manifest.ts` | ✅ Done | Dynamic manifest: name, icons, standalone display, dark theme. |
+| `app/sw.ts` | ✅ Done | Serwist service worker. ZKP artifacts cached with `CacheFirst` (1 year). Election API cached with `NetworkFirst` (1 hour fallback). Default cache for static assets. |
+| `next.config.ts` | ✅ Done | Serwist plugin wraps config. WASM async experiment enabled. SW disabled in dev mode. |
+| `public/offline.html` | ✅ Done | Minimal offline fallback page. |
+
+#### 15.11 Build Status
+
+- **Production build:** ✅ Passes (`next build --webpack`)
+- **Dev server:** ✅ Runs at `http://localhost:3000`
+- **All routes returning 200:** ✅ Confirmed (`/`, `/auth`, `/vote`, `/results`, `/audit`, `/admin`, `/api/election`)
+- **TypeScript:** ✅ No type errors
+- **Warning:** zokrates-js chunk is 6.76 MB (won't be precached by service worker — acceptable since it's loaded on-demand)
+
+---
+
+### Phase 2: Layer 2 — Smart Contracts (NOT STARTED)
+
+**Next steps:**
+1. Initialize Hardhat project inside `/contracts`
+2. Write `Verifier.sol` (ZoKrates-generated) and `ZKVoting.sol`
+3. Write deployment script (`scripts/deploy.ts`)
+4. Write contract unit tests (`test/ZKVoting.test.ts`)
+5. Compile the ZoKrates circuit via CLI and run trusted setup
+6. Copy `proving-key.bin` and `artifacts.json` to `public/zk/`
+7. Copy `Verifier.sol` to `contracts/contracts/`
+8. Deploy to Polygon Amoy testnet
+9. Update `.env.local` with deployed contract address
+10. Wire API routes to read from actual contract instead of defaults
+
+### Phase 3: Layer 3 — Audit & Testing (NOT STARTED)
+
+**Next steps:**
+1. Create Python audit script (`audit/audit.py`)
+2. Wire API routes to read live blockchain data
+3. Replace Poseidon placeholder hash with real Poseidon matching circuit
+4. End-to-end integration testing
+5. Mock election with N=50 participants
+6. SUS survey + performance metrics collection

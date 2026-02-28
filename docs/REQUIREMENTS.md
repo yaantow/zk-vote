@@ -643,12 +643,15 @@ The circuit proves: **"I am a registered voter, and I voted for a valid candidat
 - `candidateIndex` — which candidate was selected
 - `maxCandidates` — total number of candidates (to validate range)
 
+**Circuit Return Value (5th public signal):**
+- The circuit returns `bool` (`true` if all checks pass). ZoKrates treats the return value as an additional public output, making the verifier accept **5 public inputs** total: `[merkleRoot, nullifierHash, candidateIndex, maxCandidates, returnValue=1]`.
+
 **Circuit Logic (pseudocode):**
 
 ```zokrates
 import "hashes/poseidon/poseidon" as poseidon
 
-const u32 DEPTH = 5  // supports 2^5 = 32 voters (increase for 50+)
+const u32 DEPTH = 6  // supports 2^6 = 64 voters
 
 def main(
     private field voterSecret,
@@ -684,19 +687,29 @@ def main(
 }
 ```
 
-### 7.2 Trusted Setup & Key Generation
+### 7.2 Trusted Setup & Key Generation (COMPLETED)
+
+The trusted setup has been completed using ZoKrates CLI v0.8.8. The circuit compiles to 2720 R1CS constraints with DEPTH=6 (64 voter capacity).
 
 ```bash
 # Using ZoKrates CLI (one-time setup, not in browser)
-zokrates compile -i lib/zk/circuit.zok
-zokrates setup
-zokrates export-verifier  # Generates Verifier.sol
+cd contracts/circuits
+zokrates compile -i circuit.zok     # 2720 constraints
+zokrates setup                      # proving.key (1.1MB) + verification.key (2.2KB)
+zokrates export-verifier            # verifier.sol with real VK (10.4KB)
 
-# Copy outputs:
-# - proving.key → lib/zk/proving-key.bin (bundle with app)
-# - verification.key → lib/zk/verification-key.json
-# - Verifier.sol → contracts/contracts/Verifier.sol
+# Sync artifacts to frontend
+cd ..
+bash scripts/sync-artifacts.sh
+
+# Outputs synced:
+# - proving.key → public/zk/proving-key.bin
+# - verification.key → public/zk/verification-key.json
+# - compiled program → public/zk/out
+# - ABI → lib/blockchain/abi/ZKVoting.json (20 entries)
 ```
+
+**Important:** The ZoKrates circuit returns `bool`, which ZoKrates treats as a 5th public output. This means the on-chain verifier (`verifyTx`) accepts `uint[5] memory input` — not `uint256[4]` as originally designed. All contracts, tests, scripts, and frontend code have been updated accordingly.
 
 ### 7.3 Client-Side Proof Generation (`lib/zk/prover.ts`)
 
@@ -843,19 +856,22 @@ contract ZKVoting {
     // --- Voting ---
     function castVote(
         Verifier.Proof memory _proof,
-        uint256[4] memory _publicInputs
+        uint256[5] memory _publicInputs
         // [0] = merkleRoot
         // [1] = nullifierHash
         // [2] = candidateIndex
         // [3] = maxCandidates
+        // [4] = returnValue (must be 1)
     ) external electionIsActive {
 
         uint256 _merkleRoot = _publicInputs[0];
         uint256 _nullifier = _publicInputs[1];
         uint256 _candidateIdx = _publicInputs[2];
         uint256 _maxCandidates = _publicInputs[3];
+        uint256 _returnValue = _publicInputs[4];
 
         // Checks
+        require(_returnValue == 1, "Invalid circuit return value");
         require(_merkleRoot == merkleRoot, "Invalid Merkle root");
         require(!nullifierUsed[_nullifier], "Already voted");
         require(_candidateIdx < candidates.length, "Invalid candidate");
@@ -1398,7 +1414,7 @@ shadcn/ui was initialized with defaults (new-york style, neutral base, CSS varia
 | `lib/zk/zokrates.ts` | ✅ Done | Lazy singleton provider via `getZoKratesProvider()`. Wraps `zokrates-js` `initialize()`. |
 | `lib/zk/prover.ts` | ✅ Done | `loadArtifacts()` fetches from `/public/zk/`. `generateProof(input)` computes witness + Groth16 proof. Uses proper `CompilationArtifacts` type from zokrates-js. |
 | `lib/zk/circuit.zok` | ✅ Reference | ZoKrates source code in comments (DEPTH=6, Poseidon-based). Needs CLI compilation to produce artifacts. |
-| `public/zk/` | ⬜ Empty | Placeholder directory. Will contain `artifacts.json` and `proving-key.bin` after trusted setup (Layer 2 prerequisite). |
+| `public/zk/` | ✅ Populated | Contains `artifacts.json`, `proving-key.bin`, `verification-key.json`, and compiled program (`out`) from ZoKrates trusted setup. |
 
 #### 15.8 Blockchain Integration
 
@@ -1445,7 +1461,7 @@ the deployed contract (with prototype fallbacks when no contract is deployed).
 
 #### Completed Steps:
 1. ✅ Initialized Hardhat 2.28.6 project inside `/contracts`
-2. ✅ Wrote `Verifier.sol` (Groth16 pairing-based, placeholder VK — replace after trusted setup)
+2. ✅ Wrote `Verifier.sol` (ZoKrates-generated Groth16 verifier with real VK from trusted setup)
 3. ✅ Wrote `ZKVoting.sol` with full election lifecycle + ZKP-verified voting
 4. ✅ Wrote deployment script (`scripts/deploy.ts`) — deploys Verifier then ZKVoting
 5. ✅ Wrote election setup script (`scripts/setup-election.ts`)
@@ -1466,7 +1482,7 @@ the deployed contract (with prototype fallbacks when no contract is deployed).
 | `contracts/tsconfig.json` | Config | TypeScript config for Hardhat scripts/tests |
 | `contracts/.env` | Config | Template for deployer key + contract addresses |
 | `contracts/.gitignore` | Config | Ignores node_modules, cache, artifacts, .env |
-| `contracts/contracts/Verifier.sol` | Contract | Groth16 Pairing library + Verifier with placeholder VK (5 IC points for 4 public inputs). Replace with `zokrates export-verifier` output after trusted setup. |
+| `contracts/contracts/Verifier.sol` | Contract | ZoKrates-generated Groth16 verifier with **real verification key** (2720 constraints, 6 gamma_abc points for 5 public inputs). `verifyTx` is `virtual` for MockVerifier override. |
 | `contracts/contracts/ZKVoting.sol` | Contract | Main voting contract — admin setup/start/end, castVote with on-chain ZKP verification, nullifier tracking, candidate tallies, VoteCast events |
 | `contracts/circuits/circuit.zok` | Circuit | ZoKrates circuit source (DEPTH=6, Poseidon hash, Merkle proof, nullifier check, candidate range) |
 | `contracts/scripts/deploy.ts` | Script | Deploys Verifier → ZKVoting, prints addresses |
@@ -1490,11 +1506,11 @@ the deployed contract (with prototype fallbacks when no contract is deployed).
 | Verifier | 3 | ✅ All pass |
 
 #### Remaining Before Testnet Deployment:
-1. Install ZoKrates CLI and compile `contracts/circuits/circuit.zok`
-2. Run trusted setup (`zokrates setup`) to generate proving.key + verification.key
-3. Export verifier (`zokrates export-verifier`) to replace placeholder Verifier.sol
-4. Run `bash scripts/sync-artifacts.sh` to copy artifacts
-5. Recompile contracts (`npx hardhat compile`)
+1. ✅ ~~Install ZoKrates CLI and compile `contracts/circuits/circuit.zok`~~ — Compiled (2720 R1CS constraints)
+2. ✅ ~~Run trusted setup (`zokrates setup`) to generate proving.key + verification.key~~ — Done
+3. ✅ ~~Export verifier (`zokrates export-verifier`) to replace placeholder Verifier.sol~~ — Real VK installed
+4. ✅ ~~Run `bash scripts/sync-artifacts.sh` to copy artifacts~~ — Synced to `public/zk/`
+5. ✅ ~~Recompile contracts (`npx hardhat compile`)~~ — Updated to 5 public inputs, all 32 tests pass
 6. Fund deployer wallet with Polygon Amoy POL
 7. Set `DEPLOYER_PRIVATE_KEY` in `contracts/.env`
 8. Deploy (`npx hardhat run scripts/deploy.ts --network amoy`)

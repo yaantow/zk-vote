@@ -151,7 +151,7 @@ zk-vote/
 │       ├── config.ts                    # Chain config (Polygon Amoy 80002)
 │       ├── provider.ts                  # JsonRpcProvider + MetaMask connection
 │       ├── voting-contract.ts           # Typed contract wrappers
-│       └── abi/ZKVoting.json           # Contract ABI (16 entries)
+│       └── abi/ZKVoting.json           # Contract ABI (20 entries)
 │
 ├── contracts/                           # Hardhat project (smart contracts)
 │   ├── contracts/
@@ -159,7 +159,11 @@ zk-vote/
 │   │   ├── ZKVoting.sol                 # Main voting contract
 │   │   └── MockVerifier.sol             # Always-true verifier for E2E testing
 │   ├── circuits/
-│   │   └── circuit.zok                  # ZoKrates circuit source
+│   │   ├── circuit.zok                  # ZoKrates circuit source
+│   │   ├── out, out.r1cs                # Compiled circuit + constraints
+│   │   ├── proving.key                  # Groth16 proving key
+│   │   ├── verification.key             # Verification key (JSON)
+│   │   └── verifier.sol                 # ZoKrates-generated verifier (raw)
 │   ├── test/
 │   │   └── ZKVoting.test.ts             # 32 unit tests
 │   ├── scripts/
@@ -185,7 +189,7 @@ zk-vote/
 │
 ├── public/
 │   ├── offline.html                     # Offline fallback page
-│   └── zk/                             # ZK artifacts (after trusted setup)
+│   └── zk/                             # ZK artifacts (proving key, verification key, compiled program)
 │
 ├── docs/
 │   └── REQUIREMENTS.md                  # Full project specification
@@ -317,13 +321,13 @@ VOTING_CONTRACT_ADDRESS=0x...
 
 **`Verifier.sol`** — Groth16 pairing-based proof verifier
 - Implements elliptic curve pairing checks (BN256/alt_bn128)
-- Contains the verification key (VK) — currently a **placeholder**
-- Must be replaced with the output of `zokrates export-verifier` after trusted setup
-- Accepts 4 public inputs: `[merkleRoot, nullifierHash, candidateIndex, candidateCount]`
+- Contains the **real verification key** generated from ZoKrates trusted setup (2720 R1CS constraints)
+- Accepts 5 public inputs: `[merkleRoot, nullifierHash, candidateIndex, candidateCount, returnValue]`
+- The 5th input is the circuit return value (must equal `1` for a valid proof)
 
 **`ZKVoting.sol`** — Main voting contract
 - **Admin functions:** `setupElection()`, `startElection()`, `endElection()`
-- **Voting:** `castVote(proof, merkleRoot, nullifierHash, candidateIndex)` — verifies ZKP on-chain, checks nullifier uniqueness, increments tally
+- **Voting:** `castVote(proof, publicInputs[5])` — verifies ZKP on-chain, validates circuit return value, checks nullifier uniqueness, increments tally
 - **Views:** `getCandidateCount()`, `getCandidateName(i)`, `getCandidateTally(i)`, `totalVotes()`
 - **Events:** `VoteCast(nullifierHash, candidateIndex, timestamp)`, `ElectionStarted()`, `ElectionEnded()`
 - **Security:** Only admin can manage elections, double-voting prevented by nullifier hash set, candidate index validated against count
@@ -339,7 +343,7 @@ All 32 unit tests pass across 6 categories:
 | Election Lifecycle | 8     | Start/end transitions, state guards            |
 | Vote Casting Guards| 4     | Election state, candidate range, nullifier     |
 | View Functions     | 6     | Candidate data, tally reads, total votes       |
-| Verifier           | 3     | Contract deployment, interface                 |
+| Verifier           | 2     | Contract deployment, invalid proof rejection   |
 
 ```bash
 cd contracts && npm test
@@ -367,57 +371,71 @@ NEXT_PUBLIC_CONTRACT_ADDRESS=0x<deployed-address>
 
 ### Testnet Deployment
 
-Before deploying to Polygon Amoy testnet, you must:
+The ZoKrates trusted setup is complete and the real verification key is installed.
+To deploy to Polygon Amoy testnet:
 
-1. Complete the [ZoKrates Trusted Setup](#zokrates-trusted-setup)
-2. Fund your deployer wallet with Polygon Amoy POL (from a faucet)
-3. Set `DEPLOYER_PRIVATE_KEY` in `contracts/.env`
+1. Fund your deployer wallet with Polygon Amoy POL (from a [faucet](https://faucet.polygon.technology/))
+2. Set `DEPLOYER_PRIVATE_KEY` in `contracts/.env`
 
 ```bash
 cd contracts
 npm run deploy:amoy
 ```
 
+After deployment, update your environment files with the printed contract addresses:
+- `contracts/.env` → `VERIFIER_ADDRESS` and `ZK_VOTING_ADDRESS`
+- `.env.local` → `NEXT_PUBLIC_CONTRACT_ADDRESS=<ZKVoting address>`
+
 ---
 
 ## ZoKrates Trusted Setup
 
-The ZoKrates circuit must be compiled and a trusted setup performed before real
-ZKP verification can work on-chain. The current `Verifier.sol` contains a
-**placeholder verification key** that works for unit testing but will reject real proofs.
+The ZoKrates trusted setup has been completed. The `Verifier.sol` contract contains the **real verification key** generated from the compiled circuit (2720 R1CS constraints, DEPTH=6 supporting 64 voters).
 
-### Steps
+### Setup Details
+
+- **ZoKrates CLI:** v0.8.8 (aarch64-apple-darwin)
+- **Circuit:** `contracts/circuits/circuit.zok` — Poseidon-based Merkle proof + nullifier check
+- **Constraints:** 2720 R1CS constraints
+- **Proving system:** Groth16 (BN128)
+- **Public inputs:** 5 (merkleRoot, nullifierHash, candidateIndex, maxCandidates, returnValue)
+
+### Generated Artifacts
+
+| Artifact | Location | Size | Purpose |
+|----------|----------|------|---------|
+| Compiled program | `contracts/circuits/out` | 2.8 MB | Circuit binary |
+| R1CS constraints | `contracts/circuits/out.r1cs` | 2.1 MB | Constraint system |
+| Proving key | `contracts/circuits/proving.key` | 1.1 MB | Client-side proof generation |
+| Verification key | `contracts/circuits/verification.key` | 2.2 KB | VK in JSON format |
+| Verifier contract | `contracts/contracts/Verifier.sol` | 10.4 KB | On-chain Groth16 verifier with real VK |
+
+### Synced to Frontend
+
+| Source | Destination | Purpose |
+|--------|-------------|---------|
+| `proving.key` | `public/zk/proving-key.bin` | Browser-side proof generation |
+| `verification.key` | `public/zk/verification-key.json` | Client reference |
+| `out` | `public/zk/out` | Compiled circuit for WASM |
+| Compiled ABI | `lib/blockchain/abi/ZKVoting.json` | Frontend contract interaction |
+
+### Reproducing the Setup
 
 ```bash
-# 1. Install ZoKrates CLI
+# Install ZoKrates CLI
 curl -LSfs get.zokrat.es | sh
 export PATH="$HOME/.zokrates/bin:$PATH"
 
-# 2. Compile the circuit
+# Compile + setup + export
 cd contracts/circuits
 zokrates compile -i circuit.zok
-
-# 3. Perform trusted setup (generates proving.key + verification.key)
 zokrates setup
-
-# 4. Export the Solidity verifier (replaces placeholder)
 zokrates export-verifier
 
-# 5. Run the sync script to copy artifacts
+# Sync artifacts to frontend
 cd ..
 bash scripts/sync-artifacts.sh
-```
-
-After running `sync-artifacts.sh`, the following files are updated:
-- `public/zk/proving.key` — used by the browser for client-side proof generation
-- `contracts/contracts/Verifier.sol` — replaced with real verification key
-- `lib/blockchain/abi/ZKVoting.json` — updated ABI after recompilation
-
-Then recompile and redeploy:
-```bash
-cd contracts
-npm run compile
-npm run deploy:amoy  # or deploy:local
+npx hardhat compile
 ```
 
 ---
@@ -587,8 +605,8 @@ Metrics are stored in localStorage and can be exported via `exportMetricsCSV()` 
 - [x] **Phase 1 — Layer 1 (Client PWA):** All pages, components, stores, utilities, API routes, and PWA configuration complete. Production build passes.
 - [x] **Phase 2 — Layer 2 (Smart Contracts):** Hardhat project, Verifier.sol, ZKVoting.sol, circuit, deploy scripts, 32/32 tests passing. Frontend API routes wired to contract.
 - [x] **Phase 3 — Layer 3 (Audit & Testing):** Python audit script, real Poseidon hash (circomlibjs), E2E integration test, mock election (N=50, 100% double-vote rejection), SUS survey page, performance metrics instrumentation. 70 tests total (38 Jest + 32 Hardhat).
-- [ ] **ZoKrates Trusted Setup:** Circuit written, awaiting CLI compilation + setup.
-- [ ] **Testnet Deployment:** Awaiting trusted setup + funded wallet.
+- [x] **ZoKrates Trusted Setup:** Circuit compiled (2720 constraints), Groth16 trusted setup completed, real verification key installed in Verifier.sol, all contracts updated from 4→5 public inputs, artifacts synced to frontend.
+- [ ] **Testnet Deployment:** Awaiting funded deployer wallet (Polygon Amoy POL).
 
 ---
 

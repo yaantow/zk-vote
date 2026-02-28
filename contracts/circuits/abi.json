@@ -1,0 +1,55 @@
+{
+  "inputs": [
+    {
+      "name": "voterSecret",
+      "public": false,
+      "type": "field"
+    },
+    {
+      "name": "voterNid",
+      "public": false,
+      "type": "field"
+    },
+    {
+      "name": "merklePath",
+      "public": false,
+      "type": "array",
+      "components": {
+        "size": 6,
+        "type": "field"
+      }
+    },
+    {
+      "name": "merklePathIndices",
+      "public": false,
+      "type": "array",
+      "components": {
+        "size": 6,
+        "type": "field"
+      }
+    },
+    {
+      "name": "merkleRoot",
+      "public": true,
+      "type": "field"
+    },
+    {
+      "name": "nullifierHash",
+      "public": true,
+      "type": "field"
+    },
+    {
+      "name": "candidateIndex",
+      "public": true,
+      "type": "field"
+    },
+    {
+      "name": "maxCandidates",
+      "public": true,
+      "type": "field"
+    }
+  ],
+  "output": {
+    "type": "bool"
+  }
+}

@@ -113,7 +113,7 @@ export interface ZKProof {
  */
 export async function castVote(
   proof: ZKProof,
-  publicInputs: [string, string, string, string]
+  publicInputs: [string, string, string, string, string]
 ): Promise<ContractTransactionResponse> {
   const contract = await getWriteContract();
 

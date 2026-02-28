@@ -282,11 +282,12 @@ describe("ZKVoting", function () {
         b: { X: [0, 0], Y: [0, 0] },
         c: { X: 0, Y: 0 },
       };
-      const publicInputs: [bigint, bigint, bigint, bigint] = [
+      const publicInputs: [bigint, bigint, bigint, bigint, bigint] = [
         merkleRoot,
         1n,
         0n,
         4n,
+        1n,
       ];
 
       await expect(
@@ -304,11 +305,12 @@ describe("ZKVoting", function () {
         c: { X: 0, Y: 0 },
       };
       const wrongRoot = BigInt("0xdead");
-      const publicInputs: [bigint, bigint, bigint, bigint] = [
+      const publicInputs: [bigint, bigint, bigint, bigint, bigint] = [
         wrongRoot,
         1n,
         0n,
         4n,
+        1n,
       ];
 
       await expect(
@@ -326,11 +328,12 @@ describe("ZKVoting", function () {
         c: { X: 0, Y: 0 },
       };
       // candidateIndex = 99 (out of range)
-      const publicInputs: [bigint, bigint, bigint, bigint] = [
+      const publicInputs: [bigint, bigint, bigint, bigint, bigint] = [
         merkleRoot,
         1n,
         99n,
         4n,
+        1n,
       ];
 
       await expect(
@@ -348,11 +351,12 @@ describe("ZKVoting", function () {
         c: { X: 0, Y: 0 },
       };
       // maxCandidates = 10 (doesn't match actual 4)
-      const publicInputs: [bigint, bigint, bigint, bigint] = [
+      const publicInputs: [bigint, bigint, bigint, bigint, bigint] = [
         merkleRoot,
         1n,
         0n,
         10n,
+        1n,
       ];
 
       await expect(
@@ -430,7 +434,7 @@ describe("ZKVoting", function () {
         b: { X: [0, 0], Y: [0, 0] },
         c: { X: 0, Y: 0 },
       };
-      const fakeInputs: [bigint, bigint, bigint, bigint] = [0n, 0n, 0n, 0n];
+      const fakeInputs: [bigint, bigint, bigint, bigint, bigint] = [0n, 0n, 0n, 0n, 0n];
 
       // An all-zero proof should fail verification (pairing check fails)
       // This may revert or return false depending on the pairing precompile behavior

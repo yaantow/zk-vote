@@ -127,11 +127,12 @@ async function main() {
     const candidateIdx = getRandomCandidate();
     const nullifier = BigInt(2000 + i);
 
-    const publicInputs: [bigint, bigint, bigint, bigint] = [
+    const publicInputs: [bigint, bigint, bigint, bigint, bigint] = [
       merkleRoot,
       nullifier,
       BigInt(candidateIdx),
       BigInt(candidates.length),
+      1n,
     ];
 
     const voteStart = Date.now();
@@ -173,6 +174,7 @@ async function main() {
         reusedNullifier,
         0n,
         BigInt(candidates.length),
+        1n,
       ]);
       console.log(`  ❌ Double vote ${i + 1} was NOT rejected!`);
     } catch {

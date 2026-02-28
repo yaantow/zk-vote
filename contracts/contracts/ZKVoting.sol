@@ -128,18 +128,21 @@ contract ZKVoting {
     /**
      * @notice Cast a vote by submitting a valid Groth16 proof.
      * @param _proof         The zk-SNARK proof (a, b, c G-points).
-     * @param _publicInputs  [merkleRoot, nullifierHash, candidateIndex, maxCandidates]
+     * @param _publicInputs  [merkleRoot, nullifierHash, candidateIndex, maxCandidates, returnValue]
+     *                       The 5th element is the circuit return value (must be 1 = valid).
      */
     function castVote(
         Verifier.Proof memory _proof,
-        uint256[4] memory _publicInputs
+        uint256[5] memory _publicInputs
     ) external electionIsActive {
-        uint256 _merkleRoot   = _publicInputs[0];
-        uint256 _nullifier    = _publicInputs[1];
-        uint256 _candidateIdx = _publicInputs[2];
+        uint256 _merkleRoot    = _publicInputs[0];
+        uint256 _nullifier     = _publicInputs[1];
+        uint256 _candidateIdx  = _publicInputs[2];
         uint256 _maxCandidates = _publicInputs[3];
+        uint256 _returnValue   = _publicInputs[4];
 
         // --- Checks ---
+        require(_returnValue == 1, "Invalid circuit return value");
         require(_merkleRoot == merkleRoot, "Invalid Merkle root");
         require(!nullifierUsed[_nullifier], "Already voted");
         require(_candidateIdx < candidates.length, "Invalid candidate");

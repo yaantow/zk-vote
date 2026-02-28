@@ -99,7 +99,7 @@ export default function ConfirmPage() {
             ] as [[string, string], [string, string]],
             c: ["0x0", "0x0"] as [string, string],
           },
-          inputs: [merkleRoot, nullifierHash, String(proof.selectedCandidate), String(candidates.length)],
+          inputs: [merkleRoot, nullifierHash, String(proof.selectedCandidate), String(candidates.length), "1"],
         };
       }
 
@@ -125,7 +125,7 @@ export default function ConfirmPage() {
         );
         const tx = await castVote(
           generatedProof.proof as ZKProof,
-          generatedProof.inputs as [string, string, string, string]
+          generatedProof.inputs as [string, string, string, string, string]
         );
         const receipt = await tx.wait();
         proof.setTxHash(receipt?.hash || tx.hash);

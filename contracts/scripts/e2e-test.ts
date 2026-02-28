@@ -123,11 +123,12 @@ async function main() {
     const candidateIdx = i % candidates.length; // Distribute votes evenly
     const nullifier = BigInt(1000 + i); // Unique nullifier per voter
 
-    const publicInputs: [bigint, bigint, bigint, bigint] = [
+    const publicInputs: [bigint, bigint, bigint, bigint, bigint] = [
       merkleRoot,
       nullifier,
       BigInt(candidateIdx),
       BigInt(candidates.length),
+      1n,
     ];
 
     const voterContract = voting.connect(voter);
@@ -171,6 +172,7 @@ async function main() {
       doubleNullifier,
       0n,
       BigInt(candidates.length),
+      1n,
     ]);
     console.log("  ❌ FAIL: Double vote should have reverted!");
     process.exit(1);
@@ -193,6 +195,7 @@ async function main() {
       BigInt(9999), // Fresh nullifier
       BigInt(99), // Invalid candidate index
       BigInt(candidates.length),
+      1n,
     ]);
     console.log("  ❌ FAIL: Invalid candidate should have reverted!");
     process.exit(1);
@@ -226,6 +229,7 @@ async function main() {
       BigInt(8888),
       0n,
       BigInt(candidates.length),
+      1n,
     ]);
     console.log("  ❌ FAIL: Late vote should have reverted!");
     process.exit(1);

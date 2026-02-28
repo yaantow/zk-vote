@@ -16,7 +16,7 @@ contract MockVerifier is Verifier {
      */
     function verifyTx(
         Proof memory,
-        uint256[4] memory
+        uint256[5] memory
     ) public pure override returns (bool) {
         return true;
     }

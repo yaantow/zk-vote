@@ -8,11 +8,10 @@ import { NetworkStatus } from "./NetworkStatus";
 
 const navItems = [
   { href: "/", label: "Home", icon: Vote },
-  { href: "/vote", label: "Vote", icon: Vote },
-  { href: "/results", label: "Results", icon: BarChart3 },
-  { href: "/audit", label: "Audit", icon: Shield },
-  { href: "/survey", label: "Survey", icon: ClipboardList },
   { href: "/admin", label: "Admin", icon: Settings },
+  { href: "/audit", label: "Audit", icon: Shield },
+  { href: "/results", label: "Results", icon: BarChart3 },
+  { href: "/survey", label: "Survey", icon: ClipboardList },
 ];
 
 export function Header() {

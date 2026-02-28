@@ -37,11 +37,11 @@ export function VotingCard({
           : "border-border hover:border-primary/50"
       )}
     >
-      <CardContent className="flex flex-col items-center gap-3 p-6">
-        <span className="text-4xl" role="img" aria-label={name}>
+      <CardContent className="flex flex-col items-center gap-3 p-8">
+        <span className="text-5xl" role="img" aria-label={name}>
           {icon}
         </span>
-        <span className="text-sm font-semibold">{name}</span>
+        <span className="text-base font-semibold">{name}</span>
         <div
           className={cn(
             "h-5 w-5 rounded-full border-2 transition-colors",

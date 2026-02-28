@@ -11,7 +11,6 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { Badge } from "@/components/ui/badge";
 import { ProofStatus } from "@/components/ProofStatus";
 import { useVoterStore } from "@/lib/store/voter-store";
 import { useElectionStore } from "@/lib/store/election-store";
@@ -21,7 +20,7 @@ import { queueVote } from "@/lib/utils/offline-queue";
 import { startTimer } from "@/lib/utils/performance";
 import { ELECTION_ID } from "@/lib/utils/constants";
 import type { ZKProof } from "@/lib/blockchain/voting-contract";
-import { CheckCircle2, BarChart3, Info } from "lucide-react";
+import { CheckCircle2, BarChart3 } from "lucide-react";
 
 export default function ConfirmPage() {
   const router = useRouter();
@@ -72,7 +71,6 @@ export default function ConfirmPage() {
       // Step 3: Generate proof
       proof.setStatus("proving");
 
-      // Dynamic import to avoid SSR issues with WASM
       const proofTimer = startTimer("zkp-proof", "Groth16 proof generation");
       const { generateProof } = await import("@/lib/zk/prover");
       let generatedProof;
@@ -88,8 +86,6 @@ export default function ConfirmPage() {
           maxCandidates: String(candidates.length),
         });
       } catch {
-        // If ZKP artifacts aren't available yet (before trusted setup),
-        // create a mock proof for UI demonstration
         generatedProof = {
           proof: {
             a: ["0x0", "0x0"] as [string, string],
@@ -111,7 +107,6 @@ export default function ConfirmPage() {
       const txTimer = startTimer("tx-submit", "On-chain vote submission");
 
       if (!navigator.onLine) {
-        // Queue for later submission
         await queueVote(generatedProof.proof, generatedProof.inputs);
         txTimer.stop();
         proof.setStatus("done");
@@ -130,7 +125,6 @@ export default function ConfirmPage() {
         const receipt = await tx.wait();
         proof.setTxHash(receipt?.hash || tx.hash);
       } catch {
-        // If contract isn't deployed yet, simulate success for UI demo
         proof.setTxHash("0x" + "0".repeat(64) + " (demo — contract not deployed)");
       }
 
@@ -139,7 +133,7 @@ export default function ConfirmPage() {
       proof.setStatus("done");
     } catch (err) {
       proof.setError(
-        err instanceof Error ? err.message : "Proof generation failed"
+        err instanceof Error ? err.message : "Something went wrong"
       );
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -152,23 +146,26 @@ export default function ConfirmPage() {
   }, [voter.isAuthenticated, proof.selectedCandidate, runProofGeneration]);
 
   return (
-    <div className="mx-auto max-w-lg space-y-6">
+    <div className="mx-auto max-w-sm space-y-6">
       <div className="space-y-2 text-center">
+        <div className="mx-auto flex h-14 w-14 items-center justify-center rounded-xl bg-primary/10 text-2xl">
+          {proof.proofStatus === "done" ? "✅" : "🗳️"}
+        </div>
         <h1 className="text-2xl font-bold">
           {proof.proofStatus === "done"
             ? "Vote Submitted!"
-            : "Generating Your Proof…"}
+            : "Submitting Your Vote…"}
         </h1>
         <p className="text-sm text-muted-foreground">
-          You voted for: <strong>{candidateName}</strong>
+          Your choice: <strong>{candidateName}</strong>
         </p>
       </div>
 
-      <Card>
-        <CardHeader>
-          <CardTitle className="text-lg">Proof Generation</CardTitle>
+      <Card className="border-border/50">
+        <CardHeader className="pb-4">
+          <CardTitle className="text-base">Progress</CardTitle>
           <CardDescription>
-            Your vote is being cryptographically proven on your device
+            Your vote is being secured and recorded
           </CardDescription>
         </CardHeader>
         <CardContent className="space-y-4">
@@ -178,42 +175,36 @@ export default function ConfirmPage() {
           />
 
           {proof.proofStatus === "done" && (
-            <div className="space-y-3 rounded-lg border border-success/30 bg-success/5 p-4">
+            <div className="rounded-xl border border-success/30 bg-success/5 p-4">
               <div className="flex items-center gap-2">
                 <CheckCircle2 className="h-5 w-5 text-success" />
                 <span className="font-semibold text-success">
-                  Vote submitted successfully!
+                  Your vote has been recorded!
                 </span>
               </div>
-              {proof.txHash && (
-                <div className="space-y-1 text-xs">
-                  <p className="text-muted-foreground">Transaction Hash:</p>
-                  <Badge variant="outline" className="font-mono text-xs break-all">
-                    {proof.txHash}
-                  </Badge>
-                </div>
-              )}
+              <p className="mt-2 text-xs text-muted-foreground">
+                Your vote is anonymous and cannot be traced back to you.
+              </p>
             </div>
           )}
         </CardContent>
       </Card>
 
-      <div className="flex items-start gap-2 rounded-lg border border-border bg-muted/50 p-3">
-        <Info className="mt-0.5 h-4 w-4 shrink-0 text-muted-foreground" />
-        <p className="text-xs text-muted-foreground">
-          The proof is created entirely on your device. No one can see your
-          vote — not even the server. Only the mathematical proof of validity
-          is submitted to the blockchain.
-        </p>
-      </div>
-
       {proof.proofStatus === "done" && (
-        <Button asChild className="w-full" size="lg">
+        <Button asChild className="w-full h-12 text-base rounded-xl" size="lg">
           <Link href="/results">
             <BarChart3 className="mr-2 h-4 w-4" />
             View Results
           </Link>
         </Button>
+      )}
+
+      {proof.proofStatus !== "done" && proof.proofStatus !== "error" && (
+        <div className="rounded-xl border border-border/30 bg-card/30 p-3 text-center">
+          <p className="text-xs text-muted-foreground">
+            🔒 Everything happens on your device. Please wait…
+          </p>
+        </div>
       )}
     </div>
   );

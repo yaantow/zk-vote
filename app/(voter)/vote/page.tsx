@@ -3,14 +3,6 @@
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
 import { VotingCard } from "@/components/VotingCard";
 import { useVoterStore } from "@/lib/store/voter-store";
 import { useElectionStore } from "@/lib/store/election-store";
@@ -34,7 +26,6 @@ export default function VotePage() {
       return;
     }
 
-    // Fetch election data
     async function fetchElection() {
       try {
         const res = await fetch("/api/election");
@@ -81,61 +72,43 @@ export default function VotePage() {
   }
 
   return (
-    <div className="mx-auto max-w-2xl space-y-6">
+    <div className="mx-auto max-w-md space-y-6">
       <div className="space-y-2 text-center">
-        <h1 className="text-2xl font-bold">Cast Your Vote</h1>
+        <h1 className="text-2xl font-bold">Choose Your Candidate</h1>
         <p className="text-sm text-muted-foreground">
-          {election.title || "Election"}
+          Tap the option you want to vote for
         </p>
-        {election.isActive ? (
-          <Badge className="bg-success text-success-foreground">
-            Election Active
-          </Badge>
-        ) : (
-          <Badge variant="secondary">Election Not Active</Badge>
-        )}
       </div>
 
-      <Card>
-        <CardHeader>
-          <CardTitle>Select a Candidate</CardTitle>
-          <CardDescription>
-            Choose exactly one option. You will confirm your choice on the next
-            screen.
-          </CardDescription>
-        </CardHeader>
-        <CardContent>
-          <div className="grid grid-cols-2 gap-4">
-            {candidates.map((name, i) => (
-              <VotingCard
-                key={i}
-                name={name}
-                index={i}
-                icon={CANDIDATE_ICONS[i] || "🗳️"}
-                selected={selected === i}
-                onSelect={setSelected}
-              />
-            ))}
-          </div>
-        </CardContent>
-      </Card>
+      <div className="grid grid-cols-2 gap-3">
+        {candidates.map((name, i) => (
+          <VotingCard
+            key={i}
+            name={name}
+            index={i}
+            icon={CANDIDATE_ICONS[i] || "🗳️"}
+            selected={selected === i}
+            onSelect={setSelected}
+          />
+        ))}
+      </div>
 
-      <div className="space-y-3">
+      <div className="space-y-3 pt-2">
         <Button
           onClick={handleConfirm}
           disabled={selected === null}
-          className="w-full"
+          className="w-full h-12 text-base rounded-xl"
           size="lg"
         >
-          Confirm Vote
+          Continue
           <ArrowRight className="ml-2 h-4 w-4" />
         </Button>
 
-        <div className="flex items-start gap-2 rounded-lg border border-warning/30 bg-warning/5 p-3">
+        <div className="flex items-start gap-2 rounded-xl border border-warning/30 bg-warning/5 p-3">
           <AlertTriangle className="mt-0.5 h-4 w-4 shrink-0 text-warning" />
           <p className="text-xs text-muted-foreground">
-            You cannot change your vote after confirmation. Please review your
-            selection carefully.
+            You cannot change your vote after the next step. Please review
+            your selection carefully.
           </p>
         </div>
       </div>

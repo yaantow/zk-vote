@@ -12,12 +12,10 @@ import {
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
-import { Badge } from "@/components/ui/badge";
-import { Separator } from "@/components/ui/separator";
 import { WalletConnect } from "@/components/WalletConnect";
 import { useVoterStore } from "@/lib/store/voter-store";
 import { computeCommitment, nidToField } from "@/lib/utils/hash";
-import { Loader2, Info, ShieldCheck } from "lucide-react";
+import { Loader2, Lock, ChevronDown, ChevronUp } from "lucide-react";
 
 export default function AuthPage() {
   const router = useRouter();
@@ -25,13 +23,13 @@ export default function AuthPage() {
   const [secret, setSecret] = useState("");
   const [verifying, setVerifying] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [showWallet, setShowWallet] = useState(false);
 
   const voter = useVoterStore();
 
   const handleVerify = async () => {
     setError(null);
 
-    // Basic validation
     if (!nid.trim()) {
       setError("Please enter your National ID");
       return;
@@ -44,11 +42,8 @@ export default function AuthPage() {
     setVerifying(true);
 
     try {
-      // Compute commitment hash
       const commitment = computeCommitment(nid.trim(), secret.trim());
 
-      // In production, verify commitment against the Merkle tree via API.
-      // For now, we register the voter by calling the register API.
       const res = await fetch("/api/register", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -65,7 +60,6 @@ export default function AuthPage() {
 
       const data = await res.json();
 
-      // Store voter data in Zustand
       voter.setVoter({
         isAuthenticated: true,
         nid: nid.trim(),
@@ -75,7 +69,6 @@ export default function AuthPage() {
         merklePathIndices: data.merklePathIndices,
       });
 
-      // Redirect to voting page
       router.push("/vote");
     } catch (err) {
       setError(
@@ -86,27 +79,28 @@ export default function AuthPage() {
     }
   };
 
-  // If already authenticated, redirect
   if (voter.isAuthenticated) {
     router.push("/vote");
     return null;
   }
 
   return (
-    <div className="mx-auto max-w-md space-y-6">
+    <div className="mx-auto max-w-sm space-y-6">
       <div className="space-y-2 text-center">
-        <ShieldCheck className="mx-auto h-10 w-10 text-primary" />
-        <h1 className="text-2xl font-bold">Voter Authentication</h1>
+        <div className="mx-auto flex h-14 w-14 items-center justify-center rounded-xl bg-primary/10">
+          <Lock className="h-7 w-7 text-primary" />
+        </div>
+        <h1 className="text-2xl font-bold">Verify Your Identity</h1>
         <p className="text-sm text-muted-foreground">
-          Verify your identity to participate in the election
+          Enter your details to start voting
         </p>
       </div>
 
-      <Card>
-        <CardHeader>
-          <CardTitle className="text-lg">Credentials</CardTitle>
+      <Card className="border-border/50">
+        <CardHeader className="pb-4">
+          <CardTitle className="text-base">Your Details</CardTitle>
           <CardDescription>
-            Enter your National ID and a secret pin
+            This information stays on your device
           </CardDescription>
         </CardHeader>
         <CardContent className="space-y-4">
@@ -118,6 +112,7 @@ export default function AuthPage() {
               value={nid}
               onChange={(e) => setNid(e.target.value)}
               disabled={verifying}
+              className="h-12 text-base"
             />
           </div>
           <div className="space-y-2">
@@ -125,12 +120,16 @@ export default function AuthPage() {
             <Input
               id="secret"
               type="password"
-              placeholder="4-6 digit pin"
+              placeholder="4–6 digit pin"
               value={secret}
               onChange={(e) => setSecret(e.target.value)}
               disabled={verifying}
               maxLength={6}
+              className="h-12 text-base"
             />
+            <p className="text-[11px] text-muted-foreground">
+              Choose a pin only you know. It keeps your vote private.
+            </p>
           </div>
 
           {error && (
@@ -140,7 +139,7 @@ export default function AuthPage() {
           <Button
             onClick={handleVerify}
             disabled={verifying}
-            className="w-full"
+            className="w-full h-12 text-base rounded-xl"
             size="lg"
           >
             {verifying ? (
@@ -149,38 +148,40 @@ export default function AuthPage() {
                 Verifying…
               </>
             ) : (
-              "Verify & Continue"
+              "Continue"
             )}
           </Button>
 
-          <Separator />
-
-          <div>
-            <Label className="mb-2 block text-sm font-medium">
-              Wallet Connection
-            </Label>
-            <WalletConnect />
-          </div>
-
-          <div className="flex items-start gap-2 rounded-lg border border-border bg-muted/50 p-3">
-            <Info className="mt-0.5 h-4 w-4 shrink-0 text-muted-foreground" />
-            <p className="text-xs text-muted-foreground">
-              Your ID is checked against the voter registry. Your secret pin is{" "}
-              <strong>NEVER</strong> sent to any server — it stays on your device
-              and is used to generate a zero-knowledge proof.
-            </p>
-          </div>
-
-          <div className="text-center">
-            <Badge variant="outline">
-              Status:{" "}
-              {voter.walletAddress
-                ? `Connected (${voter.walletAddress.slice(0, 6)}…)`
-                : "Not connected"}
-            </Badge>
+          {/* Wallet connect — collapsed by default */}
+          <div className="pt-2">
+            <button
+              type="button"
+              onClick={() => setShowWallet(!showWallet)}
+              className="flex w-full items-center justify-between rounded-lg border border-border/50 px-3 py-2 text-xs text-muted-foreground hover:bg-muted/50 transition-colors"
+            >
+              <span>Advanced: Connect wallet</span>
+              {showWallet ? (
+                <ChevronUp className="h-3.5 w-3.5" />
+              ) : (
+                <ChevronDown className="h-3.5 w-3.5" />
+              )}
+            </button>
+            {showWallet && (
+              <div className="mt-2">
+                <WalletConnect />
+              </div>
+            )}
           </div>
         </CardContent>
       </Card>
+
+      <div className="rounded-xl border border-border/30 bg-card/30 p-3 text-center">
+        <p className="text-xs text-muted-foreground">
+          🔒 Your ID and pin <strong>never leave your device</strong>.
+          <br />
+          They are only used to create a secure, anonymous vote.
+        </p>
+      </div>
     </div>
   );
 }

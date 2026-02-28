@@ -15,10 +15,10 @@ interface Step {
 }
 
 const STEPS: Step[] = [
-  { key: "initializing", label: "Loading ZoKrates" },
-  { key: "computing", label: "Computing witness" },
-  { key: "proving", label: "Generating proof" },
-  { key: "submitting", label: "Submitting to blockchain" },
+  { key: "initializing", label: "Preparing…" },
+  { key: "computing", label: "Securing your vote…" },
+  { key: "proving", label: "Creating verification…" },
+  { key: "submitting", label: "Recording your vote…" },
 ];
 
 interface ProofStatusProps {

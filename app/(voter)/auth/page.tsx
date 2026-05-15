@@ -12,7 +12,6 @@ import {
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
-import { WalletConnect } from "@/components/WalletConnect";
 import { useVoterStore } from "@/lib/store/voter-store";
 import { computeCommitment, nidToField } from "@/lib/utils/hash";
 import { Loader2, Lock, ChevronDown, ChevronUp } from "lucide-react";
@@ -23,7 +22,6 @@ export default function AuthPage() {
   const [secret, setSecret] = useState("");
   const [verifying, setVerifying] = useState(false);
   const [error, setError] = useState<string | null>(null);
-  const [showWallet, setShowWallet] = useState(false);
 
   const voter = useVoterStore();
 
@@ -152,26 +150,7 @@ export default function AuthPage() {
             )}
           </Button>
 
-          {/* Wallet connect — collapsed by default */}
-          <div className="pt-2">
-            <button
-              type="button"
-              onClick={() => setShowWallet(!showWallet)}
-              className="flex w-full items-center justify-between rounded-lg border border-border/50 px-3 py-2 text-xs text-muted-foreground hover:bg-muted/50 transition-colors"
-            >
-              <span>Advanced: Connect wallet</span>
-              {showWallet ? (
-                <ChevronUp className="h-3.5 w-3.5" />
-              ) : (
-                <ChevronDown className="h-3.5 w-3.5" />
-              )}
-            </button>
-            {showWallet && (
-              <div className="mt-2">
-                <WalletConnect />
-              </div>
-            )}
-          </div>
+
         </CardContent>
       </Card>
 

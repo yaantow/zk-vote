@@ -115,17 +115,24 @@ export default function ConfirmPage() {
       }
 
       try {
-        const { castVote } = await import(
-          "@/lib/blockchain/voting-contract"
-        );
-        const tx = await castVote(
-          generatedProof.proof as ZKProof,
-          generatedProof.inputs as [string, string, string, string, string]
-        );
-        const receipt = await tx.wait();
-        proof.setTxHash(receipt?.hash || tx.hash);
-      } catch {
-        proof.setTxHash("0x" + "0".repeat(64) + " (demo — contract not deployed)");
+        const response = await fetch("/api/vote", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            proof: generatedProof.proof,
+            inputs: generatedProof.inputs,
+          }),
+        });
+        
+        const data = await response.json();
+        
+        if (!response.ok) {
+          throw new Error(data.error || "Failed to submit vote");
+        }
+        
+        proof.setTxHash(data.txHash);
+      } catch (err) {
+        throw err; // Let the outer catch handle it
       }
 
       txTimer.stop();

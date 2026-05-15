@@ -18,8 +18,8 @@ const STEPS = [
 function VoterStepper() {
   const pathname = usePathname();
 
-  // Don't show stepper on landing page
-  if (pathname === "/") return null;
+  // Only show stepper on auth or vote paths
+  if (!pathname.startsWith("/auth") && !pathname.startsWith("/vote")) return null;
 
   const currentStepIndex = STEPS.findIndex((s) => pathname.startsWith(s.path));
 

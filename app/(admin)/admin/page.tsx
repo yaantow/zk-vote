@@ -25,7 +25,7 @@ import {
 } from "lucide-react";
 
 export default function AdminPage() {
-  const walletAddress = useVoterStore((s) => s.walletAddress);
+  const [password, setPassword] = useState("");
   const [title, setTitle] = useState("Best Campus Facility");
   const [candidatesStr, setCandidatesStr] = useState(
     "Library, Lab, Gym, Cafeteria"
@@ -67,11 +67,27 @@ export default function AdminPage() {
         setStatus("Need at least 2 candidates");
         return;
       }
+      
+      if (!password) {
+        setStatus("Please enter the admin password");
+        return;
+      }
 
-      // In production, call contract.setupElection()
-      // For now, just update the status
+      // We use a default merkleRoot for now, as the actual registry builds it.
+      // In a real flow, handleRegisterVoters would save it to DB, and setup would fetch it.
+      const merkleRoot = "1";
+
+      const res = await fetch("/api/admin/setup", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ title, candidates, merkleRoot, password })
+      });
+      
+      const data = await res.json();
+      if (!res.ok) throw new Error(data.error);
+
       setStatus(
-        `Election "${title}" configured with ${candidates.length} candidates`
+        `Election "${title}" configured. Tx: ${data.txHash}`
       );
       setElectionStatus("setup");
     } catch (err) {
@@ -112,8 +128,18 @@ export default function AdminPage() {
   const handleStartElection = async () => {
     setLoading(true);
     try {
+      if (!password) throw new Error("Please enter the admin password");
+      
+      const res = await fetch("/api/admin/start", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ password })
+      });
+      const data = await res.json();
+      if (!res.ok) throw new Error(data.error);
+
       setElectionStatus("active");
-      setStatus("Election started!");
+      setStatus(`Election started! Tx: ${data.txHash}`);
     } catch (err) {
       setStatus(
         err instanceof Error ? err.message : "Failed to start"
@@ -126,8 +152,18 @@ export default function AdminPage() {
   const handleEndElection = async () => {
     setLoading(true);
     try {
+      if (!password) throw new Error("Please enter the admin password");
+      
+      const res = await fetch("/api/admin/end", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ password })
+      });
+      const data = await res.json();
+      if (!res.ok) throw new Error(data.error);
+
       setElectionStatus("ended");
-      setStatus("Election ended.");
+      setStatus(`Election ended. Tx: ${data.txHash}`);
     } catch (err) {
       setStatus(
         err instanceof Error ? err.message : "Failed to end"
@@ -156,16 +192,25 @@ export default function AdminPage() {
         </Badge>
       </div>
 
-      {/* Wallet Connection */}
+      {/* Admin Auth */}
       <Card>
         <CardHeader>
-          <CardTitle className="text-lg">Wallet</CardTitle>
+          <CardTitle className="text-lg">Authentication</CardTitle>
           <CardDescription>
-            Connect the contract owner wallet
+            Enter the admin password to manage the election
           </CardDescription>
         </CardHeader>
         <CardContent>
-          <WalletConnect />
+          <div className="space-y-2">
+            <Label htmlFor="password">Admin Password</Label>
+            <Input
+              id="password"
+              type="password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              placeholder="••••••••"
+            />
+          </div>
         </CardContent>
       </Card>
 

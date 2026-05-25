@@ -169,22 +169,54 @@ export interface VoteCastEvent {
 /**
  * Query all VoteCast events from the contract.
  */
+import { JsonRpcProvider } from "ethers";
+
 export async function getVoteCastEvents(): Promise<VoteCastEvent[]> {
   const contract = getReadContract();
   const filter = contract.filters.VoteCast();
-  const events = await contract.queryFilter(filter);
+  
+  try {
+    const currentBlock = await contract.runner?.provider?.getBlockNumber();
+    if (!currentBlock) return [];
+    
+    // The default Polygon Amoy RPC restricts getLogs to ~50 blocks.
+    // We use a dedicated public RPC here that allows up to 10,000 blocks per query.
+    const auditProvider = new JsonRpcProvider("https://polygon-amoy-bor-rpc.publicnode.com");
+    const auditContract = contract.connect(auditProvider) as Contract;
+    
+    // We query the last 30,000 blocks (~24 hours on Amoy) in 10,000-block chunks
+    const CHUNK_SIZE = 9999;
+    const TOTAL_BLOCKS = 30000;
+    const startBlock = Math.max(0, currentBlock - TOTAL_BLOCKS);
+    
+    let allEvents: any[] = [];
+    
+    // Query forwards in chunks to maintain order
+    for (let fromBlock = startBlock; fromBlock <= currentBlock; fromBlock += CHUNK_SIZE + 1) {
+      const toBlock = Math.min(currentBlock, fromBlock + CHUNK_SIZE);
+      try {
+        const chunkEvents = await auditContract.queryFilter(filter, fromBlock, toBlock);
+        allEvents = [...allEvents, ...chunkEvents];
+      } catch (e) {
+        console.warn(`[voting-contract] Skipped event chunk ${fromBlock}-${toBlock}:`, e);
+      }
+    }
 
-  return events.map((e) => {
-    const parsed = contract.interface.parseLog({
-      topics: e.topics as string[],
-      data: e.data,
+    return allEvents.map((e) => {
+      const parsed = auditContract.interface.parseLog({
+        topics: e.topics as string[],
+        data: e.data,
+      });
+      return {
+        nullifierHash: parsed?.args[0]?.toString() ?? "",
+        candidateIndex: Number(parsed?.args[1] ?? 0),
+        timestamp: Number(parsed?.args[2] ?? 0),
+        blockNumber: e.blockNumber,
+        transactionHash: e.transactionHash,
+      };
     });
-    return {
-      nullifierHash: parsed?.args[0]?.toString() ?? "",
-      candidateIndex: Number(parsed?.args[1] ?? 0),
-      timestamp: Number(parsed?.args[2] ?? 0),
-      blockNumber: e.blockNumber,
-      transactionHash: e.transactionHash,
-    };
-  });
+  } catch (err) {
+    console.error("[voting-contract] getVoteCastEvents failed:", err);
+    throw err;
+  }
 }

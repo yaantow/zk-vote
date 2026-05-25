@@ -53,8 +53,8 @@ export async function GET() {
           match,
           candidateNames: candidates.map((c) => c.name),
         });
-      } catch {
-        console.warn("[/api/audit] Contract call failed, using defaults");
+      } catch (err) {
+        console.warn("[/api/audit] Contract call failed, using defaults:", err);
       }
     }
 

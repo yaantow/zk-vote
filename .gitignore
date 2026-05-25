@@ -24,6 +24,9 @@
 .DS_Store
 *.pem
 
+# voter registry (local dev state — not committed)
+.registry-data.json
+
 # debug
 npm-debug.log*
 yarn-debug.log*

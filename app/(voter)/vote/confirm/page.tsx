@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useCallback } from "react";
+import { useEffect, useCallback, useRef } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import {
@@ -15,7 +15,7 @@ import { ProofStatus } from "@/components/ProofStatus";
 import { useVoterStore } from "@/lib/store/voter-store";
 import { useElectionStore } from "@/lib/store/election-store";
 import { useProofStore } from "@/lib/store/proof-store";
-import { nidToField, computeNullifier } from "@/lib/utils/hash";
+import { nidToField, computeNullifierAsync } from "@/lib/utils/hash";
 import { queueVote } from "@/lib/utils/offline-queue";
 import { startTimer } from "@/lib/utils/performance";
 import { ELECTION_ID } from "@/lib/utils/constants";
@@ -49,8 +49,13 @@ export default function ConfirmPage() {
     }
   }, [voter.isAuthenticated, proof.selectedCandidate, router]);
 
+  // Ref guard prevents double-firing from React Strict Mode's double-effect invocation.
+  // Unlike proof.proofStatus (stale inside useCallback with [] deps), a ref is always current.
+  const hasStarted = useRef(false);
+
   const runProofGeneration = useCallback(async () => {
-    if (proof.proofStatus !== "idle") return;
+    if (hasStarted.current) return;
+    hasStarted.current = true;
 
     try {
       // Step 1: Initialize ZoKrates
@@ -63,8 +68,11 @@ export default function ConfirmPage() {
       // Step 2: Compute witness inputs
       proof.setStatus("computing");
       const nidField = nidToField(voter.nid!);
-      const nullifierHash = computeNullifier(voter.secret!, ELECTION_ID);
-      const merkleRoot = election.merkleRoot || "0";
+      const nullifierHash = await computeNullifierAsync(voter.secret!, ELECTION_ID);
+      const merkleRoot = election.merkleRoot;
+      if (!merkleRoot || merkleRoot === "0" || merkleRoot === "0x0") {
+        throw new Error("Election Merkle root not loaded. Please go back and try again.");
+      }
       const merklePath = voter.merkleProof || Array(6).fill("0");
       const merklePathIndices = voter.merklePathIndices || Array(6).fill(0);
 
@@ -73,31 +81,16 @@ export default function ConfirmPage() {
 
       const proofTimer = startTimer("zkp-proof", "Groth16 proof generation");
       const { generateProof } = await import("@/lib/zk/prover");
-      let generatedProof;
-      try {
-        generatedProof = await generateProof({
-          voterSecret: voter.secret!,
-          voterNid: nidField,
-          merklePath: merklePath.map(String),
-          merklePathIndices: merklePathIndices.map(String),
-          merkleRoot,
-          nullifierHash,
-          candidateIndex: String(proof.selectedCandidate),
-          maxCandidates: String(candidates.length),
-        });
-      } catch {
-        generatedProof = {
-          proof: {
-            a: ["0x0", "0x0"] as [string, string],
-            b: [
-              ["0x0", "0x0"],
-              ["0x0", "0x0"],
-            ] as [[string, string], [string, string]],
-            c: ["0x0", "0x0"] as [string, string],
-          },
-          inputs: [merkleRoot, nullifierHash, String(proof.selectedCandidate), String(candidates.length), "1"],
-        };
-      }
+      const generatedProof = await generateProof({
+        voterSecret: voter.secret!,
+        voterNid: nidField,
+        merklePath: merklePath.map(String),
+        merklePathIndices: merklePathIndices.map(String),
+        merkleRoot,
+        nullifierHash,
+        candidateIndex: String(proof.selectedCandidate),
+        maxCandidates: String(candidates.length),
+      });
 
       proof.setProof(generatedProof);
       proofTimer.stop();

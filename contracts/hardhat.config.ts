@@ -24,6 +24,7 @@ const config: HardhatUserConfig = {
       url: process.env.POLYGON_AMOY_RPC || "https://rpc-amoy.polygon.technology",
       chainId: 80002,
       accounts: DEPLOYER_PRIVATE_KEY ? [DEPLOYER_PRIVATE_KEY] : [],
+      gasPrice: 50_000_000_000, // 50 gwei — above Polygon Amoy's minimum tip cap
     },
   },
 

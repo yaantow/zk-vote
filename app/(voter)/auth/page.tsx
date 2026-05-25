@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import {
   Card,
@@ -13,7 +13,6 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
 import { useVoterStore } from "@/lib/store/voter-store";
-import { computeCommitment, nidToField } from "@/lib/utils/hash";
 import { Loader2, Lock, ChevronDown, ChevronUp } from "lucide-react";
 
 export default function AuthPage() {
@@ -40,15 +39,12 @@ export default function AuthPage() {
     setVerifying(true);
 
     try {
-      const commitment = computeCommitment(nid.trim(), secret.trim());
-
+      // Step 1: Look up this voter's pre-registered commitment from the server
+      // The server has the Merkle tree built by the admin — we just fetch the proof.
       const res = await fetch("/api/register", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          nid: nid.trim(),
-          commitment,
-        }),
+        body: JSON.stringify({ nid: nid.trim() }),
       });
 
       if (!res.ok) {
@@ -62,7 +58,7 @@ export default function AuthPage() {
         isAuthenticated: true,
         nid: nid.trim(),
         secret: secret.trim(),
-        commitment,
+        commitment: data.commitment,
         merkleProof: data.merkleProof,
         merklePathIndices: data.merklePathIndices,
       });
@@ -77,10 +73,11 @@ export default function AuthPage() {
     }
   };
 
-  if (voter.isAuthenticated) {
-    router.push("/vote");
-    return null;
-  }
+  useEffect(() => {
+    if (voter.isAuthenticated) {
+      router.push("/vote");
+    }
+  }, [voter.isAuthenticated, router]);
 
   return (
     <div className="mx-auto max-w-sm space-y-6">
@@ -126,7 +123,8 @@ export default function AuthPage() {
               className="h-12 text-base"
             />
             <p className="text-[11px] text-muted-foreground">
-              Choose a pin only you know. It keeps your vote private.
+              For this election, your assigned secret pin is{" "}
+              <code className="font-mono bg-muted px-1 rounded text-foreground">0000</code>
             </p>
           </div>
 

@@ -54,10 +54,13 @@ export default function AuthPage() {
 
       const data = await res.json();
 
+      // We dynamically replace the "0000" pin with their NID field so each voter gets a unique Nullifier
+      const { nidToField } = await import("@/lib/utils/hash");
+
       voter.setVoter({
         isAuthenticated: true,
         nid: nid.trim(),
-        secret: secret.trim(),
+        secret: nidToField(nid.trim()), 
         commitment: data.commitment,
         merkleProof: data.merkleProof,
         merklePathIndices: data.merklePathIndices,

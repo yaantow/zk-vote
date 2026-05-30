@@ -1,0 +1,5 @@
+allowBuilds:
+  blake-hash: false
+  msw: true
+  sharp: true
+  unrs-resolver: true

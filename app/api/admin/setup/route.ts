@@ -34,8 +34,10 @@ export async function POST(req: Request) {
 
     const nids: string[] = (voterNids || []).map((n: string) => n.trim()).filter(Boolean);
     for (const nid of nids) {
-      // Commitment uses secret "0000" → BigInt("0000") = 0 in the circuit
-      const commitment = await computeCommitmentAsync(nid, "0000");
+      // Use the NID field as the secret instead of '0000' to ensure unique nullifiers
+      const { nidToField } = await import("@/lib/utils/hash");
+      const secret = nidToField(nid);
+      const commitment = await computeCommitmentAsync(nid, secret);
       registerVoter(nid, commitment);
     }
 

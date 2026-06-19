@@ -23,22 +23,8 @@ export async function GET() {
           getVoteCastEvents(),
         ]);
 
-        const candidateCount = candidates.length;
-
-        // Recompute tallies from raw events
-        const recomputedTally = Array(candidateCount).fill(0);
-        for (const event of events) {
-          const idx = Number(event.candidateIndex);
-          if (idx >= 0 && idx < candidateCount) {
-            recomputedTally[idx]++;
-          }
-        }
-
-        // On-chain tallies from contract state
         const onChainTally = candidates.map((c) => c.tally);
-
-        const match =
-          JSON.stringify(recomputedTally) === JSON.stringify(onChainTally);
+        const candidateNames = candidates.map((c) => c.name);
 
         return NextResponse.json({
           events: events.map((e, i) => ({
@@ -48,10 +34,8 @@ export async function GET() {
             blockNumber: e.blockNumber,
             timestamp: Number(e.timestamp),
           })),
-          recomputedTally,
           onChainTally,
-          match,
-          candidateNames: candidates.map((c) => c.name),
+          candidateNames,
         });
       } catch (err) {
         console.warn("[/api/audit] Contract call failed, using defaults:", err);
@@ -61,16 +45,11 @@ export async function GET() {
     // Prototype defaults
     const candidateCount = DEFAULT_CANDIDATES.length;
     const events: unknown[] = [];
-    const recomputedTally = Array(candidateCount).fill(0);
     const onChainTally = Array(candidateCount).fill(0);
-    const match =
-      JSON.stringify(recomputedTally) === JSON.stringify(onChainTally);
 
     return NextResponse.json({
       events,
-      recomputedTally,
       onChainTally,
-      match,
       candidateNames: DEFAULT_CANDIDATES,
     });
   } catch (err) {

@@ -8,12 +8,9 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
-import { Separator } from "@/components/ui/separator";
 import { AuditLog, type AuditEntry } from "@/components/AuditLog";
 import {
   Loader2,
-  CheckCircle2,
   AlertTriangle,
   RefreshCw,
 } from "lucide-react";
@@ -21,9 +18,7 @@ import { Button } from "@/components/ui/button";
 
 interface AuditData {
   events: AuditEntry[];
-  recomputedTally: number[];
   onChainTally: number[];
-  match: boolean;
   candidates: string[];
 }
 
@@ -46,10 +41,8 @@ export default function AuditPage() {
 
       setData({
         events: json.events,
-        recomputedTally: json.recomputedTally,
         onChainTally: json.onChainTally,
-        match: json.match,
-        candidates: electionData?.candidates || [],
+        candidates: json.candidateNames || electionData?.candidates || [],
       });
     } catch (err) {
       setError(
@@ -98,77 +91,23 @@ export default function AuditPage() {
         </Button>
       </div>
 
-      {/* Tally Comparison */}
-      <div className="grid gap-4 sm:grid-cols-2">
-        <Card>
-          <CardHeader className="pb-2">
-            <CardTitle className="text-sm">On-Chain Tally</CardTitle>
-            <CardDescription>Read from smart contract</CardDescription>
-          </CardHeader>
-          <CardContent>
-            <div className="space-y-1">
-              {data.onChainTally.map((count, i) => (
-                <div
-                  key={i}
-                  className="flex justify-between text-sm"
-                >
-                  <span>{data.candidates[i] || `Candidate ${i}`}</span>
-                  <span className="font-mono font-medium">{count}</span>
-                </div>
-              ))}
-            </div>
-          </CardContent>
-        </Card>
-
-        <Card>
-          <CardHeader className="pb-2">
-            <CardTitle className="text-sm">Recomputed from Events</CardTitle>
-            <CardDescription>
-              Independently tallied from VoteCast events
-            </CardDescription>
-          </CardHeader>
-          <CardContent>
-            <div className="space-y-1">
-              {data.recomputedTally.map((count, i) => (
-                <div
-                  key={i}
-                  className="flex justify-between text-sm"
-                >
-                  <span>{data.candidates[i] || `Candidate ${i}`}</span>
-                  <span className="font-mono font-medium">{count}</span>
-                </div>
-              ))}
-            </div>
-          </CardContent>
-        </Card>
-      </div>
-
-      {/* Match Status */}
-      <div
-        className={`flex items-center gap-2 rounded-lg border p-4 ${
-          data.match
-            ? "border-success/30 bg-success/5"
-            : "border-destructive/30 bg-destructive/5"
-        }`}
-      >
-        {data.match ? (
-          <>
-            <CheckCircle2 className="h-5 w-5 text-success" />
-            <span className="font-semibold text-success">
-              Tallies MATCH — Election integrity verified
-            </span>
-          </>
-        ) : (
-          <>
-            <AlertTriangle className="h-5 w-5 text-destructive" />
-            <span className="font-semibold text-destructive">
-              Tallies DO NOT MATCH — Discrepancy detected!
-            </span>
-          </>
-        )}
-      </div>
-
-      <Separator />
+      {/* Tally */}
+      <Card>
+        <CardHeader className="pb-2">
+          <CardTitle className="text-sm">Vote Tally</CardTitle>
+          <CardDescription>Read from smart contract</CardDescription>
+        </CardHeader>
+        <CardContent>
+          <div className="space-y-1">
+            {data.onChainTally.map((count, i) => (
+              <div key={i} className="flex justify-between text-sm">
+                <span>{data.candidates[i] || `Candidate ${i}`}</span>
+                <span className="font-mono font-medium">{count}</span>
+              </div>
+            ))}
+          </div>
+        </CardContent>
+      </Card>
 
       {/* Event Log */}
       <AuditLog events={data.events} />

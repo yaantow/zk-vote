@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import Link from "next/link";
 import {
   Card,
   CardContent,
@@ -17,6 +18,7 @@ import {
   CheckCircle2,
   Download,
   RotateCcw,
+  BarChart3,
 } from "lucide-react";
 
 /* ------------------------------------------------------------------ */
@@ -108,7 +110,7 @@ export default function SurveyPage() {
     setResponses(updated);
   };
 
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
     const susScore = calculateSUSScore(responses);
     setScore(susScore);
     setSubmitted(true);
@@ -121,14 +123,15 @@ export default function SurveyPage() {
 
     setAllSubmissions((prev) => [...prev, submission]);
 
-    // Also persist to localStorage for data collection
+    // POST to server — persists across devices
     try {
-      const stored = localStorage.getItem("zk-vote-sus-results");
-      const existing = stored ? JSON.parse(stored) : [];
-      existing.push(submission);
-      localStorage.setItem("zk-vote-sus-results", JSON.stringify(existing));
+      await fetch("/api/survey", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(submission),
+      });
     } catch {
-      // localStorage may not be available
+      // non-fatal — submission still counted in local state
     }
   };
 
@@ -138,13 +141,14 @@ export default function SurveyPage() {
     setScore(null);
   };
 
-  const handleExportCSV = () => {
-    // Load all results from localStorage
-    let results: { responses: number[]; score: number; timestamp: string }[] =
-      [];
+  const handleExportCSV = async () => {
+    let results: { responses: number[]; score: number; timestamp: string }[] = [];
     try {
-      const stored = localStorage.getItem("zk-vote-sus-results");
-      results = stored ? JSON.parse(stored) : [];
+      const res = await fetch("/api/survey");
+      if (res.ok) {
+        const data = await res.json();
+        results = data.submissions ?? [];
+      }
     } catch {
       results = allSubmissions;
     }
@@ -163,12 +167,7 @@ export default function SurveyPage() {
 
     const rows = results.map((r) => {
       const grade = getSUSGrade(r.score);
-      return [
-        r.timestamp,
-        ...r.responses,
-        r.score.toFixed(1),
-        grade.grade,
-      ].join(",");
+      return [r.timestamp, ...r.responses, r.score.toFixed(1), grade.grade].join(",");
     });
 
     const csv = [header, ...rows].join("\n");
@@ -297,16 +296,19 @@ export default function SurveyPage() {
               </ul>
             </div>
 
+            <Button asChild className="w-full" size="lg">
+              <Link href="/results">
+                <BarChart3 className="mr-2 h-4 w-4" />
+                View Election Results
+              </Link>
+            </Button>
+
             <div className="flex gap-3">
               <Button onClick={handleReset} variant="outline" className="flex-1">
                 <RotateCcw className="mr-2 h-4 w-4" />
                 New Response
               </Button>
-              <Button
-                onClick={handleExportCSV}
-                variant="default"
-                className="flex-1"
-              >
+              <Button onClick={handleExportCSV} variant="outline" className="flex-1">
                 <Download className="mr-2 h-4 w-4" />
                 Export All Results
               </Button>

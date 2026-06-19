@@ -20,7 +20,7 @@ import { queueVote } from "@/lib/utils/offline-queue";
 import { startTimer } from "@/lib/utils/performance";
 import { ELECTION_ID } from "@/lib/utils/constants";
 import type { ZKProof } from "@/lib/blockchain/voting-contract";
-import { CheckCircle2, BarChart3 } from "lucide-react";
+import { CheckCircle2, BarChart3, ClipboardList } from "lucide-react";
 
 export default function ConfirmPage() {
   const router = useRouter();
@@ -191,12 +191,23 @@ export default function ConfirmPage() {
       </Card>
 
       {proof.proofStatus === "done" && (
-        <Button asChild className="w-full h-12 text-base rounded-xl" size="lg">
-          <Link href="/results">
-            <BarChart3 className="mr-2 h-4 w-4" />
-            View Results
-          </Link>
-        </Button>
+        <div className="space-y-3">
+          <Button asChild className="w-full h-12 text-base rounded-xl" size="lg">
+            <Link href="/survey">
+              <ClipboardList className="mr-2 h-4 w-4" />
+              Complete the Survey
+            </Link>
+          </Button>
+          <p className="text-center text-xs text-muted-foreground">
+            Complete the 10-question survey to view the results
+          </p>
+          <Button asChild variant="ghost" className="w-full" size="sm">
+            <Link href="/results">
+              <BarChart3 className="mr-2 h-4 w-4" />
+              Skip to Results
+            </Link>
+          </Button>
+        </div>
       )}
 
       {proof.proofStatus !== "done" && proof.proofStatus !== "error" && (

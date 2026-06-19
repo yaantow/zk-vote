@@ -115,16 +115,26 @@ export default function AuthPage() {
           </div>
           <div className="space-y-2">
             <Label htmlFor="secret">Secret Pin</Label>
-            <Input
-              id="secret"
-              type="password"
-              placeholder="4–6 digit pin"
-              value={secret}
-              onChange={(e) => setSecret(e.target.value)}
-              disabled={verifying}
-              maxLength={6}
-              className="h-12 text-base"
-            />
+            <div className="relative">
+              <Input
+                id="secret"
+                type="password"
+                placeholder="4–6 digit pin"
+                value={secret}
+                onChange={(e) => setSecret(e.target.value)}
+                disabled={verifying}
+                maxLength={6}
+                className="h-12 text-base pr-24"
+              />
+              <button
+                type="button"
+                onClick={() => setSecret("0000")}
+                disabled={verifying}
+                className="absolute right-2 top-1/2 -translate-y-1/2 rounded-md bg-muted px-2.5 py-1 text-xs font-medium text-muted-foreground hover:bg-accent hover:text-accent-foreground transition-colors disabled:pointer-events-none disabled:opacity-50"
+              >
+                Use 0000
+              </button>
+            </div>
             <p className="text-[11px] text-muted-foreground">
               For this election, your assigned secret pin is{" "}
               <code className="font-mono bg-muted px-1 rounded text-foreground">0000</code>

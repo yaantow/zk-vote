@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Vote, BarChart3, Shield, Settings, ClipboardList } from "lucide-react";
+import { Vote, BarChart3, Shield, Settings } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { NetworkStatus } from "./NetworkStatus";
 
@@ -11,7 +11,6 @@ const navItems = [
   { href: "/admin", label: "Admin", icon: Settings },
   { href: "/audit", label: "Audit", icon: Shield },
   { href: "/results", label: "Results", icon: BarChart3 },
-  { href: "/survey", label: "Survey", icon: ClipboardList },
 ];
 
 export function Header() {

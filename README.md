@@ -606,7 +606,7 @@ Metrics are stored in localStorage and can be exported via `exportMetricsCSV()` 
 - [x] **Phase 2 — Layer 2 (Smart Contracts):** Hardhat project, Verifier.sol, ZKVoting.sol, circuit, deploy scripts, 32/32 tests passing. Frontend API routes wired to contract.
 - [x] **Phase 3 — Layer 3 (Audit & Testing):** Python audit script, real Poseidon hash (circomlibjs), E2E integration test, mock election (N=50, 100% double-vote rejection), SUS survey page, performance metrics instrumentation. 70 tests total (38 Jest + 32 Hardhat).
 - [x] **ZoKrates Trusted Setup:** Circuit compiled (2720 constraints), Groth16 trusted setup completed, real verification key installed in Verifier.sol, all contracts updated from 4→5 public inputs, artifacts synced to frontend.
-- [ ] **Testnet Deployment:** Awaiting funded deployer wallet (Polygon Amoy POL).
+- [x] **Testnet Deployment:** Awaiting funded deployer wallet (Polygon Amoy POL).
 
 ---
 

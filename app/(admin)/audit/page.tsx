@@ -8,7 +8,6 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { AuditLog, type AuditEntry } from "@/components/AuditLog";
 import {
   Loader2,
   AlertTriangle,
@@ -17,7 +16,6 @@ import {
 import { Button } from "@/components/ui/button";
 
 interface AuditData {
-  events: AuditEntry[];
   onChainTally: number[];
   candidates: string[];
 }
@@ -35,19 +33,12 @@ export default function AuditPage() {
       if (!res.ok) throw new Error("Failed to fetch audit data");
       const json = await res.json();
 
-      // Also get candidates from election endpoint
-      const electionRes = await fetch("/api/election");
-      const electionData = electionRes.ok ? await electionRes.json() : null;
-
       setData({
-        events: json.events,
         onChainTally: json.onChainTally,
-        candidates: json.candidateNames || electionData?.candidates || [],
+        candidates: json.candidateNames || [],
       });
     } catch (err) {
-      setError(
-        err instanceof Error ? err.message : "Failed to load audit data"
-      );
+      setError(err instanceof Error ? err.message : "Failed to load audit data");
     } finally {
       setLoading(false);
     }
@@ -81,9 +72,9 @@ export default function AuditPage() {
     <div className="mx-auto max-w-3xl space-y-6">
       <div className="flex items-center justify-between">
         <div className="space-y-1">
-          <h1 className="text-2xl font-bold">Election Audit Log</h1>
+          <h1 className="text-2xl font-bold">Election Audit</h1>
           <p className="text-sm text-muted-foreground">
-            Independent verification of the election tally
+            Vote tally read directly from the smart contract
           </p>
         </div>
         <Button variant="ghost" size="icon" onClick={fetchAudit}>
@@ -91,7 +82,6 @@ export default function AuditPage() {
         </Button>
       </div>
 
-      {/* Tally */}
       <Card>
         <CardHeader className="pb-2">
           <CardTitle className="text-sm">Vote Tally</CardTitle>
@@ -108,9 +98,6 @@ export default function AuditPage() {
           </div>
         </CardContent>
       </Card>
-
-      {/* Event Log */}
-      <AuditLog events={data.events} />
     </div>
   );
 }

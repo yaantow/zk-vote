@@ -98,6 +98,29 @@ export default function AuditPage() {
           </div>
         </CardContent>
       </Card>
+
+      <div className="flex gap-3">
+        <a
+          href="https://amoy.polygonscan.com/address/0x14550E11e18aB93E5378A7695bD14196ff9f5C21"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="flex-1"
+        >
+          <Button variant="outline" className="w-full">
+            View Contract on Polygonscan ↗
+          </Button>
+        </a>
+        <a
+          href="https://amoy.polygonscan.com/address/0x14550E11e18aB93E5378A7695bD14196ff9f5C21#events"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="flex-1"
+        >
+          <Button variant="outline" className="w-full">
+            Detailed Events ↗
+          </Button>
+        </a>
+      </div>
     </div>
   );
 }

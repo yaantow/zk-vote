@@ -13,6 +13,7 @@ import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Separator } from "@/components/ui/separator";
+import Link from "next/link";
 import {
   Loader2,
   Settings,
@@ -20,9 +21,9 @@ import {
   Square,
   CheckCircle2,
   Lock,
-  Users,
   Rocket,
   AlertCircle,
+  ClipboardList,
 } from "lucide-react";
 
 type ElectionStatus = "none" | "setup" | "active" | "ended";
@@ -349,6 +350,29 @@ export default function AdminPage() {
               {electionStatus === "ended" ? "Election Ended ✓" : "End Election"}
             </Button>
           </StepCard>
+
+          {/* Survey Results */}
+          <Card className="border-border/50">
+            <CardHeader className="pb-2 pt-4 px-4">
+              <div className="flex items-center gap-3">
+                <div className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-primary/10">
+                  <ClipboardList className="h-4 w-4 text-primary" />
+                </div>
+                <div>
+                  <CardTitle className="text-sm leading-tight">SUS Survey Results</CardTitle>
+                  <CardDescription className="text-xs mt-0.5">View all collected responses</CardDescription>
+                </div>
+              </div>
+            </CardHeader>
+            <CardContent className="px-4 pb-4">
+              <Button asChild variant="outline" className="w-full h-10 text-sm">
+                <Link href="/survey-results">
+                  <ClipboardList className="mr-2 h-4 w-4" />
+                  View Survey Results
+                </Link>
+              </Button>
+            </CardContent>
+          </Card>
         </div>
       </div>
     </div>

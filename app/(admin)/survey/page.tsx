@@ -12,11 +12,9 @@ import {
 import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
 import { Separator } from "@/components/ui/separator";
-import { Badge } from "@/components/ui/badge";
 import {
   ClipboardList,
   CheckCircle2,
-  Download,
   RotateCcw,
   BarChart3,
 } from "lucide-react";
@@ -98,10 +96,6 @@ export default function SurveyPage() {
   );
   const [submitted, setSubmitted] = useState(false);
   const [score, setScore] = useState<number | null>(null);
-  const [allSubmissions, setAllSubmissions] = useState<
-    { responses: number[]; score: number; timestamp: string }[]
-  >([]);
-
   const allAnswered = responses.every((r) => r >= 1 && r <= 5);
 
   const handleResponse = (questionIndex: number, value: number) => {
@@ -121,8 +115,6 @@ export default function SurveyPage() {
       timestamp: new Date().toISOString(),
     };
 
-    setAllSubmissions((prev) => [...prev, submission]);
-
     // POST to server — persists across devices
     try {
       await fetch("/api/survey", {
@@ -141,51 +133,6 @@ export default function SurveyPage() {
     setScore(null);
   };
 
-  const handleExportCSV = async () => {
-    let results: { responses: number[]; score: number; timestamp: string }[] = [];
-    try {
-      const res = await fetch("/api/survey");
-      if (res.ok) {
-        const data = await res.json();
-        results = data.submissions ?? [];
-      }
-    } catch {
-      results = allSubmissions;
-    }
-
-    if (results.length === 0) {
-      alert("No survey results to export.");
-      return;
-    }
-
-    const header = [
-      "Timestamp",
-      ...SUS_QUESTIONS.map((_, i) => `Q${i + 1}`),
-      "SUS Score",
-      "Grade",
-    ].join(",");
-
-    const rows = results.map((r) => {
-      const grade = getSUSGrade(r.score);
-      return [r.timestamp, ...r.responses, r.score.toFixed(1), grade.grade].join(",");
-    });
-
-    const csv = [header, ...rows].join("\n");
-    const blob = new Blob([csv], { type: "text/csv" });
-    const url = URL.createObjectURL(blob);
-    const a = document.createElement("a");
-    a.href = url;
-    a.download = `sus-survey-results-${Date.now()}.csv`;
-    a.click();
-    URL.revokeObjectURL(url);
-  };
-
-  const averageScore =
-    allSubmissions.length > 0
-      ? allSubmissions.reduce((sum, s) => sum + s.score, 0) /
-        allSubmissions.length
-      : null;
-
   return (
     <div className="mx-auto max-w-2xl space-y-6">
       {/* Header */}
@@ -196,28 +143,6 @@ export default function SurveyPage() {
           Rate your experience with the ZK-Vote Maldives voting system
         </p>
       </div>
-
-      {/* Session stats */}
-      {allSubmissions.length > 0 && (
-        <Card>
-          <CardContent className="flex items-center justify-between py-3">
-            <div className="flex items-center gap-4">
-              <Badge variant="secondary">
-                {allSubmissions.length} response{allSubmissions.length !== 1 ? "s" : ""} this session
-              </Badge>
-              {averageScore !== null && (
-                <span className="text-sm text-muted-foreground">
-                  Avg: {averageScore.toFixed(1)} ({getSUSGrade(averageScore).grade})
-                </span>
-              )}
-            </div>
-            <Button variant="outline" size="sm" onClick={handleExportCSV}>
-              <Download className="mr-1 h-4 w-4" />
-              Export CSV
-            </Button>
-          </CardContent>
-        </Card>
-      )}
 
       {/* Result Display */}
       {submitted && score !== null ? (
@@ -303,16 +228,10 @@ export default function SurveyPage() {
               </Link>
             </Button>
 
-            <div className="flex gap-3">
-              <Button onClick={handleReset} variant="outline" className="flex-1">
-                <RotateCcw className="mr-2 h-4 w-4" />
-                New Response
-              </Button>
-              <Button onClick={handleExportCSV} variant="outline" className="flex-1">
-                <Download className="mr-2 h-4 w-4" />
-                Export All Results
-              </Button>
-            </div>
+            <Button onClick={handleReset} variant="outline" className="w-full">
+              <RotateCcw className="mr-2 h-4 w-4" />
+              New Response
+            </Button>
           </CardContent>
         </Card>
       ) : (

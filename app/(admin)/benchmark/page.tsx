@@ -55,7 +55,8 @@ export default function BenchmarkPage() {
       // Build valid inputs: single dummy voter in a Merkle tree
       log("Computing valid circuit inputs…");
       const { nidToField, computeNullifierAsync, poseidonHashAsync } = await import("@/lib/utils/hash");
-      const { buildMerkleTree, generateMerkleProof, getMerkleRoot } = await import("@/lib/utils/merkle");
+      const { generateMerkleProof, getMerkleRoot } = await import("@/lib/utils/merkle");
+      const { buildMerkleTreeAsync } = await import("@/lib/utils/merkle-async");
       const { MERKLE_DEPTH, ELECTION_ID } = await import("@/lib/utils/constants");
 
       const DUMMY_NID = "A000000";
@@ -63,7 +64,7 @@ export default function BenchmarkPage() {
       const nidField = nidToField(DUMMY_NID);
       const commitment = await poseidonHashAsync(nidField, DUMMY_SECRET);
       const nullifierHash = await computeNullifierAsync(DUMMY_SECRET, ELECTION_ID);
-      const tree = buildMerkleTree([commitment], MERKLE_DEPTH);
+      const tree = await buildMerkleTreeAsync([commitment], MERKLE_DEPTH);
       const merkleProof = generateMerkleProof(tree, 0, MERKLE_DEPTH);
 
       const dummyInput = {

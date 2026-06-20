@@ -52,17 +52,31 @@ export default function BenchmarkPage() {
       await loadArtifacts();
       log("Artifacts loaded.");
 
-      // Dummy inputs — valid field values that produce a deterministic proof
+      // Build valid inputs: single dummy voter in a Merkle tree
+      log("Computing valid circuit inputs…");
+      const { nidToField, computeNullifierAsync, poseidonHashAsync } = await import("@/lib/utils/hash");
+      const { buildMerkleTree, generateMerkleProof, getMerkleRoot } = await import("@/lib/utils/merkle");
+      const { MERKLE_DEPTH, ELECTION_ID } = await import("@/lib/utils/constants");
+
+      const DUMMY_NID = "A000000";
+      const DUMMY_SECRET = "0000";
+      const nidField = nidToField(DUMMY_NID);
+      const commitment = await poseidonHashAsync(nidField, DUMMY_SECRET);
+      const nullifierHash = await computeNullifierAsync(DUMMY_SECRET, ELECTION_ID);
+      const tree = buildMerkleTree([commitment], MERKLE_DEPTH);
+      const merkleProof = generateMerkleProof(tree, 0, MERKLE_DEPTH);
+
       const dummyInput = {
-        voterSecret: "0",
-        voterNid: "0",
-        merklePath: Array(6).fill("0"),
-        merklePathIndices: Array(6).fill("0"),
-        merkleRoot: "0",
-        nullifierHash: "0",
+        voterSecret: DUMMY_SECRET,
+        voterNid: nidField,
+        merklePath: merkleProof.path.map((p) => BigInt(p).toString()),
+        merklePathIndices: merkleProof.indices.map(String),
+        merkleRoot: BigInt(getMerkleRoot(tree)).toString(),
+        nullifierHash,
         candidateIndex: "0",
         maxCandidates: "4",
       };
+      log("Inputs ready.");
 
       for (let i = 1; i <= iterations; i++) {
         log(`Run ${i}/${iterations} — initialising ZoKrates…`);

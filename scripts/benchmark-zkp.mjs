@@ -25,16 +25,10 @@ const ARTIFACTS_PATH = path.join(ROOT, "public/zk/artifacts.json");
 const PROVING_KEY_PATH = path.join(ROOT, "public/zk/proving-key.bin");
 
 // Dummy inputs — same structure as a real vote, all zeros
-const DUMMY_INPUT = [
-  "0",           // voterSecret
-  "0",           // voterNid
-  ["0","0","0","0","0","0"],  // merklePath[6]
-  ["0","0","0","0","0","0"],  // merklePathIndices[6]
-  "0",           // merkleRoot
-  "0",           // nullifierHash
-  "0",           // candidateIndex
-  "4",           // maxCandidates
-];
+const MERKLE_DEPTH = 6;
+const ELECTION_ID = 1;
+const DUMMY_NID = "A000000";
+const DUMMY_SECRET = "0000";
 
 function computeStats(values) {
   const sorted = [...values].sort((a, b) => a - b);
@@ -56,6 +50,55 @@ function computeStats(values) {
   };
 }
 
+async function buildValidInputs() {
+  const { buildPoseidon } = await import("circomlibjs");
+  const poseidon = await buildPoseidon();
+  const F = poseidon.F;
+
+  const hash = (a, b) => F.toString(poseidon([BigInt(a), BigInt(b)]), 10);
+
+  // nidToField: encode each char as byte, concatenated into a bigint
+  let nidField = 0n;
+  for (const ch of DUMMY_NID) nidField = nidField * 256n + BigInt(ch.charCodeAt(0));
+
+  const commitment = hash(nidField.toString(), DUMMY_SECRET);
+  const nullifierHash = hash(DUMMY_SECRET, ELECTION_ID.toString());
+
+  // Build Merkle tree (depth 6, single real leaf, rest zero-padded)
+  const ZERO = "0";
+  const width = 2 ** MERKLE_DEPTH;
+  let layer = [commitment, ...Array(width - 1).fill(ZERO)];
+  const layers = [layer];
+  for (let d = 0; d < MERKLE_DEPTH; d++) {
+    const next = [];
+    for (let i = 0; i < layer.length; i += 2) next.push(hash(layer[i], layer[i + 1]));
+    layers.push(next);
+    layer = next;
+  }
+  const root = layers[MERKLE_DEPTH][0];
+
+  // Merkle proof for leaf 0
+  const path = [], indices = [];
+  let idx = 0;
+  for (let d = 0; d < MERKLE_DEPTH; d++) {
+    const sibling = idx % 2 === 0 ? idx + 1 : idx - 1;
+    path.push(layers[d][sibling]);
+    indices.push(idx % 2);
+    idx = Math.floor(idx / 2);
+  }
+
+  return [
+    DUMMY_SECRET,            // voterSecret
+    nidField.toString(),     // voterNid
+    path,                    // merklePath[6]
+    indices.map(String),     // merklePathIndices[6]
+    root,                    // merkleRoot
+    nullifierHash,           // nullifierHash
+    "0",                     // candidateIndex
+    "4",                     // maxCandidates
+  ];
+}
+
 async function main() {
   console.log(`\nZKP Benchmark — ${ITERATIONS} iteration(s)\n`);
 
@@ -65,6 +108,10 @@ async function main() {
   const programBytes = Uint8Array.from(atob(rawArtifacts.program), (c) => c.charCodeAt(0));
   const artifacts = { ...rawArtifacts, program: programBytes };
   const provingKey = new Uint8Array(await readFile(PROVING_KEY_PATH));
+  console.log("done.");
+
+  process.stdout.write("Computing valid circuit inputs… ");
+  const dummyInput = await buildValidInputs();
   console.log("done.\n");
 
   const { initialize } = await import("zokrates-js");
@@ -83,7 +130,7 @@ async function main() {
     process.stdout.write(`init ${initMs.toFixed(0).padStart(5)} ms  `);
 
     const t1 = performance.now();
-    const { witness } = zk.computeWitness(artifacts, DUMMY_INPUT);
+    const { witness } = zk.computeWitness(artifacts, dummyInput);
     zk.generateProof(artifacts.program, witness, provingKey);
     const proofMs = performance.now() - t1;
     proofTimes.push(proofMs);

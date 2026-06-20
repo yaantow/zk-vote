@@ -24,6 +24,7 @@ import {
   Rocket,
   AlertCircle,
   ClipboardList,
+  Activity,
 } from "lucide-react";
 
 type ElectionStatus = "none" | "setup" | "active" | "ended";
@@ -351,28 +352,40 @@ export default function AdminPage() {
             </Button>
           </StepCard>
 
-          {/* Survey Results */}
-          <Card className="border-border/50">
-            <CardHeader className="pb-2 pt-4 px-4">
-              <div className="flex items-center gap-3">
-                <div className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-primary/10">
-                  <ClipboardList className="h-4 w-4 text-primary" />
+          {/* Data links: Survey + Metrics */}
+          <div className="grid grid-cols-2 gap-3">
+            <Card className="border-border/50">
+              <CardHeader className="pb-2 pt-3 px-3">
+                <div className="flex items-center gap-2">
+                  <div className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-primary/10">
+                    <ClipboardList className="h-3.5 w-3.5 text-primary" />
+                  </div>
+                  <CardTitle className="text-xs leading-tight">SUS Survey</CardTitle>
                 </div>
-                <div>
-                  <CardTitle className="text-sm leading-tight">SUS Survey Results</CardTitle>
-                  <CardDescription className="text-xs mt-0.5">View all collected responses</CardDescription>
+              </CardHeader>
+              <CardContent className="px-3 pb-3">
+                <Button asChild variant="outline" className="w-full h-9 text-xs">
+                  <Link href="/survey-results">View Results</Link>
+                </Button>
+              </CardContent>
+            </Card>
+
+            <Card className="border-border/50">
+              <CardHeader className="pb-2 pt-3 px-3">
+                <div className="flex items-center gap-2">
+                  <div className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-primary/10">
+                    <Activity className="h-3.5 w-3.5 text-primary" />
+                  </div>
+                  <CardTitle className="text-xs leading-tight">Performance</CardTitle>
                 </div>
-              </div>
-            </CardHeader>
-            <CardContent className="px-4 pb-4">
-              <Button asChild variant="outline" className="w-full h-10 text-sm">
-                <Link href="/survey-results">
-                  <ClipboardList className="mr-2 h-4 w-4" />
-                  View Survey Results
-                </Link>
-              </Button>
-            </CardContent>
-          </Card>
+              </CardHeader>
+              <CardContent className="px-3 pb-3">
+                <Button asChild variant="outline" className="w-full h-9 text-xs">
+                  <Link href="/metrics">View Metrics</Link>
+                </Button>
+              </CardContent>
+            </Card>
+          </div>
         </div>
       </div>
     </div>

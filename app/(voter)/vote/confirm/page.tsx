@@ -17,7 +17,7 @@ import { useElectionStore } from "@/lib/store/election-store";
 import { useProofStore } from "@/lib/store/proof-store";
 import { nidToField, computeNullifierAsync } from "@/lib/utils/hash";
 import { queueVote } from "@/lib/utils/offline-queue";
-import { startTimer } from "@/lib/utils/performance";
+import { startTimer, getAllMetrics, clearMetrics } from "@/lib/utils/performance";
 import { ELECTION_ID } from "@/lib/utils/constants";
 import type { ZKProof } from "@/lib/blockchain/voting-contract";
 import { CheckCircle2, BarChart3, ClipboardList } from "lucide-react";
@@ -131,6 +131,21 @@ export default function ConfirmPage() {
       txTimer.stop();
 
       proof.setStatus("done");
+
+      // Flush all collected metrics to server, then clear localStorage
+      try {
+        const metrics = getAllMetrics();
+        if (metrics.length > 0) {
+          await fetch("/api/metrics", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(metrics),
+          });
+          clearMetrics();
+        }
+      } catch {
+        // non-fatal — metrics loss is acceptable
+      }
     } catch (err) {
       proof.setError(
         err instanceof Error ? err.message : "Something went wrong"

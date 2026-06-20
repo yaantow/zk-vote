@@ -25,6 +25,7 @@ import {
   AlertCircle,
   ClipboardList,
   Activity,
+  Timer,
 } from "lucide-react";
 
 type ElectionStatus = "none" | "setup" | "active" | "ended";
@@ -352,39 +353,29 @@ export default function AdminPage() {
             </Button>
           </StepCard>
 
-          {/* Data links: Survey + Metrics */}
-          <div className="grid grid-cols-2 gap-3">
-            <Card className="border-border/50">
-              <CardHeader className="pb-2 pt-3 px-3">
-                <div className="flex items-center gap-2">
-                  <div className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-primary/10">
-                    <ClipboardList className="h-3.5 w-3.5 text-primary" />
+          {/* Data links: Survey + Metrics + Benchmark */}
+          <div className="grid grid-cols-3 gap-2">
+            {[
+              { href: "/survey-results", icon: ClipboardList, label: "SUS Survey" },
+              { href: "/metrics", icon: Activity, label: "Performance" },
+              { href: "/benchmark", icon: Timer, label: "Benchmark" },
+            ].map(({ href, icon: Icon, label }) => (
+              <Card key={href} className="border-border/50">
+                <CardHeader className="pb-1.5 pt-3 px-3">
+                  <div className="flex items-center gap-1.5">
+                    <div className="flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-primary/10">
+                      <Icon className="h-3 w-3 text-primary" />
+                    </div>
+                    <CardTitle className="text-xs leading-tight">{label}</CardTitle>
                   </div>
-                  <CardTitle className="text-xs leading-tight">SUS Survey</CardTitle>
-                </div>
-              </CardHeader>
-              <CardContent className="px-3 pb-3">
-                <Button asChild variant="outline" className="w-full h-9 text-xs">
-                  <Link href="/survey-results">View Results</Link>
-                </Button>
-              </CardContent>
-            </Card>
-
-            <Card className="border-border/50">
-              <CardHeader className="pb-2 pt-3 px-3">
-                <div className="flex items-center gap-2">
-                  <div className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-primary/10">
-                    <Activity className="h-3.5 w-3.5 text-primary" />
-                  </div>
-                  <CardTitle className="text-xs leading-tight">Performance</CardTitle>
-                </div>
-              </CardHeader>
-              <CardContent className="px-3 pb-3">
-                <Button asChild variant="outline" className="w-full h-9 text-xs">
-                  <Link href="/metrics">View Metrics</Link>
-                </Button>
-              </CardContent>
-            </Card>
+                </CardHeader>
+                <CardContent className="px-3 pb-3">
+                  <Button asChild variant="outline" className="w-full h-8 text-xs">
+                    <Link href={href}>Open</Link>
+                  </Button>
+                </CardContent>
+              </Card>
+            ))}
           </div>
         </div>
       </div>

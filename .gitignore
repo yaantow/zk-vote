@@ -47,4 +47,5 @@ yarn-error.log*
 *.tsbuildinfo
 next-env.d.ts
 data/*.jsonl
+scripts/benchmark-results.csv
 

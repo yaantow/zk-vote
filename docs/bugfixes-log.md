@@ -19,15 +19,33 @@ React's Strict Mode in development double-invokes `useEffect`. The proof generat
 **Solution:**
 - Added a `useRef(false)` guard inside `app/(voter)/vote/confirm/page.tsx` to instantly block the duplicate React Strict Mode effect from firing the blockchain transaction twice.
 
-## 3. Audit Page Polygon RPC Limits (Fixed "0 Tally Recomputation")
-**Issue:**
-The `/api/audit` page was rendering the on-chain tally and recomputed tally as exactly `[0, 0, 0, 0]` despite votes successfully appearing on the `/results` page.
-The default Polygon Amoy public RPC (`rpc-amoy.polygon.technology`) strictly limits `eth_getLogs` (event queries) to ~50 blocks. The vote events were pushed outside this 50-block window, causing the query to fail and fallback to default zero data.
+## 3. Audit Page — On-Chain Event Log Recomputation (Removed Due to Platform Limitations)
 
-**Solution:**
-- Updated `getVoteCastEvents` in `lib/blockchain/voting-contract.ts`.
-- Implemented a dedicated high-capacity public RPC specifically for auditing (`polygon-amoy-bor-rpc.publicnode.com`).
-- Added robust chunking to query up to 30,000 blocks backwards in 10,000-block chunks to ensure we seamlessly fetch the entire election history.
+### What Was Attempted
+The `/audit` page was designed to independently recompute the vote tally by fetching all `VoteCast` events directly from the Polygon Amoy blockchain using `eth_getLogs`, then counting them client-side. This would have provided a second, independent verification of the tally stored in the smart contract — a core auditability feature for the research prototype.
+
+### Why It Failed — RPC Limitations (Systematic)
+
+Every available free public RPC for Polygon Amoy was investigated and each blocked the approach for a different reason:
+
+| RPC Endpoint | Failure Mode |
+|---|---|
+| `rpc-amoy.polygon.technology` (official) | Limits `eth_getLogs` to ~50 blocks per request. Votes fell outside this window immediately. |
+| `polygon-amoy-bor-rpc.publicnode.com` | Requires a paid archive node token for `eth_getLogs` beyond recent blocks. Free tier returns empty. |
+| `rpc.ankr.com/polygon_amoy` | Requires an API key even for basic `eth_getLogs`. No anonymous access. |
+| `polygon-amoy.drpc.org` | Hard block range cap (~1,000 blocks per request). Chunking across the full election history hit rate limits and returned inconsistent results. |
+
+The root technical constraint: Polygon Amoy is a testnet and all viable free RPC providers restrict or gate `eth_getLogs` to prevent abuse. An archive node subscription (e.g. Alchemy, QuickNode) would resolve this, but was outside scope for this research prototype.
+
+### Additional Complication — ethers.js v6 API Change
+During investigation, a secondary bug was found: the code called `contract.runner?.provider?.getBlockNumber()` which always returned `undefined` in ethers.js v6. In v6, `contract.runner` IS the provider directly — there is no `.provider` sub-property. This meant the block range calculation was broken regardless of which RPC was used.
+
+### Decision
+Given that no free RPC could reliably serve `eth_getLogs` for the full election history, the recomputed tally feature was removed from the audit page entirely. The audit page was simplified to:
+- Display the on-chain tally read directly from the contract's `getAllCandidates()` view function (which works on all RPCs with no block range restriction).
+- Provide direct links to Polygonscan (Amoy) so any participant can independently verify the `VoteCast` event log through a block explorer.
+
+This approach still satisfies the auditability requirement of the research: the smart contract state is publicly readable, and the full event history is verifiable on Polygonscan without requiring a custom indexer.
 
 ## 4. Admin UX Overhaul
 **Issue:**

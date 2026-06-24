@@ -1,209 +1,309 @@
-{"id": "perf_init_0001", "timestamp": "2026-06-19T18:04:30Z", "category": "zkp-init", "label": "ZoKrates WASM initialization", "duration_ms": 1.65, "sessionId": "voter_0001"}
-{"id": "perf_proof_0001", "timestamp": "2026-06-19T18:04:30Z", "category": "zkp-proof", "label": "Groth16 proof generation", "duration_ms": 1556.67, "sessionId": "voter_0001"}
-{"id": "perf_init_0002", "timestamp": "2026-06-19T18:45:30Z", "category": "zkp-init", "label": "ZoKrates WASM initialization", "duration_ms": 7443.0, "sessionId": "voter_0002"}
-{"id": "perf_proof_0002", "timestamp": "2026-06-19T18:45:37Z", "category": "zkp-proof", "label": "Groth16 proof generation", "duration_ms": 1247.55, "sessionId": "voter_0002"}
-{"id": "perf_init_0003", "timestamp": "2026-06-19T19:13:30Z", "category": "zkp-init", "label": "ZoKrates WASM initialization", "duration_ms": 4051.15, "sessionId": "voter_0003"}
-{"id": "perf_proof_0003", "timestamp": "2026-06-19T19:13:34Z", "category": "zkp-proof", "label": "Groth16 proof generation", "duration_ms": 1110.11, "sessionId": "voter_0003"}
-{"id": "perf_init_0004", "timestamp": "2026-06-19T19:56:30Z", "category": "zkp-init", "label": "ZoKrates WASM initialization", "duration_ms": 2.7, "sessionId": "voter_0004"}
-{"id": "perf_proof_0004", "timestamp": "2026-06-19T19:56:30Z", "category": "zkp-proof", "label": "Groth16 proof generation", "duration_ms": 559.0, "sessionId": "voter_0004"}
-{"id": "perf_init_0005", "timestamp": "2026-06-19T20:35:30Z", "category": "zkp-init", "label": "ZoKrates WASM initialization", "duration_ms": 1442.11, "sessionId": "voter_0005"}
-{"id": "perf_proof_0005", "timestamp": "2026-06-19T20:35:31Z", "category": "zkp-proof", "label": "Groth16 proof generation", "duration_ms": 559.0, "sessionId": "voter_0005"}
-{"id": "perf_init_0006", "timestamp": "2026-06-19T21:09:30Z", "category": "zkp-init", "label": "ZoKrates WASM initialization", "duration_ms": 1335.59, "sessionId": "voter_0006"}
-{"id": "perf_proof_0006", "timestamp": "2026-06-19T21:09:31Z", "category": "zkp-proof", "label": "Groth16 proof generation", "duration_ms": 690.74, "sessionId": "voter_0006"}
-{"id": "perf_init_0007", "timestamp": "2026-06-19T21:44:30Z", "category": "zkp-init", "label": "ZoKrates WASM initialization", "duration_ms": 2676.19, "sessionId": "voter_0007"}
-{"id": "perf_proof_0007", "timestamp": "2026-06-19T21:44:32Z", "category": "zkp-proof", "label": "Groth16 proof generation", "duration_ms": 882.49, "sessionId": "voter_0007"}
-{"id": "perf_init_0008", "timestamp": "2026-06-19T22:17:30Z", "category": "zkp-init", "label": "ZoKrates WASM initialization", "duration_ms": 2593.25, "sessionId": "voter_0008"}
-{"id": "perf_proof_0008", "timestamp": "2026-06-19T22:17:32Z", "category": "zkp-proof", "label": "Groth16 proof generation", "duration_ms": 1014.72, "sessionId": "voter_0008"}
-{"id": "perf_init_0009", "timestamp": "2026-06-19T22:59:30Z", "category": "zkp-init", "label": "ZoKrates WASM initialization", "duration_ms": 2.76, "sessionId": "voter_0009"}
-{"id": "perf_proof_0009", "timestamp": "2026-06-19T22:59:30Z", "category": "zkp-proof", "label": "Groth16 proof generation", "duration_ms": 559.0, "sessionId": "voter_0009"}
-{"id": "perf_init_0010", "timestamp": "2026-06-19T23:34:30Z", "category": "zkp-init", "label": "ZoKrates WASM initialization", "duration_ms": 0.26, "sessionId": "voter_0010"}
-{"id": "perf_proof_0010", "timestamp": "2026-06-19T23:34:30Z", "category": "zkp-proof", "label": "Groth16 proof generation", "duration_ms": 872.41, "sessionId": "voter_0010"}
-{"id": "perf_init_0011", "timestamp": "2026-06-20T00:15:30Z", "category": "zkp-init", "label": "ZoKrates WASM initialization", "duration_ms": 1.94, "sessionId": "voter_0011"}
-{"id": "perf_proof_0011", "timestamp": "2026-06-20T00:15:30Z", "category": "zkp-proof", "label": "Groth16 proof generation", "duration_ms": 780.34, "sessionId": "voter_0011"}
-{"id": "perf_init_0012", "timestamp": "2026-06-20T00:52:30Z", "category": "zkp-init", "label": "ZoKrates WASM initialization", "duration_ms": 4.07, "sessionId": "voter_0012"}
-{"id": "perf_proof_0012", "timestamp": "2026-06-20T00:52:30Z", "category": "zkp-proof", "label": "Groth16 proof generation", "duration_ms": 559.0, "sessionId": "voter_0012"}
-{"id": "perf_init_0013", "timestamp": "2026-06-20T01:25:30Z", "category": "zkp-init", "label": "ZoKrates WASM initialization", "duration_ms": 3.31, "sessionId": "voter_0013"}
-{"id": "perf_proof_0013", "timestamp": "2026-06-20T01:25:30Z", "category": "zkp-proof", "label": "Groth16 proof generation", "duration_ms": 1116.87, "sessionId": "voter_0013"}
-{"id": "perf_init_0014", "timestamp": "2026-06-20T02:04:30Z", "category": "zkp-init", "label": "ZoKrates WASM initialization", "duration_ms": 2.98, "sessionId": "voter_0014"}
-{"id": "perf_proof_0014", "timestamp": "2026-06-20T02:04:30Z", "category": "zkp-proof", "label": "Groth16 proof generation", "duration_ms": 700.61, "sessionId": "voter_0014"}
-{"id": "perf_init_0015", "timestamp": "2026-06-20T02:37:30Z", "category": "zkp-init", "label": "ZoKrates WASM initialization", "duration_ms": 3929.63, "sessionId": "voter_0015"}
-{"id": "perf_proof_0015", "timestamp": "2026-06-20T02:37:33Z", "category": "zkp-proof", "label": "Groth16 proof generation", "duration_ms": 855.14, "sessionId": "voter_0015"}
-{"id": "perf_init_0016", "timestamp": "2026-06-20T03:23:30Z", "category": "zkp-init", "label": "ZoKrates WASM initialization", "duration_ms": 2.0, "sessionId": "voter_0016"}
-{"id": "perf_proof_0016", "timestamp": "2026-06-20T03:23:30Z", "category": "zkp-proof", "label": "Groth16 proof generation", "duration_ms": 818.65, "sessionId": "voter_0016"}
-{"id": "perf_init_0017", "timestamp": "2026-06-20T03:55:30Z", "category": "zkp-init", "label": "ZoKrates WASM initialization", "duration_ms": 4.56, "sessionId": "voter_0017"}
-{"id": "perf_proof_0017", "timestamp": "2026-06-20T03:55:30Z", "category": "zkp-proof", "label": "Groth16 proof generation", "duration_ms": 630.3, "sessionId": "voter_0017"}
-{"id": "perf_init_0018", "timestamp": "2026-06-20T04:35:30Z", "category": "zkp-init", "label": "ZoKrates WASM initialization", "duration_ms": 3376.79, "sessionId": "voter_0018"}
-{"id": "perf_proof_0018", "timestamp": "2026-06-20T04:35:33Z", "category": "zkp-proof", "label": "Groth16 proof generation", "duration_ms": 1084.65, "sessionId": "voter_0018"}
-{"id": "perf_init_0019", "timestamp": "2026-06-20T05:14:30Z", "category": "zkp-init", "label": "ZoKrates WASM initialization", "duration_ms": 2.92, "sessionId": "voter_0019"}
-{"id": "perf_proof_0019", "timestamp": "2026-06-20T05:14:30Z", "category": "zkp-proof", "label": "Groth16 proof generation", "duration_ms": 816.34, "sessionId": "voter_0019"}
-{"id": "perf_init_0020", "timestamp": "2026-06-20T05:46:30Z", "category": "zkp-init", "label": "ZoKrates WASM initialization", "duration_ms": 7167.79, "sessionId": "voter_0020"}
-{"id": "perf_proof_0020", "timestamp": "2026-06-20T05:46:37Z", "category": "zkp-proof", "label": "Groth16 proof generation", "duration_ms": 729.19, "sessionId": "voter_0020"}
-{"id": "perf_init_0021", "timestamp": "2026-06-20T06:18:30Z", "category": "zkp-init", "label": "ZoKrates WASM initialization", "duration_ms": 2.96, "sessionId": "voter_0021"}
-{"id": "perf_proof_0021", "timestamp": "2026-06-20T06:18:30Z", "category": "zkp-proof", "label": "Groth16 proof generation", "duration_ms": 851.35, "sessionId": "voter_0021"}
-{"id": "perf_init_0022", "timestamp": "2026-06-20T07:01:30Z", "category": "zkp-init", "label": "ZoKrates WASM initialization", "duration_ms": 6379.33, "sessionId": "voter_0022"}
-{"id": "perf_proof_0022", "timestamp": "2026-06-20T07:01:36Z", "category": "zkp-proof", "label": "Groth16 proof generation", "duration_ms": 713.13, "sessionId": "voter_0022"}
-{"id": "perf_init_0023", "timestamp": "2026-06-20T07:36:30Z", "category": "zkp-init", "label": "ZoKrates WASM initialization", "duration_ms": 6667.52, "sessionId": "voter_0023"}
-{"id": "perf_proof_0023", "timestamp": "2026-06-20T07:36:36Z", "category": "zkp-proof", "label": "Groth16 proof generation", "duration_ms": 559.0, "sessionId": "voter_0023"}
-{"id": "perf_init_0024", "timestamp": "2026-06-20T08:12:30Z", "category": "zkp-init", "label": "ZoKrates WASM initialization", "duration_ms": 1.75, "sessionId": "voter_0024"}
-{"id": "perf_proof_0024", "timestamp": "2026-06-20T08:12:30Z", "category": "zkp-proof", "label": "Groth16 proof generation", "duration_ms": 559.0, "sessionId": "voter_0024"}
-{"id": "perf_init_0025", "timestamp": "2026-06-20T08:47:30Z", "category": "zkp-init", "label": "ZoKrates WASM initialization", "duration_ms": 2792.81, "sessionId": "voter_0025"}
-{"id": "perf_proof_0025", "timestamp": "2026-06-20T08:47:32Z", "category": "zkp-proof", "label": "Groth16 proof generation", "duration_ms": 1097.93, "sessionId": "voter_0025"}
-{"id": "perf_init_0026", "timestamp": "2026-06-20T09:30:30Z", "category": "zkp-init", "label": "ZoKrates WASM initialization", "duration_ms": 5628.38, "sessionId": "voter_0026"}
-{"id": "perf_proof_0026", "timestamp": "2026-06-20T09:30:35Z", "category": "zkp-proof", "label": "Groth16 proof generation", "duration_ms": 559.0, "sessionId": "voter_0026"}
-{"id": "perf_init_0027", "timestamp": "2026-06-20T10:01:30Z", "category": "zkp-init", "label": "ZoKrates WASM initialization", "duration_ms": 3716.14, "sessionId": "voter_0027"}
-{"id": "perf_proof_0027", "timestamp": "2026-06-20T10:01:33Z", "category": "zkp-proof", "label": "Groth16 proof generation", "duration_ms": 891.82, "sessionId": "voter_0027"}
-{"id": "perf_init_0028", "timestamp": "2026-06-20T10:47:30Z", "category": "zkp-init", "label": "ZoKrates WASM initialization", "duration_ms": 7128.61, "sessionId": "voter_0028"}
-{"id": "perf_proof_0028", "timestamp": "2026-06-20T10:47:37Z", "category": "zkp-proof", "label": "Groth16 proof generation", "duration_ms": 1017.08, "sessionId": "voter_0028"}
-{"id": "perf_init_0029", "timestamp": "2026-06-20T11:17:30Z", "category": "zkp-init", "label": "ZoKrates WASM initialization", "duration_ms": 1.15, "sessionId": "voter_0029"}
-{"id": "perf_proof_0029", "timestamp": "2026-06-20T11:17:30Z", "category": "zkp-proof", "label": "Groth16 proof generation", "duration_ms": 678.28, "sessionId": "voter_0029"}
-{"id": "perf_init_0030", "timestamp": "2026-06-20T12:01:30Z", "category": "zkp-init", "label": "ZoKrates WASM initialization", "duration_ms": 2055.14, "sessionId": "voter_0030"}
-{"id": "perf_proof_0030", "timestamp": "2026-06-20T12:01:32Z", "category": "zkp-proof", "label": "Groth16 proof generation", "duration_ms": 848.1, "sessionId": "voter_0030"}
-{"id": "perf_init_0031", "timestamp": "2026-06-20T12:38:30Z", "category": "zkp-init", "label": "ZoKrates WASM initialization", "duration_ms": 4030.19, "sessionId": "voter_0031"}
-{"id": "perf_proof_0031", "timestamp": "2026-06-20T12:38:34Z", "category": "zkp-proof", "label": "Groth16 proof generation", "duration_ms": 1190.79, "sessionId": "voter_0031"}
-{"id": "perf_init_0032", "timestamp": "2026-06-20T13:14:30Z", "category": "zkp-init", "label": "ZoKrates WASM initialization", "duration_ms": 6407.15, "sessionId": "voter_0032"}
-{"id": "perf_proof_0032", "timestamp": "2026-06-20T13:14:36Z", "category": "zkp-proof", "label": "Groth16 proof generation", "duration_ms": 559.0, "sessionId": "voter_0032"}
-{"id": "perf_init_0033", "timestamp": "2026-06-20T13:42:30Z", "category": "zkp-init", "label": "ZoKrates WASM initialization", "duration_ms": 4.61, "sessionId": "voter_0033"}
-{"id": "perf_proof_0033", "timestamp": "2026-06-20T13:42:30Z", "category": "zkp-proof", "label": "Groth16 proof generation", "duration_ms": 1790.42, "sessionId": "voter_0033"}
-{"id": "perf_init_0034", "timestamp": "2026-06-20T14:19:30Z", "category": "zkp-init", "label": "ZoKrates WASM initialization", "duration_ms": 5003.27, "sessionId": "voter_0034"}
-{"id": "perf_proof_0034", "timestamp": "2026-06-20T14:19:35Z", "category": "zkp-proof", "label": "Groth16 proof generation", "duration_ms": 910.96, "sessionId": "voter_0034"}
-{"id": "perf_init_0035", "timestamp": "2026-06-20T15:01:30Z", "category": "zkp-init", "label": "ZoKrates WASM initialization", "duration_ms": 3.92, "sessionId": "voter_0035"}
-{"id": "perf_proof_0035", "timestamp": "2026-06-20T15:01:30Z", "category": "zkp-proof", "label": "Groth16 proof generation", "duration_ms": 559.0, "sessionId": "voter_0035"}
-{"id": "perf_init_0036", "timestamp": "2026-06-20T15:36:30Z", "category": "zkp-init", "label": "ZoKrates WASM initialization", "duration_ms": 3.38, "sessionId": "voter_0036"}
-{"id": "perf_proof_0036", "timestamp": "2026-06-20T15:36:30Z", "category": "zkp-proof", "label": "Groth16 proof generation", "duration_ms": 559.0, "sessionId": "voter_0036"}
-{"id": "perf_init_0037", "timestamp": "2026-06-20T16:12:30Z", "category": "zkp-init", "label": "ZoKrates WASM initialization", "duration_ms": 4.02, "sessionId": "voter_0037"}
-{"id": "perf_proof_0037", "timestamp": "2026-06-20T16:12:30Z", "category": "zkp-proof", "label": "Groth16 proof generation", "duration_ms": 1499.28, "sessionId": "voter_0037"}
-{"id": "perf_init_0038", "timestamp": "2026-06-20T16:56:30Z", "category": "zkp-init", "label": "ZoKrates WASM initialization", "duration_ms": 2.43, "sessionId": "voter_0038"}
-{"id": "perf_proof_0038", "timestamp": "2026-06-20T16:56:30Z", "category": "zkp-proof", "label": "Groth16 proof generation", "duration_ms": 1048.75, "sessionId": "voter_0038"}
-{"id": "perf_init_0039", "timestamp": "2026-06-20T17:27:30Z", "category": "zkp-init", "label": "ZoKrates WASM initialization", "duration_ms": 4.66, "sessionId": "voter_0039"}
-{"id": "perf_proof_0039", "timestamp": "2026-06-20T17:27:30Z", "category": "zkp-proof", "label": "Groth16 proof generation", "duration_ms": 625.81, "sessionId": "voter_0039"}
-{"id": "perf_init_0040", "timestamp": "2026-06-20T18:02:30Z", "category": "zkp-init", "label": "ZoKrates WASM initialization", "duration_ms": 1199.93, "sessionId": "voter_0040"}
-{"id": "perf_proof_0040", "timestamp": "2026-06-20T18:02:31Z", "category": "zkp-proof", "label": "Groth16 proof generation", "duration_ms": 623.87, "sessionId": "voter_0040"}
-{"id": "perf_init_0041", "timestamp": "2026-06-20T18:46:30Z", "category": "zkp-init", "label": "ZoKrates WASM initialization", "duration_ms": 0.4, "sessionId": "voter_0041"}
-{"id": "perf_proof_0041", "timestamp": "2026-06-20T18:46:30Z", "category": "zkp-proof", "label": "Groth16 proof generation", "duration_ms": 713.06, "sessionId": "voter_0041"}
-{"id": "perf_init_0042", "timestamp": "2026-06-20T19:18:30Z", "category": "zkp-init", "label": "ZoKrates WASM initialization", "duration_ms": 1737.01, "sessionId": "voter_0042"}
-{"id": "perf_proof_0042", "timestamp": "2026-06-20T19:18:31Z", "category": "zkp-proof", "label": "Groth16 proof generation", "duration_ms": 559.0, "sessionId": "voter_0042"}
-{"id": "perf_init_0043", "timestamp": "2026-06-20T20:01:30Z", "category": "zkp-init", "label": "ZoKrates WASM initialization", "duration_ms": 7133.22, "sessionId": "voter_0043"}
-{"id": "perf_proof_0043", "timestamp": "2026-06-20T20:01:37Z", "category": "zkp-proof", "label": "Groth16 proof generation", "duration_ms": 687.51, "sessionId": "voter_0043"}
-{"id": "perf_init_0044", "timestamp": "2026-06-20T20:32:30Z", "category": "zkp-init", "label": "ZoKrates WASM initialization", "duration_ms": 1259.38, "sessionId": "voter_0044"}
-{"id": "perf_proof_0044", "timestamp": "2026-06-20T20:32:31Z", "category": "zkp-proof", "label": "Groth16 proof generation", "duration_ms": 806.79, "sessionId": "voter_0044"}
-{"id": "perf_init_0045", "timestamp": "2026-06-20T21:09:30Z", "category": "zkp-init", "label": "ZoKrates WASM initialization", "duration_ms": 2.36, "sessionId": "voter_0045"}
-{"id": "perf_proof_0045", "timestamp": "2026-06-20T21:09:30Z", "category": "zkp-proof", "label": "Groth16 proof generation", "duration_ms": 1981.0, "sessionId": "voter_0045"}
-{"id": "perf_init_0046", "timestamp": "2026-06-20T21:48:30Z", "category": "zkp-init", "label": "ZoKrates WASM initialization", "duration_ms": 3.04, "sessionId": "voter_0046"}
-{"id": "perf_proof_0046", "timestamp": "2026-06-20T21:48:30Z", "category": "zkp-proof", "label": "Groth16 proof generation", "duration_ms": 572.74, "sessionId": "voter_0046"}
-{"id": "perf_init_0047", "timestamp": "2026-06-20T22:22:30Z", "category": "zkp-init", "label": "ZoKrates WASM initialization", "duration_ms": 2650.98, "sessionId": "voter_0047"}
-{"id": "perf_proof_0047", "timestamp": "2026-06-20T22:22:32Z", "category": "zkp-proof", "label": "Groth16 proof generation", "duration_ms": 597.56, "sessionId": "voter_0047"}
-{"id": "perf_init_0048", "timestamp": "2026-06-20T23:06:30Z", "category": "zkp-init", "label": "ZoKrates WASM initialization", "duration_ms": 0.53, "sessionId": "voter_0048"}
-{"id": "perf_proof_0048", "timestamp": "2026-06-20T23:06:30Z", "category": "zkp-proof", "label": "Groth16 proof generation", "duration_ms": 1153.92, "sessionId": "voter_0048"}
-{"id": "perf_init_0049", "timestamp": "2026-06-20T23:34:30Z", "category": "zkp-init", "label": "ZoKrates WASM initialization", "duration_ms": 3.16, "sessionId": "voter_0049"}
-{"id": "perf_proof_0049", "timestamp": "2026-06-20T23:34:30Z", "category": "zkp-proof", "label": "Groth16 proof generation", "duration_ms": 775.43, "sessionId": "voter_0049"}
-{"id": "perf_init_0050", "timestamp": "2026-06-21T00:15:30Z", "category": "zkp-init", "label": "ZoKrates WASM initialization", "duration_ms": 1.54, "sessionId": "voter_0050"}
-{"id": "perf_proof_0050", "timestamp": "2026-06-21T00:15:30Z", "category": "zkp-proof", "label": "Groth16 proof generation", "duration_ms": 559.0, "sessionId": "voter_0050"}
-{"id": "perf_init_0051", "timestamp": "2026-06-21T00:50:30Z", "category": "zkp-init", "label": "ZoKrates WASM initialization", "duration_ms": 4903.77, "sessionId": "voter_0001"}
-{"id": "perf_proof_0051", "timestamp": "2026-06-21T00:50:34Z", "category": "zkp-proof", "label": "Groth16 proof generation", "duration_ms": 1042.19, "sessionId": "voter_0001"}
-{"id": "perf_init_0052", "timestamp": "2026-06-21T01:27:30Z", "category": "zkp-init", "label": "ZoKrates WASM initialization", "duration_ms": 4.19, "sessionId": "voter_0002"}
-{"id": "perf_proof_0052", "timestamp": "2026-06-21T01:27:30Z", "category": "zkp-proof", "label": "Groth16 proof generation", "duration_ms": 715.51, "sessionId": "voter_0002"}
-{"id": "perf_init_0053", "timestamp": "2026-06-21T02:10:30Z", "category": "zkp-init", "label": "ZoKrates WASM initialization", "duration_ms": 2.22, "sessionId": "voter_0003"}
-{"id": "perf_proof_0053", "timestamp": "2026-06-21T02:10:30Z", "category": "zkp-proof", "label": "Groth16 proof generation", "duration_ms": 605.37, "sessionId": "voter_0003"}
-{"id": "perf_init_0054", "timestamp": "2026-06-21T02:43:30Z", "category": "zkp-init", "label": "ZoKrates WASM initialization", "duration_ms": 4.69, "sessionId": "voter_0004"}
-{"id": "perf_proof_0054", "timestamp": "2026-06-21T02:43:30Z", "category": "zkp-proof", "label": "Groth16 proof generation", "duration_ms": 598.86, "sessionId": "voter_0004"}
-{"id": "perf_init_0055", "timestamp": "2026-06-21T03:18:30Z", "category": "zkp-init", "label": "ZoKrates WASM initialization", "duration_ms": 0.93, "sessionId": "voter_0005"}
-{"id": "perf_proof_0055", "timestamp": "2026-06-21T03:18:30Z", "category": "zkp-proof", "label": "Groth16 proof generation", "duration_ms": 559.0, "sessionId": "voter_0005"}
-{"id": "perf_init_0056", "timestamp": "2026-06-21T03:54:30Z", "category": "zkp-init", "label": "ZoKrates WASM initialization", "duration_ms": 7209.34, "sessionId": "voter_0006"}
-{"id": "perf_proof_0056", "timestamp": "2026-06-21T03:54:37Z", "category": "zkp-proof", "label": "Groth16 proof generation", "duration_ms": 726.53, "sessionId": "voter_0006"}
-{"id": "perf_init_0057", "timestamp": "2026-06-21T04:40:30Z", "category": "zkp-init", "label": "ZoKrates WASM initialization", "duration_ms": 7106.4, "sessionId": "voter_0007"}
-{"id": "perf_proof_0057", "timestamp": "2026-06-21T04:40:37Z", "category": "zkp-proof", "label": "Groth16 proof generation", "duration_ms": 728.18, "sessionId": "voter_0007"}
-{"id": "perf_init_0058", "timestamp": "2026-06-21T05:07:30Z", "category": "zkp-init", "label": "ZoKrates WASM initialization", "duration_ms": 3.55, "sessionId": "voter_0008"}
-{"id": "perf_proof_0058", "timestamp": "2026-06-21T05:07:30Z", "category": "zkp-proof", "label": "Groth16 proof generation", "duration_ms": 559.0, "sessionId": "voter_0008"}
-{"id": "perf_init_0059", "timestamp": "2026-06-21T05:46:30Z", "category": "zkp-init", "label": "ZoKrates WASM initialization", "duration_ms": 2444.66, "sessionId": "voter_0009"}
-{"id": "perf_proof_0059", "timestamp": "2026-06-21T05:46:32Z", "category": "zkp-proof", "label": "Groth16 proof generation", "duration_ms": 573.41, "sessionId": "voter_0009"}
-{"id": "perf_init_0060", "timestamp": "2026-06-21T06:21:30Z", "category": "zkp-init", "label": "ZoKrates WASM initialization", "duration_ms": 3174.52, "sessionId": "voter_0010"}
-{"id": "perf_proof_0060", "timestamp": "2026-06-21T06:21:33Z", "category": "zkp-proof", "label": "Groth16 proof generation", "duration_ms": 1027.48, "sessionId": "voter_0010"}
-{"id": "perf_init_0061", "timestamp": "2026-06-21T07:03:30Z", "category": "zkp-init", "label": "ZoKrates WASM initialization", "duration_ms": 5825.96, "sessionId": "voter_0011"}
-{"id": "perf_proof_0061", "timestamp": "2026-06-21T07:03:35Z", "category": "zkp-proof", "label": "Groth16 proof generation", "duration_ms": 720.6, "sessionId": "voter_0011"}
-{"id": "perf_init_0062", "timestamp": "2026-06-21T07:38:30Z", "category": "zkp-init", "label": "ZoKrates WASM initialization", "duration_ms": 2.28, "sessionId": "voter_0062"}
-{"id": "perf_proof_0062", "timestamp": "2026-06-21T07:38:30Z", "category": "zkp-proof", "label": "Groth16 proof generation", "duration_ms": 559.0, "sessionId": "voter_0062"}
-{"id": "perf_init_0063", "timestamp": "2026-06-21T08:21:30Z", "category": "zkp-init", "label": "ZoKrates WASM initialization", "duration_ms": 3.32, "sessionId": "voter_0063"}
-{"id": "perf_proof_0063", "timestamp": "2026-06-21T08:21:30Z", "category": "zkp-proof", "label": "Groth16 proof generation", "duration_ms": 621.31, "sessionId": "voter_0063"}
-{"id": "perf_init_0064", "timestamp": "2026-06-21T08:54:30Z", "category": "zkp-init", "label": "ZoKrates WASM initialization", "duration_ms": 2170.88, "sessionId": "voter_0064"}
-{"id": "perf_proof_0064", "timestamp": "2026-06-21T08:54:32Z", "category": "zkp-proof", "label": "Groth16 proof generation", "duration_ms": 967.71, "sessionId": "voter_0064"}
-{"id": "perf_init_0065", "timestamp": "2026-06-21T09:26:30Z", "category": "zkp-init", "label": "ZoKrates WASM initialization", "duration_ms": 1.05, "sessionId": "voter_0065"}
-{"id": "perf_proof_0065", "timestamp": "2026-06-21T09:26:30Z", "category": "zkp-proof", "label": "Groth16 proof generation", "duration_ms": 907.79, "sessionId": "voter_0065"}
-{"id": "perf_init_0066", "timestamp": "2026-06-21T10:05:30Z", "category": "zkp-init", "label": "ZoKrates WASM initialization", "duration_ms": 0.2, "sessionId": "voter_0066"}
-{"id": "perf_proof_0066", "timestamp": "2026-06-21T10:05:30Z", "category": "zkp-proof", "label": "Groth16 proof generation", "duration_ms": 559.0, "sessionId": "voter_0066"}
-{"id": "perf_init_0067", "timestamp": "2026-06-21T10:44:30Z", "category": "zkp-init", "label": "ZoKrates WASM initialization", "duration_ms": 1.38, "sessionId": "voter_0067"}
-{"id": "perf_proof_0067", "timestamp": "2026-06-21T10:44:30Z", "category": "zkp-proof", "label": "Groth16 proof generation", "duration_ms": 1120.2, "sessionId": "voter_0067"}
-{"id": "perf_init_0068", "timestamp": "2026-06-21T11:17:30Z", "category": "zkp-init", "label": "ZoKrates WASM initialization", "duration_ms": 6011.31, "sessionId": "voter_0068"}
-{"id": "perf_proof_0068", "timestamp": "2026-06-21T11:17:36Z", "category": "zkp-proof", "label": "Groth16 proof generation", "duration_ms": 1060.87, "sessionId": "voter_0068"}
-{"id": "perf_init_0069", "timestamp": "2026-06-21T11:56:30Z", "category": "zkp-init", "label": "ZoKrates WASM initialization", "duration_ms": 1.37, "sessionId": "voter_0069"}
-{"id": "perf_proof_0069", "timestamp": "2026-06-21T11:56:30Z", "category": "zkp-proof", "label": "Groth16 proof generation", "duration_ms": 768.05, "sessionId": "voter_0069"}
-{"id": "perf_init_0070", "timestamp": "2026-06-21T12:37:30Z", "category": "zkp-init", "label": "ZoKrates WASM initialization", "duration_ms": 3996.21, "sessionId": "voter_0070"}
-{"id": "perf_proof_0070", "timestamp": "2026-06-21T12:37:34Z", "category": "zkp-proof", "label": "Groth16 proof generation", "duration_ms": 767.16, "sessionId": "voter_0070"}
-{"id": "perf_init_0071", "timestamp": "2026-06-21T13:16:30Z", "category": "zkp-init", "label": "ZoKrates WASM initialization", "duration_ms": 4.48, "sessionId": "voter_0071"}
-{"id": "perf_proof_0071", "timestamp": "2026-06-21T13:16:30Z", "category": "zkp-proof", "label": "Groth16 proof generation", "duration_ms": 559.0, "sessionId": "voter_0071"}
-{"id": "perf_init_0072", "timestamp": "2026-06-21T13:46:30Z", "category": "zkp-init", "label": "ZoKrates WASM initialization", "duration_ms": 2536.95, "sessionId": "voter_0072"}
-{"id": "perf_proof_0072", "timestamp": "2026-06-21T13:46:32Z", "category": "zkp-proof", "label": "Groth16 proof generation", "duration_ms": 1251.8, "sessionId": "voter_0072"}
-{"id": "perf_init_0073", "timestamp": "2026-06-21T14:23:30Z", "category": "zkp-init", "label": "ZoKrates WASM initialization", "duration_ms": 4.72, "sessionId": "voter_0073"}
-{"id": "perf_proof_0073", "timestamp": "2026-06-21T14:23:30Z", "category": "zkp-proof", "label": "Groth16 proof generation", "duration_ms": 960.21, "sessionId": "voter_0073"}
-{"id": "perf_init_0074", "timestamp": "2026-06-21T15:06:30Z", "category": "zkp-init", "label": "ZoKrates WASM initialization", "duration_ms": 2.41, "sessionId": "voter_0074"}
-{"id": "perf_proof_0074", "timestamp": "2026-06-21T15:06:30Z", "category": "zkp-proof", "label": "Groth16 proof generation", "duration_ms": 838.8, "sessionId": "voter_0074"}
-{"id": "perf_init_0075", "timestamp": "2026-06-21T15:43:30Z", "category": "zkp-init", "label": "ZoKrates WASM initialization", "duration_ms": 3109.13, "sessionId": "voter_0075"}
-{"id": "perf_proof_0075", "timestamp": "2026-06-21T15:43:33Z", "category": "zkp-proof", "label": "Groth16 proof generation", "duration_ms": 1056.57, "sessionId": "voter_0075"}
-{"id": "perf_init_0076", "timestamp": "2026-06-21T16:18:30Z", "category": "zkp-init", "label": "ZoKrates WASM initialization", "duration_ms": 3.04, "sessionId": "voter_0076"}
-{"id": "perf_proof_0076", "timestamp": "2026-06-21T16:18:30Z", "category": "zkp-proof", "label": "Groth16 proof generation", "duration_ms": 930.52, "sessionId": "voter_0076"}
-{"id": "perf_init_0077", "timestamp": "2026-06-21T16:58:30Z", "category": "zkp-init", "label": "ZoKrates WASM initialization", "duration_ms": 3.48, "sessionId": "voter_0077"}
-{"id": "perf_proof_0077", "timestamp": "2026-06-21T16:58:30Z", "category": "zkp-proof", "label": "Groth16 proof generation", "duration_ms": 651.97, "sessionId": "voter_0077"}
-{"id": "perf_init_0078", "timestamp": "2026-06-21T17:36:30Z", "category": "zkp-init", "label": "ZoKrates WASM initialization", "duration_ms": 4.16, "sessionId": "voter_0078"}
-{"id": "perf_proof_0078", "timestamp": "2026-06-21T17:36:30Z", "category": "zkp-proof", "label": "Groth16 proof generation", "duration_ms": 708.61, "sessionId": "voter_0078"}
-{"id": "perf_init_0079", "timestamp": "2026-06-21T18:05:30Z", "category": "zkp-init", "label": "ZoKrates WASM initialization", "duration_ms": 2.55, "sessionId": "voter_0079"}
-{"id": "perf_proof_0079", "timestamp": "2026-06-21T18:05:30Z", "category": "zkp-proof", "label": "Groth16 proof generation", "duration_ms": 570.11, "sessionId": "voter_0079"}
-{"id": "perf_tx_0001", "timestamp": "2026-06-19T18:05:45Z", "category": "tx-submit", "label": "On-chain vote submission", "duration_ms": 6855.66, "sessionId": "voter_0001"}
-{"id": "perf_tx_0002", "timestamp": "2026-06-19T18:43:45Z", "category": "tx-submit", "label": "On-chain vote submission", "duration_ms": 6546.58, "sessionId": "voter_0002"}
-{"id": "perf_tx_0003", "timestamp": "2026-06-19T19:15:45Z", "category": "tx-submit", "label": "On-chain vote submission", "duration_ms": 9381.64, "sessionId": "voter_0003"}
-{"id": "perf_tx_0004", "timestamp": "2026-06-19T19:58:45Z", "category": "tx-submit", "label": "On-chain vote submission", "duration_ms": 4284.34, "sessionId": "voter_0004"}
-{"id": "perf_tx_0005", "timestamp": "2026-06-19T20:26:45Z", "category": "tx-submit", "label": "On-chain vote submission", "duration_ms": 6731.52, "sessionId": "voter_0005"}
-{"id": "perf_tx_0006", "timestamp": "2026-06-19T21:13:45Z", "category": "tx-submit", "label": "On-chain vote submission", "duration_ms": 4867.64, "sessionId": "voter_0006"}
-{"id": "perf_tx_0007", "timestamp": "2026-06-19T21:48:45Z", "category": "tx-submit", "label": "On-chain vote submission", "duration_ms": 7729.87, "sessionId": "voter_0007"}
-{"id": "perf_tx_0008", "timestamp": "2026-06-19T22:21:45Z", "category": "tx-submit", "label": "On-chain vote submission", "duration_ms": 9956.0, "sessionId": "voter_0008"}
-{"id": "perf_tx_0009", "timestamp": "2026-06-19T23:01:45Z", "category": "tx-submit", "label": "On-chain vote submission", "duration_ms": 2390.0, "sessionId": "voter_0009"}
-{"id": "perf_tx_0010", "timestamp": "2026-06-19T23:41:45Z", "category": "tx-submit", "label": "On-chain vote submission", "duration_ms": 5638.59, "sessionId": "voter_0010"}
-{"id": "perf_tx_0011", "timestamp": "2026-06-20T00:08:45Z", "category": "tx-submit", "label": "On-chain vote submission", "duration_ms": 6259.55, "sessionId": "voter_0011"}
-{"id": "perf_tx_0012", "timestamp": "2026-06-20T00:45:45Z", "category": "tx-submit", "label": "On-chain vote submission", "duration_ms": 2390.0, "sessionId": "voter_0012"}
-{"id": "perf_tx_0013", "timestamp": "2026-06-20T01:29:45Z", "category": "tx-submit", "label": "On-chain vote submission", "duration_ms": 7106.02, "sessionId": "voter_0013"}
-{"id": "perf_tx_0014", "timestamp": "2026-06-20T02:05:45Z", "category": "tx-submit", "label": "On-chain vote submission", "duration_ms": 3765.96, "sessionId": "voter_0014"}
-{"id": "perf_tx_0015", "timestamp": "2026-06-20T02:42:45Z", "category": "tx-submit", "label": "On-chain vote submission", "duration_ms": 7968.54, "sessionId": "voter_0015"}
-{"id": "perf_tx_0016", "timestamp": "2026-06-20T03:23:45Z", "category": "tx-submit", "label": "On-chain vote submission", "duration_ms": 6201.92, "sessionId": "voter_0016"}
-{"id": "perf_tx_0017", "timestamp": "2026-06-20T03:51:45Z", "category": "tx-submit", "label": "On-chain vote submission", "duration_ms": 9934.58, "sessionId": "voter_0017"}
-{"id": "perf_tx_0018", "timestamp": "2026-06-20T04:34:45Z", "category": "tx-submit", "label": "On-chain vote submission", "duration_ms": 7365.56, "sessionId": "voter_0018"}
-{"id": "perf_tx_0019", "timestamp": "2026-06-20T05:11:45Z", "category": "tx-submit", "label": "On-chain vote submission", "duration_ms": 8812.27, "sessionId": "voter_0019"}
-{"id": "perf_tx_0020", "timestamp": "2026-06-20T05:42:45Z", "category": "tx-submit", "label": "On-chain vote submission", "duration_ms": 6545.38, "sessionId": "voter_0020"}
-{"id": "perf_tx_0021", "timestamp": "2026-06-20T06:19:45Z", "category": "tx-submit", "label": "On-chain vote submission", "duration_ms": 9956.0, "sessionId": "voter_0021"}
-{"id": "perf_tx_0022", "timestamp": "2026-06-20T07:00:45Z", "category": "tx-submit", "label": "On-chain vote submission", "duration_ms": 6420.48, "sessionId": "voter_0022"}
-{"id": "perf_tx_0023", "timestamp": "2026-06-20T07:41:45Z", "category": "tx-submit", "label": "On-chain vote submission", "duration_ms": 2390.0, "sessionId": "voter_0023"}
-{"id": "perf_tx_0024", "timestamp": "2026-06-20T08:11:45Z", "category": "tx-submit", "label": "On-chain vote submission", "duration_ms": 5963.04, "sessionId": "voter_0024"}
-{"id": "perf_tx_0025", "timestamp": "2026-06-20T08:47:45Z", "category": "tx-submit", "label": "On-chain vote submission", "duration_ms": 3600.46, "sessionId": "voter_0025"}
-{"id": "perf_tx_0026", "timestamp": "2026-06-20T09:25:45Z", "category": "tx-submit", "label": "On-chain vote submission", "duration_ms": 7224.59, "sessionId": "voter_0026"}
-{"id": "perf_tx_0027", "timestamp": "2026-06-20T10:04:45Z", "category": "tx-submit", "label": "On-chain vote submission", "duration_ms": 6166.85, "sessionId": "voter_0027"}
-{"id": "perf_tx_0028", "timestamp": "2026-06-20T10:46:45Z", "category": "tx-submit", "label": "On-chain vote submission", "duration_ms": 7098.66, "sessionId": "voter_0028"}
-{"id": "perf_tx_0029", "timestamp": "2026-06-20T11:24:45Z", "category": "tx-submit", "label": "On-chain vote submission", "duration_ms": 9005.18, "sessionId": "voter_0029"}
-{"id": "perf_tx_0030", "timestamp": "2026-06-20T12:00:45Z", "category": "tx-submit", "label": "On-chain vote submission", "duration_ms": 3200.7, "sessionId": "voter_0030"}
-{"id": "perf_tx_0031", "timestamp": "2026-06-20T12:36:45Z", "category": "tx-submit", "label": "On-chain vote submission", "duration_ms": 6020.68, "sessionId": "voter_0031"}
-{"id": "perf_tx_0032", "timestamp": "2026-06-20T13:10:45Z", "category": "tx-submit", "label": "On-chain vote submission", "duration_ms": 7005.93, "sessionId": "voter_0032"}
-{"id": "perf_tx_0033", "timestamp": "2026-06-20T13:48:45Z", "category": "tx-submit", "label": "On-chain vote submission", "duration_ms": 6928.67, "sessionId": "voter_0033"}
-{"id": "perf_tx_0034", "timestamp": "2026-06-20T14:28:45Z", "category": "tx-submit", "label": "On-chain vote submission", "duration_ms": 5158.71, "sessionId": "voter_0034"}
-{"id": "perf_tx_0035", "timestamp": "2026-06-20T15:04:45Z", "category": "tx-submit", "label": "On-chain vote submission", "duration_ms": 6647.06, "sessionId": "voter_0035"}
-{"id": "perf_tx_0036", "timestamp": "2026-06-20T15:37:45Z", "category": "tx-submit", "label": "On-chain vote submission", "duration_ms": 9956.0, "sessionId": "voter_0036"}
-{"id": "perf_tx_0037", "timestamp": "2026-06-20T16:17:45Z", "category": "tx-submit", "label": "On-chain vote submission", "duration_ms": 8114.55, "sessionId": "voter_0037"}
-{"id": "perf_tx_0038", "timestamp": "2026-06-20T16:55:45Z", "category": "tx-submit", "label": "On-chain vote submission", "duration_ms": 6513.49, "sessionId": "voter_0038"}
-{"id": "perf_tx_0039", "timestamp": "2026-06-20T17:33:45Z", "category": "tx-submit", "label": "On-chain vote submission", "duration_ms": 7637.72, "sessionId": "voter_0039"}
-{"id": "perf_tx_0040", "timestamp": "2026-06-20T18:07:45Z", "category": "tx-submit", "label": "On-chain vote submission", "duration_ms": 5559.85, "sessionId": "voter_0040"}
-{"id": "perf_tx_0041", "timestamp": "2026-06-20T18:39:45Z", "category": "tx-submit", "label": "On-chain vote submission", "duration_ms": 4964.76, "sessionId": "voter_0041"}
-{"id": "perf_tx_0042", "timestamp": "2026-06-20T19:16:45Z", "category": "tx-submit", "label": "On-chain vote submission", "duration_ms": 5368.3, "sessionId": "voter_0042"}
-{"id": "perf_tx_0043", "timestamp": "2026-06-20T20:02:45Z", "category": "tx-submit", "label": "On-chain vote submission", "duration_ms": 5612.89, "sessionId": "voter_0043"}
-{"id": "perf_tx_0044", "timestamp": "2026-06-20T20:39:45Z", "category": "tx-submit", "label": "On-chain vote submission", "duration_ms": 4718.28, "sessionId": "voter_0044"}
-{"id": "perf_tx_0045", "timestamp": "2026-06-20T21:14:45Z", "category": "tx-submit", "label": "On-chain vote submission", "duration_ms": 6367.0, "sessionId": "voter_0045"}
-{"id": "perf_tx_0046", "timestamp": "2026-06-20T21:46:45Z", "category": "tx-submit", "label": "On-chain vote submission", "duration_ms": 9956.0, "sessionId": "voter_0046"}
-{"id": "perf_tx_0047", "timestamp": "2026-06-20T22:26:45Z", "category": "tx-submit", "label": "On-chain vote submission", "duration_ms": 9956.0, "sessionId": "voter_0047"}
-{"id": "perf_tx_0048", "timestamp": "2026-06-20T23:04:45Z", "category": "tx-submit", "label": "On-chain vote submission", "duration_ms": 3625.62, "sessionId": "voter_0048"}
-{"id": "perf_tx_0049", "timestamp": "2026-06-20T23:37:45Z", "category": "tx-submit", "label": "On-chain vote submission", "duration_ms": 5949.93, "sessionId": "voter_0049"}
-{"id": "perf_tx_0050", "timestamp": "2026-06-21T00:17:45Z", "category": "tx-submit", "label": "On-chain vote submission", "duration_ms": 8246.62, "sessionId": "voter_0050"}
-{"id": "perf_tx_0051", "timestamp": "2026-06-21T00:53:45Z", "category": "tx-submit", "label": "On-chain vote submission", "duration_ms": 5845.64, "sessionId": "voter_0051"}
+{"id":"18c7f3b2-4a91-4e56-d083-9b2e5c07f4d6","category":"zkp-init","label":"ZoKrates WASM initialization","durationMs":5836,"timestamp":"2026-06-19T18:03:39.554Z"}
+{"id":"e052b49d-7f13-4c28-a961-3d80f1e75b20","category":"zkp-proof","label":"Groth16 proof generation","durationMs":1271,"timestamp":"2026-06-19T18:03:45.523Z"}
+{"id":"b2a6d081-9e74-4f03-8c15-4f390b5e7c28","category":"tx-submit","label":"On-chain vote submission","durationMs":8447,"timestamp":"2026-06-19T18:03:46.907Z"}
+{"id":"a71f09e4-2c58-4d13-9b47-6e305f8c0d21","category":"zkp-init","label":"ZoKrates WASM initialization","durationMs":2291,"timestamp":"2026-06-19T18:19:52.441Z"}
+{"id":"d3809b56-e142-4f87-c031-8a4f7d2e5c19","category":"zkp-proof","label":"Groth16 proof generation","durationMs":1037,"timestamp":"2026-06-19T18:19:54.866Z"}
+{"id":"6f4e2810-b935-4c04-a718-0d7c3e9b5f62","category":"tx-submit","label":"On-chain vote submission","durationMs":7183,"timestamp":"2026-06-19T18:19:56.018Z"}
+{"id":"2e4c17f8-9b03-4d85-e261-4f70a9c5b813","category":"zkp-init","label":"ZoKrates WASM initialization","durationMs":3174,"timestamp":"2026-06-19T18:26:38.921Z"}
+{"id":"9f0b53a1-c74e-4b29-8d16-7e2f01c48d95","category":"zkp-proof","label":"Groth16 proof generation","durationMs":856,"timestamp":"2026-06-19T18:26:42.228Z"}
+{"id":"5c8d2047-f193-4e71-b530-3a609e7c1f84","category":"tx-submit","label":"On-chain vote submission","durationMs":6914,"timestamp":"2026-06-19T18:26:43.197Z"}
+{"id":"e6b2f081-3d94-4a57-c710-9f852e1d4c36","category":"zkp-init","label":"ZoKrates WASM initialization","durationMs":1562,"timestamp":"2026-06-20T05:24:57.083Z"}
+{"id":"b49a8c13-f071-4e28-8d52-5c3e0b7f9146","category":"zkp-proof","label":"Groth16 proof generation","durationMs":1194,"timestamp":"2026-06-20T05:24:58.779Z"}
+{"id":"73d5e290-68b4-4f13-a904-1e8c3f07d52b","category":"tx-submit","label":"On-chain vote submission","durationMs":8756,"timestamp":"2026-06-20T05:25:00.097Z"}
+{"id":"c3940fb8-72d1-4e07-9a65-bf2180d53c4e","category":"zkp-init","label":"ZoKrates WASM initialization","durationMs":4928,"timestamp":"2026-06-20T05:25:27.338Z"}
+{"id":"8a1d65e3-04c7-4b92-d047-6e593f1b8c20","category":"zkp-proof","label":"Groth16 proof generation","durationMs":692,"timestamp":"2026-06-20T05:25:32.399Z"}
+{"id":"0f7e3914-a582-4c61-b839-2d4c0e7f6b15","category":"tx-submit","label":"On-chain vote submission","durationMs":5473,"timestamp":"2026-06-20T05:25:33.214Z"}
+{"id":"1c9a4e87-d305-4f62-8b41-7e260f94c3d2","category":"zkp-init","label":"ZoKrates WASM initialization","durationMs":2038,"timestamp":"2026-06-20T05:36:01.194Z"}
+{"id":"7f3e82b4-091c-4d57-a530-6c84d1f7e029","category":"zkp-proof","label":"Groth16 proof generation","durationMs":748,"timestamp":"2026-06-20T05:36:03.366Z"}
+{"id":"4b5c10f9-e726-4a83-9d14-2f08b3e57c91","category":"tx-submit","label":"On-chain vote submission","durationMs":6507,"timestamp":"2026-06-20T05:36:04.228Z"}
+{"id":"b813c570-4e29-4f01-a694-0c75d3b1e982","category":"zkp-init","label":"ZoKrates WASM initialization","durationMs":7381,"timestamp":"2026-06-20T05:40:18.504Z"}
+{"id":"6d2f094c-a157-4b83-e826-9f304e7c5d01","category":"zkp-proof","label":"Groth16 proof generation","durationMs":1512,"timestamp":"2026-06-20T05:40:25.998Z"}
+{"id":"f3710b2e-58dc-4e94-b061-4a9c7e2d0f85","category":"tx-submit","label":"On-chain vote submission","durationMs":4023,"timestamp":"2026-06-20T05:40:27.631Z"}
+{"id":"a2f85c34-7019-4e63-b148-3e506d27f9c1","category":"zkp-init","label":"ZoKrates WASM initialization","durationMs":5193,"timestamp":"2026-06-20T05:41:38.271Z"}
+{"id":"e04b17d9-c263-4a87-9f52-7b418c0e5d38","category":"zkp-proof","label":"Groth16 proof generation","durationMs":967,"timestamp":"2026-06-20T05:41:43.598Z"}
+{"id":"29f6e041-8b74-4c15-d307-5a192e8fd4b6","category":"tx-submit","label":"On-chain vote submission","durationMs":7819,"timestamp":"2026-06-20T05:41:44.681Z"}
+{"id":"8e21b763-50a4-4f38-d94c-2f670e8b5190","category":"zkp-init","label":"ZoKrates WASM initialization","durationMs":1874,"timestamp":"2026-06-20T05:44:56.338Z"}
+{"id":"c57d3920-fa81-4b06-8e14-6093b4d7e251","category":"zkp-proof","label":"Groth16 proof generation","durationMs":1241,"timestamp":"2026-06-20T05:44:58.347Z"}
+{"id":"6b094e1f-38c7-4d52-a076-d4152f90b863","category":"tx-submit","label":"On-chain vote submission","durationMs":6894,"timestamp":"2026-06-20T05:44:59.714Z"}
+{"id":"f94b10e2-6c35-4d87-b052-19a8d374cf6e","category":"zkp-init","label":"ZoKrates WASM initialization","durationMs":4412,"timestamp":"2026-06-20T05:45:18.903Z"}
+{"id":"71c3e859-2df0-4a14-9b6c-50e182f7d034","category":"zkp-proof","label":"Groth16 proof generation","durationMs":879,"timestamp":"2026-06-20T05:45:23.449Z"}
+{"id":"3a6f04d1-b872-4c59-e371-8d509c1fe726","category":"tx-submit","label":"On-chain vote submission","durationMs":3615,"timestamp":"2026-06-20T05:45:24.441Z"}
+{"id":"d52a07b3-f18e-4c91-8347-6e902cf54a71","category":"zkp-init","label":"ZoKrates WASM initialization","durationMs":2756,"timestamp":"2026-06-20T05:48:31.109Z"}
+{"id":"4f1e96c8-a047-4b72-d531-7208be3f91d6","category":"zkp-proof","label":"Groth16 proof generation","durationMs":603,"timestamp":"2026-06-20T05:48:34.003Z"}
+{"id":"0c8d2547-391b-4fe6-a819-b4d76e05f283","category":"tx-submit","label":"On-chain vote submission","durationMs":8342,"timestamp":"2026-06-20T05:48:34.728Z"}
+{"id":"e37b85c2-09d4-4a63-bf21-58714e9c0d46","category":"zkp-init","label":"ZoKrates WASM initialization","durationMs":6047,"timestamp":"2026-06-20T05:53:21.882Z"}
+{"id":"18f4d076-c2a9-4e35-9b57-3d6081f2e5c4","category":"zkp-proof","label":"Groth16 proof generation","durationMs":1389,"timestamp":"2026-06-20T05:53:28.063Z"}
+{"id":"b6390e41-74fc-4d28-a265-8c103f79d512","category":"tx-submit","label":"On-chain vote submission","durationMs":5271,"timestamp":"2026-06-20T05:53:29.578Z"}
+{"id":"2c4f71ba-d836-4e59-a013-7c948b526d1e","category":"zkp-init","label":"ZoKrates WASM initialization","durationMs":1293,"timestamp":"2026-06-20T06:01:38.774Z"}
+{"id":"a81e6053-3b7d-4f14-8c52-d9047e2f6b39","category":"zkp-proof","label":"Groth16 proof generation","durationMs":1028,"timestamp":"2026-06-20T06:01:40.201Z"}
+{"id":"5d0c29f7-e461-4817-b3a8-91f6c204d75e","category":"tx-submit","label":"On-chain vote submission","durationMs":7588,"timestamp":"2026-06-20T06:01:41.349Z"}
+{"id":"3f8a1c72-e049-4b17-9d2e-a761f305c84d","category":"zkp-init","label":"ZoKrates WASM initialization","durationMs":3821,"timestamp":"2026-06-20T06:11:09.447Z"}
+{"id":"7b2d94e1-58a3-4c06-bf71-2e390d8f1a65","category":"zkp-proof","label":"Groth16 proof generation","durationMs":714,"timestamp":"2026-06-20T06:11:13.401Z"}
+{"id":"9e5c38d0-17f4-4a82-b6c9-4052e1d73b2f","category":"tx-submit","label":"On-chain vote submission","durationMs":9134,"timestamp":"2026-06-20T06:11:14.228Z"}
+{"id":"b0aae9f9-6b7d-4bed-937d-94814513afa6","category":"zkp-init","label":"ZoKrates WASM initialization","durationMs":1033,"timestamp":"2026-06-20T06:47:50.588Z"}
+{"id":"34203f24-072f-46fe-ad38-63b0b206077c","category":"zkp-proof","label":"Groth16 proof generation","durationMs":559,"timestamp":"2026-06-20T06:47:51.333Z"}
+{"id":"8efd4df6-46d9-4457-bdc7-1edd01129dfd","category":"tx-submit","label":"On-chain vote submission","durationMs":7454,"timestamp":"2026-06-20T06:47:58.788Z"}
+{"id":"84022759-54b4-4919-a8ee-592fc3312a5c","category":"zkp-init","label":"ZoKrates WASM initialization","durationMs":7443,"timestamp":"2026-06-20T07:02:18.482Z"}
+{"id":"2ba6ee64-2fbb-4fd8-925d-d19b3502fa10","category":"zkp-proof","label":"Groth16 proof generation","durationMs":1981,"timestamp":"2026-06-20T07:02:20.875Z"}
+{"id":"01ff82ab-9b36-4033-a760-5afa4fcd1b96","category":"tx-submit","label":"On-chain vote submission","durationMs":2539,"timestamp":"2026-06-20T07:02:23.413Z"}
+{"id":"f45c7470-ba7d-4140-9fd2-ba4b0f4f1387","category":"zkp-init","label":"ZoKrates WASM initialization","durationMs":1622,"timestamp":"2026-06-20T07:04:25.163Z"}
+{"id":"a6324f95-0874-499c-9509-cdc2cdf1ea35","category":"zkp-proof","label":"Groth16 proof generation","durationMs":821,"timestamp":"2026-06-20T07:04:26.142Z"}
+{"id":"a821c586-c21d-4a5b-9326-0886c4c279e8","category":"tx-submit","label":"On-chain vote submission","durationMs":7383,"timestamp":"2026-06-20T07:04:33.525Z"}
+{"id":"9e66e2e7-eed3-466d-b55e-6fe961551ad1","category":"zkp-init","label":"ZoKrates WASM initialization","durationMs":2345,"timestamp":"2026-06-20T07:06:27.916Z"}
+{"id":"2a1fef7b-6777-4ede-a7f4-97598419fe65","category":"zkp-proof","label":"Groth16 proof generation","durationMs":845,"timestamp":"2026-06-20T07:06:28.933Z"}
+{"id":"07bb9166-a769-4330-9b13-73dc5cc219a4","category":"tx-submit","label":"On-chain vote submission","durationMs":9260,"timestamp":"2026-06-20T07:06:38.193Z"}
+{"id":"6e9afb55-7bfc-42bd-8fee-ef0f5918b1e6","category":"zkp-init","label":"ZoKrates WASM initialization","durationMs":4436.2,"timestamp":"2026-06-20T07:10:06.663Z"}
+{"id":"ceb0e917-c0fe-4f8b-be28-5459f51bbfbc","category":"zkp-proof","label":"Groth16 proof generation","durationMs":1787.4,"timestamp":"2026-06-20T07:10:08.678Z"}
+{"id":"faa5d0e1-c934-430b-b790-44db8e1cbe16","category":"tx-submit","label":"On-chain vote submission","durationMs":3168.6,"timestamp":"2026-06-20T07:10:11.847Z"}
+{"id":"5a75a1b4-ade6-4ad5-b6bb-fcebcf239058","category":"zkp-init","label":"ZoKrates WASM initialization","durationMs":5302,"timestamp":"2026-06-20T07:46:30.967Z"}
+{"id":"ff623180-b82d-4346-9f88-9877a334db2f","category":"zkp-proof","label":"Groth16 proof generation","durationMs":980,"timestamp":"2026-06-20T07:46:32.158Z"}
+{"id":"370ff5bf-870c-49ee-972c-52d5e80cea09","category":"tx-submit","label":"On-chain vote submission","durationMs":7497,"timestamp":"2026-06-20T07:46:39.656Z"}
+{"id":"d8f3a192-bc74-4e05-9361-7f20e4c8b536","category":"zkp-init","label":"ZoKrates WASM initialization","durationMs":5302,"timestamp":"2026-06-20T07:46:30.967Z"}
+{"id":"a19f04e7-53c2-4b81-d628-8e047b3f9c15","category":"zkp-proof","label":"Groth16 proof generation","durationMs":980,"timestamp":"2026-06-20T07:46:32.158Z"}
+{"id":"c74b2e81-9f03-4d56-b012-3a865e7c4f29","category":"tx-submit","label":"On-chain vote submission","durationMs":7497,"timestamp":"2026-06-20T07:46:39.656Z"}
+{"id":"2352dc11-87c0-47f4-b9bf-4d2b43e6dca7","category":"zkp-init","label":"ZoKrates WASM initialization","durationMs":640,"timestamp":"2026-06-20T10:48:04.248Z"}
+{"id":"d8e79b8c-cf1b-44be-8fee-19b057d24283","category":"zkp-proof","label":"Groth16 proof generation","durationMs":867,"timestamp":"2026-06-20T10:48:05.296Z"}
+{"id":"0188519b-7fd7-48ef-b3a4-7fbd87dcf04e","category":"tx-submit","label":"On-chain vote submission","durationMs":7531,"timestamp":"2026-06-20T10:48:12.827Z"}
+{"id":"1ba9486d-7d29-40d8-ac74-bf4c4c5dfb24","category":"zkp-init","label":"ZoKrates WASM initialization","durationMs":2214,"timestamp":"2026-06-20T12:15:08.639Z"}
+{"id":"5a2b4875-f211-4996-bb9b-b5daf64b996b","category":"zkp-proof","label":"Groth16 proof generation","durationMs":896,"timestamp":"2026-06-20T12:15:09.708Z"}
+{"id":"9997add5-7aa7-4e06-ad53-8607c5e0ba42","category":"tx-submit","label":"On-chain vote submission","durationMs":7377,"timestamp":"2026-06-20T12:15:17.085Z"}
+{"id":"55d20061-7e5f-4431-8627-8993ea2f0bd0","category":"zkp-init","label":"ZoKrates WASM initialization","durationMs":1700,"timestamp":"2026-06-20T13:29:45.502Z"}
+{"id":"d42d636e-760b-43bd-861a-d7b736500042","category":"zkp-proof","label":"Groth16 proof generation","durationMs":1267,"timestamp":"2026-06-20T13:29:47.059Z"}
+{"id":"d612bf8f-ed2c-4b89-99fd-fa08d8ef3eac","category":"tx-submit","label":"On-chain vote submission","durationMs":7399,"timestamp":"2026-06-20T13:29:54.458Z"}
+{"id":"5df58507-a04f-4d73-bdff-f531124e83f8","category":"zkp-init","label":"ZoKrates WASM initialization","durationMs":1452,"timestamp":"2026-06-20T14:54:29.483Z"}
+{"id":"5f730d77-15eb-462e-97a1-3605e8e77ab6","category":"zkp-proof","label":"Groth16 proof generation","durationMs":1264,"timestamp":"2026-06-20T14:54:31.007Z"}
+{"id":"12e214b6-aa55-4e50-b895-db9762c1ba49","category":"tx-submit","label":"On-chain vote submission","durationMs":3229,"timestamp":"2026-06-20T14:54:34.236Z"}
+{"id":"2a520b0c-b616-4f95-84f7-0f45ed60eeba","category":"zkp-init","label":"ZoKrates WASM initialization","durationMs":1800,"timestamp":"2026-06-21T04:24:31.524Z"}
+{"id":"79f78ef1-7ccc-4a3b-a2a0-4c3c9d733ee4","category":"zkp-proof","label":"Groth16 proof generation","durationMs":1848.9,"timestamp":"2026-06-21T04:24:33.651Z"}
+{"id":"2005e3e1-b9ed-4517-80db-dc9068eb70cf","category":"tx-submit","label":"On-chain vote submission","durationMs":7406.2,"timestamp":"2026-06-21T04:24:41.058Z"}
+{"id":"c1f50b2d-04fa-4f83-82af-65a326b47cd8","category":"zkp-init","label":"ZoKrates WASM initialization","durationMs":0.8,"timestamp":"2026-06-21T15:34:55.294Z"}
+{"id":"a9136bfd-edc1-471f-875a-fbd08efb12db","category":"zkp-proof","label":"Groth16 proof generation","durationMs":724.5,"timestamp":"2026-06-21T15:34:56.020Z"}
+{"id":"5533bf89-7e3f-4ca2-bea2-cedefe41462f","category":"zkp-init","label":"ZoKrates WASM initialization","durationMs":0.8,"timestamp":"2026-06-21T15:39:44.040Z"}
+{"id":"a5db36c2-b8d9-4c84-991b-08933dbc909c","category":"zkp-proof","label":"Groth16 proof generation","durationMs":722,"timestamp":"2026-06-21T15:39:44.763Z"}
+{"id":"a7c0c48a-6c0a-4f76-94ae-d3c6396f057a","category":"tx-submit","label":"On-chain vote submission","durationMs":2522.3,"timestamp":"2026-06-21T15:39:47.285Z"}
+{"id":"1823b48d-5a29-40a7-bdca-95134d9946ec","category":"zkp-init","label":"ZoKrates WASM initialization","durationMs":0.8,"timestamp":"2026-06-21T15:41:36.825Z"}
+{"id":"6a66ef9f-feb2-42ac-8e1b-15d84efae295","category":"zkp-proof","label":"Groth16 proof generation","durationMs":717.7,"timestamp":"2026-06-21T15:41:37.543Z"}
+{"id":"30bddc86-ef06-4cc6-b965-27d471c639c6","category":"zkp-init","label":"ZoKrates WASM initialization","durationMs":0.9,"timestamp":"2026-06-21T15:41:48.133Z"}
+{"id":"1fa3eebe-65a4-4b90-8452-ffc4a1617f16","category":"zkp-proof","label":"Groth16 proof generation","durationMs":716.9,"timestamp":"2026-06-21T15:41:48.851Z"}
+{"id":"ea8f6d86-9846-4352-8fd4-9d016dd3aa83","category":"zkp-init","label":"ZoKrates WASM initialization","durationMs":0.9,"timestamp":"2026-06-21T15:41:59.268Z"}
+{"id":"d08db0e5-61ae-42fc-b644-a332be8b00a0","category":"zkp-proof","label":"Groth16 proof generation","durationMs":717.4,"timestamp":"2026-06-21T15:41:59.987Z"}
+{"id":"cba7698b-28eb-4c9a-ba1e-d791b422a1ea","category":"zkp-init","label":"ZoKrates WASM initialization","durationMs":0.8,"timestamp":"2026-06-21T15:42:59.616Z"}
+{"id":"be1f82cb-0c09-4039-838f-400ef65d61cc","category":"zkp-proof","label":"Groth16 proof generation","durationMs":716.6,"timestamp":"2026-06-21T15:43:00.332Z"}
+{"id":"b205a9e2-5250-4b69-92f9-69cb1288df54","category":"zkp-init","label":"ZoKrates WASM initialization","durationMs":1.2,"timestamp":"2026-06-21T15:43:21.071Z"}
+{"id":"d9a7e53c-7860-4e96-96fd-302eeeb633b4","category":"zkp-proof","label":"Groth16 proof generation","durationMs":722.9,"timestamp":"2026-06-21T15:43:21.796Z"}
+{"id":"aa9d1ca7-7d35-4c28-8f9f-a927861b420c","category":"tx-submit","label":"On-chain vote submission","durationMs":7672.7,"timestamp":"2026-06-21T15:43:29.465Z"}
+{"id":"f1ba0a9b-2fcd-4a37-92b2-fa959a9f0760","category":"zkp-init","label":"ZoKrates WASM initialization","durationMs":3371,"timestamp":"2026-06-21T15:47:57.113Z"}
+{"id":"097d677d-86e5-4eee-9cf0-f58014c7cc12","category":"zkp-proof","label":"Groth16 proof generation","durationMs":1243,"timestamp":"2026-06-21T15:47:58.655Z"}
+{"id":"f1600925-f7f0-485d-8ea5-4f0624df8771","category":"zkp-init","label":"ZoKrates WASM initialization","durationMs":2,"timestamp":"2026-06-21T15:48:45.132Z"}
+{"id":"c39df2d4-8c7a-434d-8a75-4a0bb61adaac","category":"zkp-proof","label":"Groth16 proof generation","durationMs":1104,"timestamp":"2026-06-21T15:48:46.238Z"}
+{"id":"de60580b-0326-434f-b474-0cdaf7374f6e","category":"tx-submit","label":"On-chain vote submission","durationMs":3063,"timestamp":"2026-06-21T15:48:49.302Z"}
+{"id":"01f2623f-c7c1-4bc3-92c8-74a39aacefff","category":"zkp-init","label":"ZoKrates WASM initialization","durationMs":1,"timestamp":"2026-06-21T15:50:15.076Z"}
+{"id":"6b37123d-06bb-4656-86ac-54c1069c559a","category":"zkp-proof","label":"Groth16 proof generation","durationMs":1100,"timestamp":"2026-06-21T15:50:16.178Z"}
+{"id":"5e75c8f1-13fc-4e87-9239-35e1cf54fa26","category":"tx-submit","label":"On-chain vote submission","durationMs":3030,"timestamp":"2026-06-21T15:50:19.208Z"}
+{"id":"b4d93f4a-9a71-407d-b191-5ad1b7ea897d","category":"zkp-init","label":"ZoKrates WASM initialization","durationMs":2,"timestamp":"2026-06-21T15:52:30.654Z"}
+{"id":"0f30b848-3803-43cd-860a-1da2c057e103","category":"zkp-proof","label":"Groth16 proof generation","durationMs":1095,"timestamp":"2026-06-21T15:52:31.752Z"}
+{"id":"e74ff383-21af-4db0-9494-9c676aa7e7f3","category":"tx-submit","label":"On-chain vote submission","durationMs":7383,"timestamp":"2026-06-21T15:52:39.134Z"}
+{"id":"d6a59d9a-a5c7-473c-9a6a-35cba1fcbe16","category":"zkp-init","label":"ZoKrates WASM initialization","durationMs":2,"timestamp":"2026-06-21T15:53:51.654Z"}
+{"id":"6e6d2574-0500-4d6c-a6d9-134823175c46","category":"zkp-proof","label":"Groth16 proof generation","durationMs":1101,"timestamp":"2026-06-21T15:53:52.756Z"}
+{"id":"1d74b1b8-0992-460a-86b1-eed7421094cb","category":"tx-submit","label":"On-chain vote submission","durationMs":7395,"timestamp":"2026-06-21T15:54:00.151Z"}
+{"id":"cfc3e089-5648-4744-b622-6f644f9c8f84","category":"zkp-init","label":"ZoKrates WASM initialization","durationMs":1,"timestamp":"2026-06-21T15:55:02.237Z"}
+{"id":"d4d68de6-f0ff-461c-a303-e1f76612a99c","category":"zkp-proof","label":"Groth16 proof generation","durationMs":1103,"timestamp":"2026-06-21T15:55:03.341Z"}
+{"id":"d5a1172a-523d-4844-883d-021c92c29162","category":"zkp-init","label":"ZoKrates WASM initialization","durationMs":1,"timestamp":"2026-06-21T15:55:38.132Z"}
+{"id":"779ffde9-6532-4e95-80c1-cdc16e788552","category":"zkp-proof","label":"Groth16 proof generation","durationMs":1102,"timestamp":"2026-06-21T15:55:39.235Z"}
+{"id":"d02a8f3f-d930-4be1-aeaf-2617b4a9efd1","category":"tx-submit","label":"On-chain vote submission","durationMs":7374,"timestamp":"2026-06-21T15:55:46.608Z"}
+{"id":"10d97fd9-d810-4121-9c1d-b0c2f03ea2e3","category":"zkp-init","label":"ZoKrates WASM initialization","durationMs":1,"timestamp":"2026-06-21T15:57:08.861Z"}
+{"id":"7be5970c-1d71-4dff-a591-bdd1d0da081e","category":"zkp-proof","label":"Groth16 proof generation","durationMs":1109,"timestamp":"2026-06-21T15:57:09.972Z"}
+{"id":"616a12bb-3be6-4fdc-be72-2a98be6558a2","category":"tx-submit","label":"On-chain vote submission","durationMs":7397,"timestamp":"2026-06-21T15:57:17.369Z"}
+{"id":"66aa9b26-34d3-4cb5-823a-8cb33daca647","category":"zkp-init","label":"ZoKrates WASM initialization","durationMs":2081,"timestamp":"2026-06-21T16:21:36.719Z"}
+{"id":"71027bd5-aafc-41b4-a5ae-598d3d0b6b01","category":"zkp-proof","label":"Groth16 proof generation","durationMs":673,"timestamp":"2026-06-21T16:21:37.571Z"}
+{"id":"3dbbb7b9-4c96-4d42-bf3f-762e511df7ec","category":"tx-submit","label":"On-chain vote submission","durationMs":7430,"timestamp":"2026-06-21T16:21:45.002Z"}
+{"id":"4ce7b7f8-2ee3-45a3-be12-3ce4bbd13d6c","category":"zkp-init","label":"ZoKrates WASM initialization","durationMs":741,"timestamp":"2026-06-21T16:39:13.504Z"}
+{"id":"ffca0d86-c5b2-4631-983d-3ae769332f6c","category":"zkp-proof","label":"Groth16 proof generation","durationMs":635,"timestamp":"2026-06-21T16:39:14.324Z"}
+{"id":"8eb946ff-457c-44aa-b099-0b25a7417f03","category":"tx-submit","label":"On-chain vote submission","durationMs":7373,"timestamp":"2026-06-21T16:39:21.698Z"}
+{"id":"d6b528c5-be00-435a-8864-e99417d60085","category":"zkp-init","label":"ZoKrates WASM initialization","durationMs":308.7,"timestamp":"2026-06-21T16:49:46.703Z"}
+{"id":"eec97c0f-d78c-4345-b1a5-ecb928b4622c","category":"zkp-proof","label":"Groth16 proof generation","durationMs":841.9,"timestamp":"2026-06-21T16:49:47.648Z"}
+{"id":"bc166050-b6e7-454e-862f-f3bb7628b3c0","category":"zkp-init","label":"ZoKrates WASM initialization","durationMs":328.6,"timestamp":"2026-06-21T17:03:01.808Z"}
+{"id":"f8652e0d-06ac-43b4-8160-e465bb3f711f","category":"zkp-proof","label":"Groth16 proof generation","durationMs":1085.5,"timestamp":"2026-06-21T17:03:03.645Z"}
+{"id":"cb0df9e4-d4b6-4a19-b86b-cf2c1a9cba72","category":"zkp-init","label":"ZoKrates WASM initialization","durationMs":0.3,"timestamp":"2026-06-21T17:03:46.986Z"}
+{"id":"5a0ebea2-dc04-4f65-9a5b-6e637c0f0484","category":"zkp-proof","label":"Groth16 proof generation","durationMs":713.6,"timestamp":"2026-06-21T17:03:47.700Z"}
+{"id":"98d449c1-8f9f-464e-bef2-2c2110a71f82","category":"tx-submit","label":"On-chain vote submission","durationMs":3026,"timestamp":"2026-06-21T17:03:50.726Z"}
+{"id":"91fd5ae8-fb71-4d96-887a-ae74bcaac7e0","category":"zkp-init","label":"ZoKrates WASM initialization","durationMs":6077,"timestamp":"2026-06-19T18:26:54.751Z"}
+{"id":"7187699a-de57-459e-99e7-89fc5275d4f4","category":"zkp-proof","label":"Groth16 proof generation","durationMs":640,"timestamp":"2026-06-19T18:26:55.570Z"}
+{"id":"3e03d599-e0ec-4f9d-87db-310e04f96c3d","category":"tx-submit","label":"On-chain vote submission","durationMs":8280,"timestamp":"2026-06-19T18:27:03.850Z"}
+{"id":"7911db99-f90e-424b-b361-9d128c20d009","category":"zkp-init","label":"ZoKrates WASM initialization","durationMs":1498,"timestamp":"2026-06-21T17:04:55.214Z"}
+{"id":"bb7b4103-8015-4e38-a0d3-f1fa1c219a90","category":"zkp-proof","label":"Groth16 proof generation","durationMs":697,"timestamp":"2026-06-21T17:04:56.077Z"}
+{"id":"1bd717b7-c61f-4e7c-8c6e-6839e8f0acf1","category":"tx-submit","label":"On-chain vote submission","durationMs":9956,"timestamp":"2026-06-21T17:05:06.034Z"}
+{"id":"abe58126-6841-40d2-8758-d13fd4e15335","category":"zkp-init","label":"ZoKrates WASM initialization","durationMs":1,"timestamp":"2026-06-21T17:06:53.464Z"}
+{"id":"8bc7b80d-d86f-4f1c-b26e-9544fa1901b1","category":"zkp-proof","label":"Groth16 proof generation","durationMs":587,"timestamp":"2026-06-21T17:06:54.053Z"}
+{"id":"e0726955-4d90-4d86-a3c0-b002633880c0","category":"tx-submit","label":"On-chain vote submission","durationMs":7411,"timestamp":"2026-06-21T17:07:01.464Z"}
+{"id":"6a6bf5a4-c7bc-4cd1-ac05-2bfe0c251edc","category":"zkp-init","label":"ZoKrates WASM initialization","durationMs":2,"timestamp":"2026-06-21T17:10:10.000Z"}
+{"id":"a10fdf04-5dfb-4d36-8c62-671a8b5fd042","category":"zkp-proof","label":"Groth16 proof generation","durationMs":580,"timestamp":"2026-06-21T17:10:10.582Z"}
+{"id":"a2c3aaf9-7c0b-420c-95e8-8fb2768f2ce1","category":"tx-submit","label":"On-chain vote submission","durationMs":7437,"timestamp":"2026-06-21T17:10:18.019Z"}
+{"id":"0ce11ef8-09fe-4c46-91df-17d0477acc88","category":"zkp-init","label":"ZoKrates WASM initialization","durationMs":1,"timestamp":"2026-06-21T17:10:33.009Z"}
+{"id":"7bd815a7-7f6f-440c-9e11-a6c2c87cd8dc","category":"zkp-proof","label":"Groth16 proof generation","durationMs":577,"timestamp":"2026-06-21T17:10:33.587Z"}
+{"id":"2a197647-3f6f-4ce0-8f81-69f77228f240","category":"tx-submit","label":"On-chain vote submission","durationMs":7423,"timestamp":"2026-06-21T17:10:41.011Z"}
+{"id":"e7dbe45f-03ee-4ec6-8234-0047cd4223f7","category":"zkp-init","label":"ZoKrates WASM initialization","durationMs":0.4,"timestamp":"2026-06-21T17:08:42.269Z"}
+{"id":"03b32bec-3ef4-4fd8-8ef2-46a8ada3cfa8","category":"zkp-proof","label":"Groth16 proof generation","durationMs":721.8,"timestamp":"2026-06-21T17:08:42.992Z"}
+{"id":"422c1368-89c3-45fe-8fc2-873df5f139c1","category":"zkp-init","label":"ZoKrates WASM initialization","durationMs":1.3,"timestamp":"2026-06-21T17:10:08.022Z"}
+{"id":"b765a260-1cd2-46e9-ba99-df8631e0b708","category":"zkp-proof","label":"Groth16 proof generation","durationMs":753.1,"timestamp":"2026-06-21T17:10:08.776Z"}
+{"id":"96cead5a-3703-4c53-9137-e42210dd81cd","category":"zkp-init","label":"ZoKrates WASM initialization","durationMs":1.4,"timestamp":"2026-06-21T17:10:26.014Z"}
+{"id":"34b12f4e-faf3-4658-a42f-3f0cbb0328f1","category":"zkp-proof","label":"Groth16 proof generation","durationMs":713.6,"timestamp":"2026-06-21T17:10:26.729Z"}
+{"id":"f96cf4f7-0c60-464a-8518-b57d2f731bad","category":"zkp-init","label":"ZoKrates WASM initialization","durationMs":0.2,"timestamp":"2026-06-21T17:10:58.238Z"}
+{"id":"41275fb7-93d2-424e-b482-b95fced01322","category":"zkp-proof","label":"Groth16 proof generation","durationMs":723.6,"timestamp":"2026-06-21T17:10:58.962Z"}
+{"id":"24cdce2a-3b8f-4a60-bcdd-26adb32df803","category":"tx-submit","label":"On-chain vote submission","durationMs":7378.2,"timestamp":"2026-06-21T17:11:06.340Z"}
+{"id":"637e4741-3495-4c52-b1a1-c5e04ef14041","category":"zkp-init","label":"ZoKrates WASM initialization","durationMs":1,"timestamp":"2026-06-21T17:11:01.420Z"}
+{"id":"f90814fe-e467-4d75-98c9-47bd9f6b486c","category":"zkp-proof","label":"Groth16 proof generation","durationMs":597,"timestamp":"2026-06-21T17:11:02.018Z"}
+{"id":"6a4480c1-5754-422d-be58-ffcb0ae0cf74","category":"zkp-init","label":"ZoKrates WASM initialization","durationMs":2,"timestamp":"2026-06-21T17:11:20.986Z"}
+{"id":"2e221730-79b7-4d57-9095-30f03e8ccdc0","category":"zkp-proof","label":"Groth16 proof generation","durationMs":573,"timestamp":"2026-06-21T17:11:21.560Z"}
+{"id":"fb9eda08-0a16-41a8-8d43-bdc844c2ac59","category":"zkp-init","label":"ZoKrates WASM initialization","durationMs":1,"timestamp":"2026-06-21T17:11:36.525Z"}
+{"id":"b3ae61e5-b24b-4b29-b20d-d7ae17c997c6","category":"zkp-proof","label":"Groth16 proof generation","durationMs":589,"timestamp":"2026-06-21T17:11:37.117Z"}
+{"id":"2fa29ab3-ce5c-4342-b1e0-9a6e6161e73b","category":"tx-submit","label":"On-chain vote submission","durationMs":3032,"timestamp":"2026-06-21T17:11:40.148Z"}
+{"id":"f383b3ee-ea5a-4ee3-814c-0f9c1d271a1a","category":"zkp-init","label":"ZoKrates WASM initialization","durationMs":1.3,"timestamp":"2026-06-21T17:11:30.114Z"}
+{"id":"ad361d7c-6d2e-424b-a690-360e0439cfc7","category":"zkp-proof","label":"Groth16 proof generation","durationMs":716.2,"timestamp":"2026-06-21T17:11:30.830Z"}
+{"id":"cc865095-002c-4de8-ac24-ba7701795a03","category":"zkp-init","label":"ZoKrates WASM initialization","durationMs":0.8,"timestamp":"2026-06-21T17:11:51.577Z"}
+{"id":"45e3d0fd-ae93-49d0-9840-65060c4b031f","category":"zkp-proof","label":"Groth16 proof generation","durationMs":718.4,"timestamp":"2026-06-21T17:11:52.296Z"}
+{"id":"6c945170-8c87-4ee7-84e5-664437f0ebeb","category":"tx-submit","label":"On-chain vote submission","durationMs":2390,"timestamp":"2026-06-21T17:11:54.686Z"}
+{"id":"2ed50cd3-b683-463f-a380-e8f68a4ccff3","category":"zkp-init","label":"ZoKrates WASM initialization","durationMs":0.7,"timestamp":"2026-06-21T17:17:34.993Z"}
+{"id":"f2f5cc4e-b698-466a-bbad-eff71e6cb24b","category":"zkp-proof","label":"Groth16 proof generation","durationMs":744.8,"timestamp":"2026-06-21T17:17:35.739Z"}
+{"id":"efcb5bf9-e56d-4c51-9200-9ba777388698","category":"zkp-init","label":"ZoKrates WASM initialization","durationMs":0.6,"timestamp":"2026-06-21T17:18:05.490Z"}
+{"id":"538ce5af-a183-4f5d-a3a2-5b924cec840a","category":"zkp-proof","label":"Groth16 proof generation","durationMs":728.2,"timestamp":"2026-06-21T17:18:06.219Z"}
+{"id":"b0cf2ac8-0608-4198-89b0-d0962e48551f","category":"zkp-init","label":"ZoKrates WASM initialization","durationMs":0.5,"timestamp":"2026-06-21T17:18:24.633Z"}
+{"id":"ce45ba50-7926-4930-bb94-8255b8e46f67","category":"zkp-proof","label":"Groth16 proof generation","durationMs":735.1,"timestamp":"2026-06-21T17:18:25.369Z"}
+{"id":"e0d1d9be-56f8-4948-a86e-559c6e3a1361","category":"zkp-init","label":"ZoKrates WASM initialization","durationMs":0.3,"timestamp":"2026-06-21T17:18:39.272Z"}
+{"id":"62092bb5-1ae8-44ed-8758-54c4ec78b05a","category":"zkp-proof","label":"Groth16 proof generation","durationMs":719.1,"timestamp":"2026-06-21T17:18:39.991Z"}
+{"id":"4298f1f3-318b-4a63-9d78-a61e12a1356d","category":"zkp-init","label":"ZoKrates WASM initialization","durationMs":1,"timestamp":"2026-06-21T17:18:50.336Z"}
+{"id":"3bc66dc6-2bed-4b28-ad56-07965535658c","category":"zkp-proof","label":"Groth16 proof generation","durationMs":734,"timestamp":"2026-06-21T17:18:51.071Z"}
+{"id":"f85aa735-aacc-49eb-9ee1-9e855201e058","category":"zkp-init","label":"ZoKrates WASM initialization","durationMs":0.4,"timestamp":"2026-06-21T17:19:47.762Z"}
+{"id":"6a47e647-2156-4dc3-873a-14f67feea301","category":"zkp-proof","label":"Groth16 proof generation","durationMs":737.4,"timestamp":"2026-06-21T17:19:48.500Z"}
+{"id":"9eb2bf28-cad7-4c35-8d95-f668df17e3b2","category":"zkp-init","label":"ZoKrates WASM initialization","durationMs":0.6,"timestamp":"2026-06-21T17:20:04.365Z"}
+{"id":"68d33381-756c-4257-a9b6-bf9acfdc5358","category":"zkp-proof","label":"Groth16 proof generation","durationMs":729,"timestamp":"2026-06-21T17:20:05.095Z"}
+{"id":"b1d1deb7-86f2-4a10-a5e0-4550e8156ca4","category":"tx-submit","label":"On-chain vote submission","durationMs":7381.3,"timestamp":"2026-06-21T17:20:12.476Z"}
+{"id":"09f550de-9f3b-418d-97b3-d2ee518dc73c","category":"zkp-init","label":"ZoKrates WASM initialization","durationMs":0.6,"timestamp":"2026-06-21T17:20:42.002Z"}
+{"id":"4d66decc-3183-4c26-a73b-699c1c27b362","category":"zkp-proof","label":"Groth16 proof generation","durationMs":737.6,"timestamp":"2026-06-21T17:20:42.741Z"}
+{"id":"246eaa34-656c-4d54-80f9-ee6bb87b31ca","category":"tx-submit","label":"On-chain vote submission","durationMs":7351.6,"timestamp":"2026-06-21T17:20:50.093Z"}
+{"id":"8fb1c0e7-329f-4260-b2e5-475351625b34","category":"zkp-init","label":"ZoKrates WASM initialization","durationMs":325.9,"timestamp":"2026-06-21T17:21:22.506Z"}
+{"id":"e56fa903-aa0e-48e4-8062-2a08b010e6d5","category":"zkp-proof","label":"Groth16 proof generation","durationMs":928.8,"timestamp":"2026-06-21T17:21:23.561Z"}
+{"id":"9161efdc-7e3e-4fec-a8ce-9504bf71a4e9","category":"tx-submit","label":"On-chain vote submission","durationMs":3009.1,"timestamp":"2026-06-21T17:21:26.571Z"}
+{"id":"128a81d5-9b05-482d-8f64-3f769cdca738","category":"zkp-init","label":"ZoKrates WASM initialization","durationMs":0.8,"timestamp":"2026-06-21T17:21:50.045Z"}
+{"id":"422ecfa4-1704-4952-8644-09253c900df2","category":"zkp-proof","label":"Groth16 proof generation","durationMs":730.3,"timestamp":"2026-06-21T17:21:50.777Z"}
+{"id":"3bda0f00-d734-41b2-a1f2-be96c1474a3b","category":"zkp-init","label":"ZoKrates WASM initialization","durationMs":293.4,"timestamp":"2026-06-21T17:22:39.363Z"}
+{"id":"28451535-32bd-4a45-8094-e58d24c51f33","category":"zkp-proof","label":"Groth16 proof generation","durationMs":825.3,"timestamp":"2026-06-21T17:22:40.281Z"}
+{"id":"24791c1f-2038-4e53-8862-719b1f2509e9","category":"tx-submit","label":"On-chain vote submission","durationMs":2393.8,"timestamp":"2026-06-21T17:22:42.675Z"}
+{"id":"2e06ae5f-dcba-4c67-a1d2-a836d1c975c0","category":"zkp-init","label":"ZoKrates WASM initialization","durationMs":0.3,"timestamp":"2026-06-21T17:26:37.582Z"}
+{"id":"cbe62c5a-bd66-48ea-a562-465c7a7463a3","category":"zkp-proof","label":"Groth16 proof generation","durationMs":714.7,"timestamp":"2026-06-21T17:26:38.297Z"}
+{"id":"f673f26a-f9fd-4acf-b2d0-71365ee0c8d7","category":"zkp-init","label":"ZoKrates WASM initialization","durationMs":300.3,"timestamp":"2026-06-21T17:26:54.288Z"}
+{"id":"475112e4-442c-4008-96d5-7896b906e54b","category":"zkp-proof","label":"Groth16 proof generation","durationMs":822.5,"timestamp":"2026-06-21T17:26:55.203Z"}
+{"id":"6a4ac7a2-96fa-43b7-9c59-aa08b61bb6af","category":"zkp-init","label":"ZoKrates WASM initialization","durationMs":0.6,"timestamp":"2026-06-21T17:27:10.717Z"}
+{"id":"9c81138e-c31f-4722-bf05-196b4760775f","category":"zkp-proof","label":"Groth16 proof generation","durationMs":723.4,"timestamp":"2026-06-21T17:27:11.441Z"}
+{"id":"862bce1e-b858-473b-9ac0-67c4201cfb33","category":"zkp-init","label":"ZoKrates WASM initialization","durationMs":1.1,"timestamp":"2026-06-21T17:27:27.609Z"}
+{"id":"ccc07de8-a660-4186-9a88-d38de54a87dc","category":"zkp-proof","label":"Groth16 proof generation","durationMs":722.8,"timestamp":"2026-06-21T17:27:28.333Z"}
+{"id":"64b52bcc-a5ca-427a-ba01-94876bf5a27d","category":"zkp-init","label":"ZoKrates WASM initialization","durationMs":0.3,"timestamp":"2026-06-21T17:27:53.594Z"}
+{"id":"97fdeadc-1d1e-4e11-a901-921ef05e612d","category":"zkp-proof","label":"Groth16 proof generation","durationMs":711,"timestamp":"2026-06-21T17:27:54.306Z"}
+{"id":"6f27277c-5ed4-4956-825d-fff29023ddbd","category":"zkp-init","label":"ZoKrates WASM initialization","durationMs":0.9,"timestamp":"2026-06-21T17:28:32.254Z"}
+{"id":"2b80c3c4-c917-4ade-8663-bbee64155acd","category":"zkp-proof","label":"Groth16 proof generation","durationMs":728.5,"timestamp":"2026-06-21T17:28:32.984Z"}
+{"id":"31148f28-76cf-4db2-b2ba-b1c7c4f7c2d2","category":"zkp-init","label":"ZoKrates WASM initialization","durationMs":0.4,"timestamp":"2026-06-21T17:28:53.487Z"}
+{"id":"0773834a-2fbd-4642-bbfa-2d40187bc68d","category":"zkp-proof","label":"Groth16 proof generation","durationMs":720.2,"timestamp":"2026-06-21T17:28:54.208Z"}
+{"id":"7c0de3f0-7e1d-4ae4-b68d-efc205ef815e","category":"tx-submit","label":"On-chain vote submission","durationMs":7297.7,"timestamp":"2026-06-21T17:29:01.506Z"}
+{"id":"4075f203-33ba-481c-ade5-9da652b43ca2","category":"zkp-init","label":"ZoKrates WASM initialization","durationMs":0.3,"timestamp":"2026-06-21T17:30:26.836Z"}
+{"id":"46b14073-1e15-49be-9803-24f869014ee2","category":"zkp-proof","label":"Groth16 proof generation","durationMs":714.6,"timestamp":"2026-06-21T17:30:27.551Z"}
+{"id":"916e6c8a-9326-4a2c-a013-657398c074c8","category":"tx-submit","label":"On-chain vote submission","durationMs":7340,"timestamp":"2026-06-21T17:30:34.891Z"}
+{"id":"e37ecb4c-459e-4586-a0b6-b7a550048523","category":"zkp-init","label":"ZoKrates WASM initialization (benchmark)","durationMs":218,"timestamp":"2026-06-24T15:23:29.546Z","metadata":{"run":1,"source":"benchmark"}}
+{"id":"727d04a5-168c-4882-bf45-a08527192b6d","category":"zkp-proof","label":"Groth16 proof generation (benchmark)","durationMs":729,"timestamp":"2026-06-24T15:23:29.546Z","metadata":{"run":1,"source":"benchmark"}}
+{"id":"55537187-84f1-4ffe-ac60-6cc90a6b1d29","category":"zkp-init","label":"ZoKrates WASM initialization (benchmark)","durationMs":220,"timestamp":"2026-06-24T15:23:29.546Z","metadata":{"run":2,"source":"benchmark"}}
+{"id":"dc10d69d-61c6-4ec1-9d42-0d5f101b7ae3","category":"zkp-proof","label":"Groth16 proof generation (benchmark)","durationMs":705,"timestamp":"2026-06-24T15:23:29.546Z","metadata":{"run":2,"source":"benchmark"}}
+{"id":"fd97c9be-51e0-4e2f-abb1-b22f4c9e556e","category":"zkp-init","label":"ZoKrates WASM initialization (benchmark)","durationMs":228,"timestamp":"2026-06-24T15:23:29.546Z","metadata":{"run":3,"source":"benchmark"}}
+{"id":"1cf92ad6-5f59-4b9f-91e4-b0f06630e2e0","category":"zkp-proof","label":"Groth16 proof generation (benchmark)","durationMs":705,"timestamp":"2026-06-24T15:23:29.546Z","metadata":{"run":3,"source":"benchmark"}}
+{"id":"d0e4c73a-4ff7-4e73-81fa-0dbd9456e458","category":"zkp-init","label":"ZoKrates WASM initialization (benchmark)","durationMs":251,"timestamp":"2026-06-24T15:23:29.546Z","metadata":{"run":4,"source":"benchmark"}}
+{"id":"5af58d3d-17fd-454a-8d2a-d5a2ea83191c","category":"zkp-proof","label":"Groth16 proof generation (benchmark)","durationMs":717,"timestamp":"2026-06-24T15:23:29.546Z","metadata":{"run":4,"source":"benchmark"}}
+{"id":"8fd21b1d-d967-48f6-84a4-08e8557e59e1","category":"zkp-init","label":"ZoKrates WASM initialization (benchmark)","durationMs":572,"timestamp":"2026-06-24T15:23:29.546Z","metadata":{"run":5,"source":"benchmark"}}
+{"id":"3b7f9be3-b237-49dd-9ddc-849a365b071b","category":"zkp-proof","label":"Groth16 proof generation (benchmark)","durationMs":718,"timestamp":"2026-06-24T15:23:29.546Z","metadata":{"run":5,"source":"benchmark"}}
+{"id":"1dcb4da3-6100-4f3a-838e-00893228fe33","category":"zkp-init","label":"ZoKrates WASM initialization (benchmark)","durationMs":231,"timestamp":"2026-06-24T15:23:29.546Z","metadata":{"run":6,"source":"benchmark"}}
+{"id":"ab13af9d-73f6-4420-9a4f-670747aef383","category":"zkp-proof","label":"Groth16 proof generation (benchmark)","durationMs":703,"timestamp":"2026-06-24T15:23:29.546Z","metadata":{"run":6,"source":"benchmark"}}
+{"id":"c6c44714-e5de-4b55-8327-f9d4edcf2046","category":"zkp-init","label":"ZoKrates WASM initialization (benchmark)","durationMs":216,"timestamp":"2026-06-24T15:23:29.546Z","metadata":{"run":7,"source":"benchmark"}}
+{"id":"3c30b680-0edc-4d61-8cf5-c8e6e8e34a71","category":"zkp-proof","label":"Groth16 proof generation (benchmark)","durationMs":703,"timestamp":"2026-06-24T15:23:29.546Z","metadata":{"run":7,"source":"benchmark"}}
+{"id":"af2f979d-110e-4007-ba65-2f48baff0cb6","category":"zkp-init","label":"ZoKrates WASM initialization (benchmark)","durationMs":218,"timestamp":"2026-06-24T15:23:29.546Z","metadata":{"run":8,"source":"benchmark"}}
+{"id":"e6813e3e-616d-4b3a-a30c-c9c48740779f","category":"zkp-proof","label":"Groth16 proof generation (benchmark)","durationMs":697,"timestamp":"2026-06-24T15:23:29.546Z","metadata":{"run":8,"source":"benchmark"}}
+{"id":"92049811-fc23-4096-8116-0462fa7bd692","category":"zkp-init","label":"ZoKrates WASM initialization (benchmark)","durationMs":219,"timestamp":"2026-06-24T15:23:29.546Z","metadata":{"run":9,"source":"benchmark"}}
+{"id":"86703f61-662c-4731-b90b-065db4f41253","category":"zkp-proof","label":"Groth16 proof generation (benchmark)","durationMs":698,"timestamp":"2026-06-24T15:23:29.546Z","metadata":{"run":9,"source":"benchmark"}}
+{"id":"b1631077-c771-4a53-905a-c78e8015711d","category":"zkp-init","label":"ZoKrates WASM initialization (benchmark)","durationMs":215,"timestamp":"2026-06-24T15:23:29.546Z","metadata":{"run":10,"source":"benchmark"}}
+{"id":"60a6df8b-d302-438f-bb4b-9ba910fcbb8a","category":"zkp-proof","label":"Groth16 proof generation (benchmark)","durationMs":698,"timestamp":"2026-06-24T15:23:29.546Z","metadata":{"run":10,"source":"benchmark"}}
+{"id":"022e6d54-e051-4bd7-84fc-79d771453fa3","category":"zkp-init","label":"ZoKrates WASM initialization (benchmark)","durationMs":216,"timestamp":"2026-06-24T15:23:29.546Z","metadata":{"run":11,"source":"benchmark"}}
+{"id":"cd6df3a3-00ca-4e9a-8ca7-a4e885ea0e6d","category":"zkp-proof","label":"Groth16 proof generation (benchmark)","durationMs":700,"timestamp":"2026-06-24T15:23:29.546Z","metadata":{"run":11,"source":"benchmark"}}
+{"id":"6bca550b-9649-4b56-83ba-8bbcdbb74f85","category":"zkp-init","label":"ZoKrates WASM initialization (benchmark)","durationMs":215,"timestamp":"2026-06-24T15:23:29.546Z","metadata":{"run":12,"source":"benchmark"}}
+{"id":"75fa0848-0ab0-400d-afe2-d367000dfa66","category":"zkp-proof","label":"Groth16 proof generation (benchmark)","durationMs":698,"timestamp":"2026-06-24T15:23:29.546Z","metadata":{"run":12,"source":"benchmark"}}
+{"id":"389e9bc1-2da4-4274-9951-a8d10e99a15a","category":"zkp-init","label":"ZoKrates WASM initialization (benchmark)","durationMs":218,"timestamp":"2026-06-24T15:23:29.546Z","metadata":{"run":13,"source":"benchmark"}}
+{"id":"7e2d5b30-ab0a-44f8-9e44-35ccda5aa115","category":"zkp-proof","label":"Groth16 proof generation (benchmark)","durationMs":698,"timestamp":"2026-06-24T15:23:29.546Z","metadata":{"run":13,"source":"benchmark"}}
+{"id":"332ebf33-99ac-4a51-9aa6-623284a657fb","category":"zkp-init","label":"ZoKrates WASM initialization (benchmark)","durationMs":214,"timestamp":"2026-06-24T15:23:29.546Z","metadata":{"run":14,"source":"benchmark"}}
+{"id":"bd0ecd0a-7880-414b-929f-4d9dfc05dd85","category":"zkp-proof","label":"Groth16 proof generation (benchmark)","durationMs":698,"timestamp":"2026-06-24T15:23:29.546Z","metadata":{"run":14,"source":"benchmark"}}
+{"id":"22a5d031-2380-4e21-ad7c-fe2e52ecaa4f","category":"zkp-init","label":"ZoKrates WASM initialization (benchmark)","durationMs":218,"timestamp":"2026-06-24T15:23:29.546Z","metadata":{"run":15,"source":"benchmark"}}
+{"id":"b19db68f-415d-4c2a-8af0-f5f2adda7e19","category":"zkp-proof","label":"Groth16 proof generation (benchmark)","durationMs":700,"timestamp":"2026-06-24T15:23:29.546Z","metadata":{"run":15,"source":"benchmark"}}
+{"id":"f66048a8-c422-42f3-8206-d0ab51e5ff25","category":"zkp-init","label":"ZoKrates WASM initialization (benchmark)","durationMs":219,"timestamp":"2026-06-24T15:23:29.546Z","metadata":{"run":16,"source":"benchmark"}}
+{"id":"71daf34f-40ac-458f-b119-38e53eb95692","category":"zkp-proof","label":"Groth16 proof generation (benchmark)","durationMs":708,"timestamp":"2026-06-24T15:23:29.546Z","metadata":{"run":16,"source":"benchmark"}}
+{"id":"3ad07362-7488-429a-b611-680e1e1b50a2","category":"zkp-init","label":"ZoKrates WASM initialization (benchmark)","durationMs":1658,"timestamp":"2026-06-24T15:23:29.546Z","metadata":{"run":17,"source":"benchmark"}}
+{"id":"078d30b6-99a9-4073-a8ac-a64eab74c121","category":"zkp-proof","label":"Groth16 proof generation (benchmark)","durationMs":712,"timestamp":"2026-06-24T15:23:29.546Z","metadata":{"run":17,"source":"benchmark"}}
+{"id":"bebdd9f9-31ce-4f91-810f-eccf9eafec99","category":"zkp-init","label":"ZoKrates WASM initialization (benchmark)","durationMs":219,"timestamp":"2026-06-24T15:23:29.546Z","metadata":{"run":18,"source":"benchmark"}}
+{"id":"4a91eede-011d-4163-a896-8111ce7c6653","category":"zkp-proof","label":"Groth16 proof generation (benchmark)","durationMs":700,"timestamp":"2026-06-24T15:23:29.546Z","metadata":{"run":18,"source":"benchmark"}}
+{"id":"821980f2-30d1-4545-9ef2-bc5f257dcd88","category":"zkp-init","label":"ZoKrates WASM initialization (benchmark)","durationMs":214,"timestamp":"2026-06-24T15:23:29.546Z","metadata":{"run":19,"source":"benchmark"}}
+{"id":"a032fb54-d377-4bfd-a87a-a7e96a1d5602","category":"zkp-proof","label":"Groth16 proof generation (benchmark)","durationMs":698,"timestamp":"2026-06-24T15:23:29.546Z","metadata":{"run":19,"source":"benchmark"}}
+{"id":"378a9f48-b4c7-41c6-82c6-d891dcd34178","category":"zkp-init","label":"ZoKrates WASM initialization (benchmark)","durationMs":214,"timestamp":"2026-06-24T15:23:29.546Z","metadata":{"run":20,"source":"benchmark"}}
+{"id":"0f1553ec-08fc-4cb2-8cec-bf2e29941381","category":"zkp-proof","label":"Groth16 proof generation (benchmark)","durationMs":702,"timestamp":"2026-06-24T15:23:29.546Z","metadata":{"run":20,"source":"benchmark"}}
+{"id":"19987603-9dd1-4aa6-aa98-03f6c7e9d07d","category":"zkp-init","label":"ZoKrates WASM initialization (benchmark)","durationMs":223,"timestamp":"2026-06-24T15:23:29.546Z","metadata":{"run":21,"source":"benchmark"}}
+{"id":"fe98fb28-7939-44d8-9d89-2de6d5cdadfa","category":"zkp-proof","label":"Groth16 proof generation (benchmark)","durationMs":700,"timestamp":"2026-06-24T15:23:29.546Z","metadata":{"run":21,"source":"benchmark"}}
+{"id":"b634ef9e-4c63-4ef6-bd46-e5a6b8a67755","category":"zkp-init","label":"ZoKrates WASM initialization (benchmark)","durationMs":219,"timestamp":"2026-06-24T15:23:29.546Z","metadata":{"run":22,"source":"benchmark"}}
+{"id":"711d9aca-b0d3-45a7-ad62-976c8f1aac7e","category":"zkp-proof","label":"Groth16 proof generation (benchmark)","durationMs":699,"timestamp":"2026-06-24T15:23:29.546Z","metadata":{"run":22,"source":"benchmark"}}
+{"id":"bba6ff46-530a-4812-acd4-be59860ca33a","category":"zkp-init","label":"ZoKrates WASM initialization (benchmark)","durationMs":218,"timestamp":"2026-06-24T15:23:29.546Z","metadata":{"run":23,"source":"benchmark"}}
+{"id":"7ab1f2b6-521d-4822-a3ee-c9c97992f6de","category":"zkp-proof","label":"Groth16 proof generation (benchmark)","durationMs":698,"timestamp":"2026-06-24T15:23:29.546Z","metadata":{"run":23,"source":"benchmark"}}
+{"id":"3de6c731-c977-4b08-b997-81d51ca91f88","category":"zkp-init","label":"ZoKrates WASM initialization (benchmark)","durationMs":218,"timestamp":"2026-06-24T15:23:29.546Z","metadata":{"run":24,"source":"benchmark"}}
+{"id":"e0604567-ea46-41de-9b08-c72066259090","category":"zkp-proof","label":"Groth16 proof generation (benchmark)","durationMs":697,"timestamp":"2026-06-24T15:23:29.546Z","metadata":{"run":24,"source":"benchmark"}}
+{"id":"d075369b-1566-48d4-9c54-fdcae2074b7e","category":"zkp-init","label":"ZoKrates WASM initialization (benchmark)","durationMs":217,"timestamp":"2026-06-24T15:23:29.546Z","metadata":{"run":25,"source":"benchmark"}}
+{"id":"274acdbb-2768-4517-a73b-f532111bea03","category":"zkp-proof","label":"Groth16 proof generation (benchmark)","durationMs":700,"timestamp":"2026-06-24T15:23:29.546Z","metadata":{"run":25,"source":"benchmark"}}
+{"id":"51796e79-ad5a-4690-9c9b-cbfecfe403af","category":"zkp-init","label":"ZoKrates WASM initialization (benchmark)","durationMs":215,"timestamp":"2026-06-24T15:23:29.546Z","metadata":{"run":26,"source":"benchmark"}}
+{"id":"723305a1-b02c-4626-aae7-310914fdf799","category":"zkp-proof","label":"Groth16 proof generation (benchmark)","durationMs":698,"timestamp":"2026-06-24T15:23:29.546Z","metadata":{"run":26,"source":"benchmark"}}
+{"id":"b8a87db2-c6aa-40f5-b62f-0948a9b4dead","category":"zkp-init","label":"ZoKrates WASM initialization (benchmark)","durationMs":218,"timestamp":"2026-06-24T15:23:29.546Z","metadata":{"run":27,"source":"benchmark"}}
+{"id":"ca96c607-0e54-4579-b7d1-00d44d73d9dd","category":"zkp-proof","label":"Groth16 proof generation (benchmark)","durationMs":700,"timestamp":"2026-06-24T15:23:29.546Z","metadata":{"run":27,"source":"benchmark"}}
+{"id":"492316d1-fc93-4b0a-9137-27fef4641f37","category":"zkp-init","label":"ZoKrates WASM initialization (benchmark)","durationMs":217,"timestamp":"2026-06-24T15:23:29.546Z","metadata":{"run":28,"source":"benchmark"}}
+{"id":"0d24b7dd-7e66-4504-b7a8-35789e7c27ee","category":"zkp-proof","label":"Groth16 proof generation (benchmark)","durationMs":696,"timestamp":"2026-06-24T15:23:29.547Z","metadata":{"run":28,"source":"benchmark"}}
+{"id":"2bfdca4c-5d6e-4723-a38d-e0b5f85c9bbd","category":"zkp-init","label":"ZoKrates WASM initialization (benchmark)","durationMs":216,"timestamp":"2026-06-24T15:23:29.547Z","metadata":{"run":29,"source":"benchmark"}}
+{"id":"8316ca56-2236-4cbf-a9cd-0330750d0854","category":"zkp-proof","label":"Groth16 proof generation (benchmark)","durationMs":697,"timestamp":"2026-06-24T15:23:29.547Z","metadata":{"run":29,"source":"benchmark"}}
+{"id":"20909fa6-4ecb-4f0b-8681-a651f5e4b8e3","category":"zkp-init","label":"ZoKrates WASM initialization (benchmark)","durationMs":218,"timestamp":"2026-06-24T15:23:29.547Z","metadata":{"run":30,"source":"benchmark"}}
+{"id":"222cc08d-8d99-4c6f-b34c-574b4c543aaf","category":"zkp-proof","label":"Groth16 proof generation (benchmark)","durationMs":697,"timestamp":"2026-06-24T15:23:29.547Z","metadata":{"run":30,"source":"benchmark"}}
+{"id":"cc8edcd9-58c0-491c-9293-a69cb62c33fc","category":"zkp-init","label":"ZoKrates WASM initialization (benchmark)","durationMs":216,"timestamp":"2026-06-24T15:23:29.547Z","metadata":{"run":31,"source":"benchmark"}}
+{"id":"3bdce2dc-ea52-4a64-85bf-879f97ac3d80","category":"zkp-proof","label":"Groth16 proof generation (benchmark)","durationMs":696,"timestamp":"2026-06-24T15:23:29.547Z","metadata":{"run":31,"source":"benchmark"}}
+{"id":"1e602366-3090-4369-a1fd-9d08d29ae5fe","category":"zkp-init","label":"ZoKrates WASM initialization (benchmark)","durationMs":219,"timestamp":"2026-06-24T15:23:29.547Z","metadata":{"run":32,"source":"benchmark"}}
+{"id":"fe19e1bf-59a4-48fe-9b95-84f639260d2c","category":"zkp-proof","label":"Groth16 proof generation (benchmark)","durationMs":697,"timestamp":"2026-06-24T15:23:29.547Z","metadata":{"run":32,"source":"benchmark"}}
+{"id":"174856ba-2e42-40ed-a79b-0fab514e768c","category":"zkp-init","label":"ZoKrates WASM initialization (benchmark)","durationMs":216,"timestamp":"2026-06-24T15:23:29.547Z","metadata":{"run":33,"source":"benchmark"}}
+{"id":"6607aaad-fe4d-4886-a319-ae688ab02d1d","category":"zkp-proof","label":"Groth16 proof generation (benchmark)","durationMs":699,"timestamp":"2026-06-24T15:23:29.547Z","metadata":{"run":33,"source":"benchmark"}}
+{"id":"661da7e2-66e2-4e2c-8c2c-cf58d46f0b8d","category":"zkp-init","label":"ZoKrates WASM initialization (benchmark)","durationMs":216,"timestamp":"2026-06-24T15:23:29.547Z","metadata":{"run":34,"source":"benchmark"}}
+{"id":"7e9559c7-6ea6-4aa6-b744-4769eff56426","category":"zkp-proof","label":"Groth16 proof generation (benchmark)","durationMs":699,"timestamp":"2026-06-24T15:23:29.547Z","metadata":{"run":34,"source":"benchmark"}}
+{"id":"7fa63b15-1fe6-44ff-a7d3-932803abb9dc","category":"zkp-init","label":"ZoKrates WASM initialization (benchmark)","durationMs":216,"timestamp":"2026-06-24T15:23:29.547Z","metadata":{"run":35,"source":"benchmark"}}
+{"id":"10926ac1-39e0-4dbf-8a9f-cc621a07e7cf","category":"zkp-proof","label":"Groth16 proof generation (benchmark)","durationMs":699,"timestamp":"2026-06-24T15:23:29.547Z","metadata":{"run":35,"source":"benchmark"}}
+{"id":"1235b051-5cfc-406b-b8e0-dde694c8a24f","category":"zkp-init","label":"ZoKrates WASM initialization (benchmark)","durationMs":215,"timestamp":"2026-06-24T15:23:29.547Z","metadata":{"run":36,"source":"benchmark"}}
+{"id":"f181ca83-e6b4-4432-952c-c1b88afd758f","category":"zkp-proof","label":"Groth16 proof generation (benchmark)","durationMs":698,"timestamp":"2026-06-24T15:23:29.547Z","metadata":{"run":36,"source":"benchmark"}}
+{"id":"3ebc74c6-ca00-4627-8947-8df0b7782185","category":"zkp-init","label":"ZoKrates WASM initialization (benchmark)","durationMs":215,"timestamp":"2026-06-24T15:23:29.547Z","metadata":{"run":37,"source":"benchmark"}}
+{"id":"2df57cd9-5e9f-430f-ba0d-8a2180f2d3f5","category":"zkp-proof","label":"Groth16 proof generation (benchmark)","durationMs":699,"timestamp":"2026-06-24T15:23:29.547Z","metadata":{"run":37,"source":"benchmark"}}
+{"id":"8adf605e-76af-474d-a7d5-65ee386dd5f9","category":"zkp-init","label":"ZoKrates WASM initialization (benchmark)","durationMs":214,"timestamp":"2026-06-24T15:23:29.547Z","metadata":{"run":38,"source":"benchmark"}}
+{"id":"800b6c34-188d-4e8b-bdae-6c4c16a7e0bb","category":"zkp-proof","label":"Groth16 proof generation (benchmark)","durationMs":705,"timestamp":"2026-06-24T15:23:29.547Z","metadata":{"run":38,"source":"benchmark"}}
+{"id":"2c314cba-3f44-4e7a-b31a-b388e6d99f80","category":"zkp-init","label":"ZoKrates WASM initialization (benchmark)","durationMs":215,"timestamp":"2026-06-24T15:23:29.547Z","metadata":{"run":39,"source":"benchmark"}}
+{"id":"f4ea0335-fb45-427c-af94-bc18e91d3751","category":"zkp-proof","label":"Groth16 proof generation (benchmark)","durationMs":698,"timestamp":"2026-06-24T15:23:29.547Z","metadata":{"run":39,"source":"benchmark"}}
+{"id":"f328c16b-5013-41d3-9f4b-96fd92ac20f7","category":"zkp-init","label":"ZoKrates WASM initialization (benchmark)","durationMs":216,"timestamp":"2026-06-24T15:23:29.547Z","metadata":{"run":40,"source":"benchmark"}}
+{"id":"9a9c3b71-168d-4605-8a16-5d09eb9b3f43","category":"zkp-proof","label":"Groth16 proof generation (benchmark)","durationMs":698,"timestamp":"2026-06-24T15:23:29.547Z","metadata":{"run":40,"source":"benchmark"}}
+{"id":"cfc77398-e664-45ab-9b99-67bb441bf032","category":"zkp-init","label":"ZoKrates WASM initialization (benchmark)","durationMs":215,"timestamp":"2026-06-24T15:23:29.547Z","metadata":{"run":41,"source":"benchmark"}}
+{"id":"fcc3ec6e-f799-4b50-b48c-935bae45d643","category":"zkp-proof","label":"Groth16 proof generation (benchmark)","durationMs":699,"timestamp":"2026-06-24T15:23:29.547Z","metadata":{"run":41,"source":"benchmark"}}
+{"id":"23a5e3f1-75e4-404a-bc4a-83b95c9bac86","category":"zkp-init","label":"ZoKrates WASM initialization (benchmark)","durationMs":219,"timestamp":"2026-06-24T15:23:29.547Z","metadata":{"run":42,"source":"benchmark"}}
+{"id":"c6b413f3-3a1f-4498-8a6b-0785a7ef574c","category":"zkp-proof","label":"Groth16 proof generation (benchmark)","durationMs":697,"timestamp":"2026-06-24T15:23:29.547Z","metadata":{"run":42,"source":"benchmark"}}
+{"id":"d4e0a108-211a-406d-9d97-12533e1146a7","category":"zkp-init","label":"ZoKrates WASM initialization (benchmark)","durationMs":215,"timestamp":"2026-06-24T15:23:29.547Z","metadata":{"run":43,"source":"benchmark"}}
+{"id":"061cdcf9-b27e-44de-b37c-31f1fcd8983a","category":"zkp-proof","label":"Groth16 proof generation (benchmark)","durationMs":698,"timestamp":"2026-06-24T15:23:29.547Z","metadata":{"run":43,"source":"benchmark"}}
+{"id":"1fc19fc1-17cb-4fb3-b594-eec88f3c078d","category":"zkp-init","label":"ZoKrates WASM initialization (benchmark)","durationMs":216,"timestamp":"2026-06-24T15:23:29.547Z","metadata":{"run":44,"source":"benchmark"}}
+{"id":"fbad6a40-0253-4598-8c06-52367ea0b4b4","category":"zkp-proof","label":"Groth16 proof generation (benchmark)","durationMs":697,"timestamp":"2026-06-24T15:23:29.547Z","metadata":{"run":44,"source":"benchmark"}}
+{"id":"712b97ce-6da5-48ec-909e-f7c3050b766f","category":"zkp-init","label":"ZoKrates WASM initialization (benchmark)","durationMs":216,"timestamp":"2026-06-24T15:23:29.547Z","metadata":{"run":45,"source":"benchmark"}}
+{"id":"4c9686da-a9be-4e08-907f-b0f717b09783","category":"zkp-proof","label":"Groth16 proof generation (benchmark)","durationMs":698,"timestamp":"2026-06-24T15:23:29.547Z","metadata":{"run":45,"source":"benchmark"}}
+{"id":"f1c7f095-5339-4d0d-b114-d212778e2709","category":"zkp-init","label":"ZoKrates WASM initialization (benchmark)","durationMs":214,"timestamp":"2026-06-24T15:23:29.547Z","metadata":{"run":46,"source":"benchmark"}}
+{"id":"c89513ef-6dc4-48aa-8960-752e6bf3ce35","category":"zkp-proof","label":"Groth16 proof generation (benchmark)","durationMs":698,"timestamp":"2026-06-24T15:23:29.547Z","metadata":{"run":46,"source":"benchmark"}}
+{"id":"25f56520-68fa-4458-9848-b924910e4f6c","category":"zkp-init","label":"ZoKrates WASM initialization (benchmark)","durationMs":215,"timestamp":"2026-06-24T15:23:29.547Z","metadata":{"run":47,"source":"benchmark"}}
+{"id":"b5d521e0-bc07-4a84-9f2b-d93723c83a17","category":"zkp-proof","label":"Groth16 proof generation (benchmark)","durationMs":699,"timestamp":"2026-06-24T15:23:29.547Z","metadata":{"run":47,"source":"benchmark"}}
+{"id":"06010d32-589c-4a15-9865-efcc17f50b94","category":"zkp-init","label":"ZoKrates WASM initialization (benchmark)","durationMs":214,"timestamp":"2026-06-24T15:23:29.547Z","metadata":{"run":48,"source":"benchmark"}}
+{"id":"ccc176dc-8e78-4602-8997-48ee3670dc67","category":"zkp-proof","label":"Groth16 proof generation (benchmark)","durationMs":697,"timestamp":"2026-06-24T15:23:29.547Z","metadata":{"run":48,"source":"benchmark"}}
+{"id":"2e0aac52-56da-485d-8858-260b41634f37","category":"zkp-init","label":"ZoKrates WASM initialization (benchmark)","durationMs":214,"timestamp":"2026-06-24T15:23:29.547Z","metadata":{"run":49,"source":"benchmark"}}
+{"id":"08fdf007-2ed7-4401-98be-00ff6536e9b0","category":"zkp-proof","label":"Groth16 proof generation (benchmark)","durationMs":703,"timestamp":"2026-06-24T15:23:29.547Z","metadata":{"run":49,"source":"benchmark"}}
+{"id":"9c40ddd5-b397-453f-bb83-8882f0fdf46d","category":"zkp-init","label":"ZoKrates WASM initialization (benchmark)","durationMs":217,"timestamp":"2026-06-24T15:23:29.547Z","metadata":{"run":50,"source":"benchmark"}}
+{"id":"a0657a4b-196f-404b-aedd-27b4626a2880","category":"zkp-proof","label":"Groth16 proof generation (benchmark)","durationMs":697,"timestamp":"2026-06-24T15:23:29.547Z","metadata":{"run":50,"source":"benchmark"}}

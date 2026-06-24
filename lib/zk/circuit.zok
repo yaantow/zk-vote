@@ -1,3 +1,9 @@
+// REFERENCE COPY ONLY — not used at runtime.
+// The authoritative compiled circuit is contracts/circuits/circuit.zok.
+// This file exists for code-browsing convenience; the artifacts that
+// actually run in the browser (out, proving.key) were generated from
+// contracts/circuits/circuit.zok via `zokrates compile` + `zokrates setup`.
+//
 // ZoKrates circuit source code (for reference — compiled via CLI)
 // This file is NOT processed by the browser directly.
 // Use `zokrates compile -i circuit.zok` to produce artifacts.

@@ -2,6 +2,23 @@ import { NextResponse } from "next/server";
 import { JsonRpcProvider, Wallet, Contract } from "ethers";
 import ZKVotingABI from "@/lib/blockchain/abi/ZKVoting.json";
 
+/**
+ * SERVER-SIDE RELAYER — DESIGN NOTE
+ *
+ * This route submits votes to the blockchain using a server-held private key.
+ * This is a deliberate trade-off for this prototype:
+ *
+ * REASON: MetaMask transaction signing in-browser requires users to approve
+ * each blockchain transaction individually, adding friction (pop-up dialogs)
+ * and dependency on a browser extension — barriers for non-technical voters.
+ *
+ * TRADE-OFF: The server operator can observe vote-submission timing and
+ * could theoretically censor votes. This is a centralisation risk.
+ *
+ * PRODUCTION PATH: Replace this relayer with a voter-signed transaction using
+ * EIP-712 typed data signing and a meta-transaction pattern (ERC-2771 forwarder),
+ * preserving UX while eliminating the central submission point.
+ */
 export async function POST(req: Request) {
   try {
     const body = await req.json();

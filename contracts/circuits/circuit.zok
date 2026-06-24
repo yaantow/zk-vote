@@ -1,3 +1,10 @@
+// LIMITATION: The election ID is hardcoded to the literal value 1 in the
+// nullifier formula: Poseidon(voterSecret, 1).
+// For a production multi-election system, electionId should be a public
+// input parameter so each election produces distinct nullifiers without
+// requiring a new trusted setup ceremony per election.
+// This is a known prototype limitation documented in Section 5.4 of the paper.
+
 // ZK-Vote Maldives — Voter Eligibility Circuit
 //
 // Proves: "I am a registered voter, and I voted for a valid candidate"

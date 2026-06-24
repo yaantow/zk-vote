@@ -369,6 +369,16 @@ After deployment, copy the printed contract address to your root `.env.local`:
 NEXT_PUBLIC_CONTRACT_ADDRESS=0x<deployed-address>
 ```
 
+### Live Deployment (Polygon Amoy)
+
+The system was deployed and used for a live research trial (Presidential Election 2028, n=50 voters):
+
+| Contract | Address | Explorer |
+|----------|---------|---------|
+| ZKVoting | `0x14550E11e18aB93E5378A7695bD14196ff9f5C21` | [View on Polygonscan](https://amoy.polygonscan.com/address/0x14550E11e18aB93E5378A7695bD14196ff9f5C21) |
+
+All 50 `VoteCast` events and the final tally are publicly verifiable via the Polygonscan link above.
+
 ### Testnet Deployment
 
 The ZoKrates trusted setup is complete and the real verification key is installed.

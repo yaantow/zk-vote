@@ -79,9 +79,14 @@ export async function computeNullifierAsync(
 /* ------------------------------------------------------------------ */
 
 /**
- * Hash two field elements together (keccak256 fallback).
- * Returns a hex string. Does NOT match the ZoKrates circuit.
- * Used only when async Poseidon is not feasible.
+ * ⚠️ PROTOTYPE-ONLY FALLBACK — DO NOT USE IN PRODUCTION
+ *
+ * This function uses keccak256, which produces DIFFERENT hashes from
+ * the ZoKrates Poseidon circuit. Using this to build the Merkle tree
+ * will produce a root that does not match the circuit, causing all
+ * voter proofs to be invalid (witness computation failure).
+ *
+ * Only buildMerkleTreeAsync() (Poseidon) produces a valid tree.
  */
 export function poseidonHash(a: string, b: string): string {
   const packed = coder.encode(

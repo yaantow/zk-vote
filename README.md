@@ -6,12 +6,28 @@
 > built with Next.js, ZoKrates, Solidity, and Polygon. Designed for the Maldivian electoral
 > context (SIDS — low bandwidth, offline-first).
 >
-> **RS6005 Design Science Research — Abdulla Yamin (29707)**
+> **RS6002 Research Project — Abdulla Yamin (29707)**
+
+---
+
+## Research Paper
+
+This repository is the research artefact for:
+
+> **Abdulla Yamin (29707)**. *Decentralized, Privacy-Preserving E-Voting Using zk-SNARKs: A Design Science Research Approach for the Maldives*. RS6002 Research Project, Cyryx College (Maldives Institute of Technology), 2026.
+
+The paper applies Wieringa's (2014) Engineering Cycle and evaluates the system against three research questions:
+- **RQ1:** Can zk-SNARKs provide sufficient privacy and verifiability for e-voting in the Maldivian context?
+- **RQ2:** Can a PWA architecture support practical offline voting for island communities?
+- **RQ3:** Is the system usable enough for non-technical voters? (SUS ≥ 80 target)
+
+**Key findings:** SUS 83.2 (Grade A — Excellent); median proof generation 735 ms; end-to-end vote time ~8.1 s (warm session); zero double votes in production.
 
 ---
 
 ## Table of Contents
 
+- [Research Paper](#research-paper)
 - [Architecture](#architecture)
 - [Tech Stack](#tech-stack)
 - [Project Structure](#project-structure)
@@ -30,6 +46,8 @@
 - [Application Pages](#application-pages)
 - [PWA & Offline Support](#pwa--offline-support)
 - [Audit & Verification](#audit--verification)
+- [Performance Metrics](#performance-metrics)
+- [Research Trial Results](#research-trial-results)
 - [API Routes](#api-routes)
 - [Key Design Decisions](#key-design-decisions)
 - [License](#license)
@@ -410,6 +428,8 @@ The ZoKrates trusted setup has been completed. The `Verifier.sol` contract conta
 - **Proving system:** Groth16 (BN128)
 - **Public inputs:** 5 (merkleRoot, nullifierHash, candidateIndex, maxCandidates, returnValue)
 
+> **⚠️ Research Use Only:** The proving and verification keys in this repository were generated using a single-party ZoKrates `zokrates setup` command. For a production election system, the trusted setup **must** be replaced with a multi-party computation (MPC) ceremony (e.g., using Groth16 Phase 2 powers-of-tau tooling such as SnarkJS) to ensure no single party can construct fake proofs. The current keys are suitable for academic research and prototype demonstration only.
+
 ### Generated Artifacts
 
 | Artifact | Location | Size | Purpose |
@@ -584,6 +604,51 @@ Metrics are stored in localStorage and can be exported via `exportMetricsCSV()` 
 
 ---
 
+## Research Trial Results
+
+The system was used in a live research trial as part of RS6002 Design Science Research. The trial simulated the **Presidential Election 2028** on Polygon Amoy testnet.
+
+**Trial Period:** June 19–21, 2026 (47.5 hours)
+**Participants:** 50 registered voters (MIT students, Cyryx College)
+**Contract:** [`0x14550E11e18aB93E5378A7695bD14196ff9f5C21`](https://amoy.polygonscan.com/address/0x14550E11e18aB93E5378A7695bD14196ff9f5C21)
+
+### Usability (System Usability Scale)
+
+| Metric | Value |
+|--------|-------|
+| Mean SUS Score | **83.2 / 100** |
+| SUS Grade | **A — Excellent** |
+| 95% Confidence Interval | [78.4, 88.0] |
+| Respondents | 50 / 50 (100% response rate) |
+
+A SUS score ≥ 80.8 corresponds to Grade A (Excellent), placing the system in the top ~15% of tested products globally (Bangor, Kortum, & Miller, 2008).
+
+### Performance Metrics (Live Trial)
+
+| Phase | Median | Mean | P95 | n |
+|-------|--------|------|-----|---|
+| ZKP Init (WASM load) | 2 ms *(warm)* | 1,307 ms | 6,047 ms | 79 |
+| Proof Generation (Groth16) | 735 ms | 881 ms | 1,512 ms | 79 |
+| On-chain Submission | 7,378 ms | 6,381 ms | 9,134 ms | 51 |
+| **End-to-end (warm user)** | **~8.1 s** | — | — | — |
+
+> **Note on ZKP Init:** The high mean vs median reflects a bimodal distribution — warm sessions (WASM cached by service worker) complete in <2 ms; cold starts (fresh browser session) take 1–7 s. This is a one-time cost per browser session.
+
+### Election Outcome (On-Chain)
+
+| Candidate | Votes | Share |
+|-----------|-------|-------|
+| MDP | 30 | 60.0% |
+| PPM | 8 | 16.0% |
+| MDA | 8 | 16.0% |
+| PNC | 4 | 8.0% |
+
+**Zero double votes** detected. **Zero proof rejections** in production. All results independently verifiable on [Polygonscan](https://amoy.polygonscan.com/address/0x14550E11e18aB93E5378A7695bD14196ff9f5C21).
+
+Full data: [`docs/election-data-snapshot.md`](docs/election-data-snapshot.md)
+
+---
+
 ## API Routes
 
 | Route             | Method | Description                                                        |
@@ -607,6 +672,7 @@ Metrics are stored in localStorage and can be exported via `exportMetricsCSV()` 
 | **Zustand over Redux** | Minimal boilerplate, excellent TypeScript support, built-in persist middleware for localStorage. |
 | **shadcn/ui** | Not a dependency — components are copied into the project. Full control, accessible by default, consistent with Tailwind. |
 | **MockVerifier for testing** | Extends the real Verifier with `verifyTx` overridden to always return `true`. Enables full E2E testing of voting logic without the ZoKrates trusted setup. |
+| **Server-side transaction relayer** | The `/api/vote` endpoint uses an admin-held private key to relay all on-chain transactions. This eliminates the MetaMask onboarding barrier for research participants but introduces a centralised submission layer. Voter anonymity is preserved (wallet addresses are not exposed on-chain), but the "decentralised" characterisation applies to verification and tally, not submission. Production deployment should use client-side MetaMask signing. |
 
 ---
 
@@ -616,10 +682,10 @@ Metrics are stored in localStorage and can be exported via `exportMetricsCSV()` 
 - [x] **Phase 2 — Layer 2 (Smart Contracts):** Hardhat project, Verifier.sol, ZKVoting.sol, circuit, deploy scripts, 32/32 tests passing. Frontend API routes wired to contract.
 - [x] **Phase 3 — Layer 3 (Audit & Testing):** Python audit script, real Poseidon hash (circomlibjs), E2E integration test, mock election (N=50, 100% double-vote rejection), SUS survey page, performance metrics instrumentation. 70 tests total (38 Jest + 32 Hardhat).
 - [x] **ZoKrates Trusted Setup:** Circuit compiled (2720 constraints), Groth16 trusted setup completed, real verification key installed in Verifier.sol, all contracts updated from 4→5 public inputs, artifacts synced to frontend.
-- [x] **Testnet Deployment:** Awaiting funded deployer wallet (Polygon Amoy POL).
+- [x] **Testnet Deployment (Complete):** Deployed to Polygon Amoy. ZKVoting contract at `0x14550E11e18aB93E5378A7695bD14196ff9f5C21`. Live research trial conducted June 19–21, 2026 (n=50 voters).
 
 ---
 
 ## License
 
-This project is developed as part of academic research (RS6005 Design Science Research) at the Maldives National University.
+This project is developed as part of academic research (RS6002 Research Project) at **Cyryx College (Maldives Institute of Technology)**, Maldives.
